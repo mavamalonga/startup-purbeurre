@@ -3,7 +3,7 @@ import mysql.connector
 from mysql.connector import errorcode
 
 """
-# Indetifiants d'accès à la base de données
+# Indetifiants d'accès à la base de données       commentary
 config = {
 'host': 'localhost', 
 'user': 'root', 
