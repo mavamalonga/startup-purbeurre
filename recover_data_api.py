@@ -17,6 +17,6 @@ class get_data_api:
 			print(self.data_api[0])
 
 
-
+'''
 c = get_data_api()
 c.load_data()
