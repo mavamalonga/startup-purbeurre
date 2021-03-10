@@ -14,9 +14,8 @@ class get_data_api:
 			request = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
 			response = request.json()
 			self.data_api.append(response)
-			print(self.data_api[0])
 
+		print(self.data_api[3])
 
-'''
 c = get_data_api()
 c.load_data()

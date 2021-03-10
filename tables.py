@@ -4,7 +4,7 @@ TABLES = {}
 TABLES['Food'] = ( 
 	"create table Food("
 	"id int unsigned auto_increment not null primary key,"
-	"name varchar(130)) not null unique,"
+	"name varchar(130) not null unique,"
 	"category_id int unsigned not null,"
 	"nutriscore varchar(1) not null,"
 	"description varchar(1000) not null,"
@@ -30,23 +30,19 @@ TABLES['Favorite'] = (
 	)
 
 TABLES['Ind_nutriscore'] = (
-	"alter table Food"
-	"add index ind_nutriscore (nutriscore);"
+	"alter table Food add index ind_nutriscore(nutriscore);"
+	)
+
+TABLES['Fk_favorite_category'] = (
+	"alter table Food add constraint fk_food_category foreign key (category_id) references category (id);"
 	)
 
 TABLES['Fk_favorite_food'] = (
-	"alter table Food"
-	"add constraint fk_food_category foreign key (category_id) references category (id);"
-	)
-
-TABLES['fk_favorite_food'] = (
-	"alter table Favorite"
-	"add constraint fk_favorite_food foreign key (id_food) references Food (id);"
+	"alter table Favorite add constraint fk_favorite_food foreign key (id_food) references Food (id);"
 	)
 
 TABLES['Fk_favorite_substitute'] = (
-	"alter table Favorite"
-	"add constraint fk_favorite_substitute foreign key (id_substitute) references Food (id);"
+	"alter table Favorite add constraint fk_favorite_substitute foreign key (id_substitute) references Food (id);"
 	)
 
 
