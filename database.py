@@ -48,8 +48,13 @@ class Database:
 
 	def insert_data(self):
 		self.connect_database()
-		data_api = recover_data_api()
+		data_api = get_data_api()
 		data_api.load_data()
+		categories = data_api.categories
+		list_data = data_api.data_api
+
+		for elt, element in 
+
 
 
 
