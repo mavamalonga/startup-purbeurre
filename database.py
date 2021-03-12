@@ -2,7 +2,6 @@ import mysql.connector
 from mysql.connector.cursor import MySQLCursorPrepared
 from mysql.connector import errorcode
 import tables
-import recover_data_api
 
 class Database:
 
@@ -46,14 +45,6 @@ class Database:
 			"delete from Category"
 			"delete from Favorite")
 
-	def insert_data(self):
-		self.connect_database()
-		data_api = get_data_api()
-		data_api.load_data()
-		categories = data_api.categories
-		list_data = data_api.data_api
-
-		for elt, element in 
 
 
 

@@ -4,10 +4,12 @@ TABLES = {}
 TABLES['Food'] = ( 
 	"create table Food("
 	"id int unsigned auto_increment not null primary key,"
-	"name varchar(130) not null unique,"
+	"product_name varchar(100) not null unique,"
+	"brands varchar(100) null,"
 	"category_id int unsigned not null,"
-	"nutriscore varchar(1) not null,"
 	"description varchar(1000) not null,"
+	"ingredients_text varchar(300) not null,"
+	"nutrition_grade varchar(1) not null,"
 	"store varchar(100) not null,"
 	"link varchar(300) not null"
 	") engine = InnoDB;"
@@ -30,7 +32,7 @@ TABLES['Favorite'] = (
 	)
 
 TABLES['Ind_nutriscore'] = (
-	"alter table Food add index ind_nutriscore(nutriscore);"
+	"alter table Food add index ind_nutriscore(nutrition_grade);"
 	)
 
 TABLES['Fk_favorite_category'] = (

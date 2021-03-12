@@ -21,6 +21,8 @@ class get_data_api:
 			response = request.json()
 			self.data_api.append(response)
 
+
+	def insert_category(self):
 		for elt, element in zip(self.categories, self.data_api):
 				insert_category = ("""insert ignore category (categories)
 									values({0})"""
@@ -29,15 +31,26 @@ class get_data_api:
 				self.cursor.execute(insert_category)
 				self.Id.commit()
 
+	def insert_data(self):
+		for elt, element in zip(self.categories, self.data_api):
+
 				for value in element['products']:
 
 					product_name = "\'"+value['product_name_fr'].replace("'","")+"\'"
-					print(product_name)
+					brands = "\'"+value['brands'].replace("'", "")+"\'"
+					#description =
+					ingredients_text = "\'"+value['ingredients_text'].replace("'","")+"\'"
+					nutrition_grades = value['nutrition_grades_tags']
+										#description = "\'"+value
+					store_tags = "\'"+",".join(value['stores_tags']).replace("'","")+"\'"
+					link = "\'"+value['url'].replace("'","")+"\'"
 
-
+					print(nutrition_grades)
 
 
 		
 
 c = get_data_api()
 c.load_data()
+c.insert_category()
+c.insert_data()
