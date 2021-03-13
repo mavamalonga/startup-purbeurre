@@ -7,9 +7,10 @@ TABLES['Food'] = (
 	"product_name varchar(100) not null unique,"
 	"brands varchar(100) null,"
 	"category_id int unsigned not null,"
-	"description varchar(1000) not null,"
-	"ingredients_text varchar(300) not null,"
-	"nutrition_grade varchar(1) not null,"
+	"ingredients_text varchar(500) not null,"
+	"nutrition_grades varchar(1) not null,"
+	"nutriments varchar(500) not null,"
+	"quantity varchar(10) not null,"
 	"store varchar(100) not null,"
 	"link varchar(300) not null"
 	") engine = InnoDB;"
@@ -32,7 +33,7 @@ TABLES['Favorite'] = (
 	)
 
 TABLES['Ind_nutriscore'] = (
-	"alter table Food add index ind_nutriscore(nutrition_grade);"
+	"alter table Food add index ind_nutriscore(nutrition_grades);"
 	)
 
 TABLES['Fk_favorite_category'] = (
