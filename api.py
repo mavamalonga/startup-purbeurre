@@ -54,10 +54,3 @@ class get_data_api:
 						values({0}, {1}, (select id from category where categories = {2}), {3}, {4}, {5}, {6}, {7}, {8})""".format(product_name, brands, "\'"+elt+"\'", ingredients_text, nutrition_grades, nutriments, quantity, store_tags, link))
 					self.cursor.execute(insert_food)
 					self.Id.commit()
-
-		
-
-c = get_data_api()
-c.load_data()
-c.insert_category()
-c.insert_data()

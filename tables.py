@@ -47,5 +47,5 @@ TABLES['Fk_favorite_food'] = (
 TABLES['Fk_favorite_substitute'] = (
 	"alter table Favorite add constraint fk_favorite_substitute foreign key (id_substitute) references Food (id);"
 	)
-
+s
 

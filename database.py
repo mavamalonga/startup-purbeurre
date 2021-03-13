@@ -44,16 +44,3 @@ class Database:
 		self.cursor("delete from Food;"
 			"delete from Category"
 			"delete from Favorite")
-
-
-
-
-
-
-
-
-b = Database(tables.TABLES)
-b.create_database()
-b.create_table()
-
-
