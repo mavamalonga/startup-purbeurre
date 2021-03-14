@@ -45,7 +45,7 @@ class Database:
 			"delete from Category"
 			"delete from Favorite")
 
-	def get_category(self):
+	def get_category_list(self):
 		self.connect_database()
 		self.cursor.execute("select categories from category;")
 
@@ -53,5 +53,25 @@ class Database:
 			print("categories : {}".format(categories))
 		self.cursor.close()
 		self.Id.close()
+
+	def get_food_list(self, category_choice ):
+		self.category_choice = category_choice
+		self.connect_database()
+		self.cursor.execute("select product_name from food where category_id = {0}".format(self.category_choice))
+		for products in self.cursor:
+			print(products)
+
+	def get_food(self, food_choice):
+		self.food_choice = food_choice
+		self.connect_database()
+		self.cursor.execute("select * from food where id = {0}".format(self.food_choice))
+		for product in self.cursor:
+			print(product[1])
+
+	
+
+
+
+
 
 
