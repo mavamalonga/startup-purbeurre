@@ -44,3 +44,14 @@ class Database:
 		self.cursor("delete from Food;"
 			"delete from Category"
 			"delete from Favorite")
+
+	def get_category(self):
+		self.connect_database()
+		self.cursor.execute("select categories from category;")
+
+		for categories in self.cursor:
+			print("categories : {}".format(categories))
+		self.cursor.close()
+		self.Id.close()
+
+

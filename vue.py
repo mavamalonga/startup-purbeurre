@@ -9,14 +9,9 @@ import tables
 b = Database(tables.TABLES)
 c = get_data_api()
 
+
 def main(Database, api):
-
-	b.create_database()
-	b.create_table()
-
-	c.load_data()
-	c.insert_category()
-	c.insert_data()
+	b.get_category()
 
 
 main(b, c)
