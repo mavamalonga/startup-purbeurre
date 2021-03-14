@@ -6,6 +6,7 @@ from database import Database
 from api import get_data_api
 import tables
 from controller import interface
+import tkinter as tk 
 
 b = Database(tables.TABLES)
 c = get_data_api()
