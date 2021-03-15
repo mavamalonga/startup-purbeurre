@@ -3,20 +3,19 @@ import tkinter as tk
 
 
 class Interface:
+
 	def __init__(self):
-		self.tk = tk.Tk()
-		self.frame = tk.Frame()
-		self.mainloop = tk.mainloop()
-		self.label = tk.Label()
+		self.root = tk.Tk()
+		self.button1 = tk.Button(self.root, text="OK")
+		self.button1.pack()
+		self.root.mainloop()
 
-	def menu1(self):
 
-		self.text_m1 = self.label(master=self.frame, text="Menu prinicpal")
-		
+
 
 
 inter = Interface()
-inter.menu1()
+
 
 
 
