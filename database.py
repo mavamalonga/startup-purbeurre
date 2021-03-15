@@ -2,10 +2,12 @@ import mysql.connector
 from mysql.connector.cursor import MySQLCursorPrepared
 from mysql.connector import errorcode
 import tables
+import tkinter as tk
 
 class Database:
 
 	def __init__(self, table):
+		self.root = tk.Tk()
 		self.table = table
 		self.Id = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.Id.cursor()
@@ -49,8 +51,17 @@ class Database:
 		self.connect_database()
 		self.cursor.execute("select categories from category;")
 
+		self.list = []
 		for categories in self.cursor:
+			self.list.append(categories)
+
+			self.label1 = tk.Label(text=self.list[0])
+			self.label1.pack()
+			self.root.mainloop()
+
 			print("categories : {}".format(categories))
+
+
 		self.cursor.close()
 		self.Id.close()
 

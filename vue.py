@@ -5,16 +5,16 @@ from mysql.connector import errorcode
 from database import Database
 from api import get_data_api
 import tables
-from controller import interface
+from controller import Interface
 import tkinter as tk 
 
-b = Database(tables.TABLES)
-c = get_data_api()
+database = Database(tables.TABLES)
+inter = Interface(database)
 
-def main(Database, api):
+def main():
 
-	def category():
-		print("category")
+	inter.menu1()
+	"""
 
 	# create new window tkinter
 	window = tk.Tk()
@@ -48,7 +48,7 @@ def main(Database, api):
 
 	#executed events tkinter
 	window.mainloop()
-
+"""
 
 if __name__ == '__main__':
-	main(b, c)
+	main()
