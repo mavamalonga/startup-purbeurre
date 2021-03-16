@@ -7,7 +7,6 @@ import tkinter as tk
 class Database:
 
 	def __init__(self, table):
-		self.root = tk.Tk()
 		self.table = table
 		self.Id = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.Id.cursor()

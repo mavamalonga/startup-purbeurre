@@ -9,46 +9,17 @@ from controller import Interface
 import tkinter as tk 
 
 database = Database(tables.TABLES)
-inter = Interface(database)
+interface = Interface(database)
 
 def main():
 
-	inter.menu1()
-	"""
+	interface.menu1()
 
-	# create new window tkinter
-	window = tk.Tk()
+	while True:
+		event = input("choix : ")
+		if event == '2':
+			print("OK")
 
-	frame_first_m = tk.Frame()
-
-	text="Menu principal"
-
-	#label widget for write text
-	menu1 = tk.Label(master=frame_first_m, text=text)
-	#applied widget in window
-	menu1.pack()
-
-	textb1 = "Sélectinner une catégorie d'aliments"
-	button1 = tk.Button(master=frame_first_m, text=textb1, command=category )
-	button1.pack()
-
-	textb2 = "Retrouver mes aliments substitués"
-	button2 = tk.Button(master=frame_first_m, text=textb2)
-	button2.pack()
-
-	textb3 = "Quitter"
-	button3 = tk.Button(master=frame_first_m, text=textb3)
-	button3.pack()
-
-	frame_first_m.pack()
-
-	window.mainloop()
-
-	events_list = []
-
-	#executed events tkinter
-	window.mainloop()
-"""
 
 if __name__ == '__main__':
 	main()
