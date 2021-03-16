@@ -3,10 +3,12 @@ from mysql.connector.cursor import MySQLCursorPrepared
 from mysql.connector import errorcode
 import tables
 import tkinter as tk
+import controller
 
 class Database:
 
-	def __init__(self, table):
+	def __init__(self, table, controller):
+		self.controller = controller
 		self.table = table
 		self.Id = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.Id.cursor()
@@ -53,23 +55,18 @@ class Database:
 		self.list = []
 		for categories in self.cursor:
 			self.list.append(categories)
+		self.controller.category_menu(self.list[0], self.list[1], self.list[2], self.list[3])
 
-			self.label1 = tk.Label(text=self.list[0])
-			self.label1.pack()
-			self.root.mainloop()
-
-			print("categories : {}".format(categories))
-
-
-		self.cursor.close()
-		self.Id.close()
 
 	def get_food_list(self, category_choice ):
 		self.category_choice = category_choice
+		print(self.category_choice)
 		self.connect_database()
 		self.cursor.execute("select product_name from food where category_id = {0}".format(self.category_choice))
+		self.products_list = []
 		for products in self.cursor:
-			print(products)
+			self.products_list.append(products)
+		self.controller.products_menu(self.products_list)
 
 	def get_food(self, food_choice):
 		self.food_choice = food_choice

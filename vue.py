@@ -1,25 +1,32 @@
 import requests
-import mysql.connector
-from mysql.connector.cursor import MySQLCursorPrepared
-from mysql.connector import errorcode
 from database import Database
 from api import get_data_api
-import tables
 from controller import Interface
-import tkinter as tk 
+import tables
 
-database = Database(tables.TABLES)
-interface = Interface(database)
+
+inter = Interface()
+database = Database(tables.TABLES, inter)
 
 def main():
 
-	interface.menu1()
+	obj_interface = Interface()
+	obj_interface.main_menu()
+	menu = 'main_menu'
+	event = 0
 
 	while True:
-		event = input("choix : ")
-		if event == '2':
-			print("OK")
+		
+		if event == '1' and (menu == 'main_menu'):
+			database.get_category_list()
+			menu = 'category_menu'
+			event = 0
+		if event == '1' and (menu == 'category_menu'):
+			database.get_food_list(event)
 
+		if event == 'q':
+			quit()
+		event = input("choix : ")
 
 if __name__ == '__main__':
 	main()
