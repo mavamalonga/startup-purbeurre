@@ -53,23 +53,16 @@ class Database:
 		self.cursor.execute("select id, categories from category order by id;")
 
 		self.category_list = []
-		i=0
+
 		for categories in self.cursor:
 			self.category_list.append(categories)
-		#self.controller.category_menu(self.category_list)
-			self.value = self.category_list[i]
-			self.ctg_ID, self.ctg_name = self.value
-			print(self.ctg_ID)
-			print(self.ctg_name)
-			i+=1
-
-
+			self.controller.category_menu(self.category_list)
 
 	def get_food_list(self, category_choice ):
 		self.category_choice = category_choice
 		print(self.category_choice)
 		self.connect_database()
-		self.cursor.execute("select product_name from food where category_id = {0}".format(self.category_choice))
+		self.cursor.execute("select id, product_name from food where category_id = {0} order by id".format(self.category_choice))
 		self.products_list = []
 		for products in self.cursor:
 			self.products_list.append(products)
