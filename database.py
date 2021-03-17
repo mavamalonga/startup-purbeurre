@@ -4,12 +4,12 @@ from mysql.connector import errorcode
 import tables
 import tkinter as tk
 import controller
+import model
 
 class Database:
 
-	def __init__(self, table, controller):
-		self.controller = controller
-		self.table = table
+	def __init__(self, table):
+	
 		self.Id = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.Id.cursor()
 
@@ -50,30 +50,32 @@ class Database:
 
 	def get_category_list(self):
 		self.connect_database()
-		self.cursor.execute("select id, categories from category order by id;")
+		self.cursor.execute("select distinct id, categories from category order by id;")
 
-		self.category_list = []
+		for each_tuple in self.cursor:
+			self.ctg_id, self.ctg_name = each_tuple
 
-		for categories in self.cursor:
-			self.category_list.append(categories)
-			self.controller.category_menu(self.category_list)
+			model.Category(categories_id=self.ctg_id, categories_name=self.ctg_name)
+			
 
 	def get_food_list(self, category_choice ):
 		self.category_choice = category_choice
 		print(self.category_choice)
 		self.connect_database()
-		self.cursor.execute("select id, product_name from food where category_id = {0} order by id".format(self.category_choice))
+		self.cursor.execute("select distinct id, product_name from food where category_id = {0} order by id".format(self.category_choice))
 		self.products_list = []
 		for products in self.cursor:
 			self.products_list.append(products)
 		self.controller.products_menu(self.products_list)
 
-	def get_food(self, food_choice):
-		self.food_choice = food_choice
+	def get_product(self, product_choice):
+		self.product_choice = product_choice
 		self.connect_database()
-		self.cursor.execute("select * from food where id = {0}".format(self.food_choice))
+		self.value_product = []
+		self.cursor.execute("select * from food where id = {0}".format(self.product_choice))
 		for product in self.cursor:
-			print(product[1])
+			self.value_product.append(product)
+			print(self.value_product[0])
 
 	
 

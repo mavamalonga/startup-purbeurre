@@ -1,13 +1,16 @@
 
 import tables
 import tkinter as tk
+import model
 
 
 
 class Interface:
 
-	def __init__(self):
-		self.var = 0
+	def __init__(self, Product, Catgory, Favorite):
+		self.Product = Product
+		self.Catgory = Catgory
+		self.Favorite = Favorite
 
 	def main_menu(self):
 
@@ -18,15 +21,7 @@ class Interface:
 		print(self.text_m1)
 
 	def category_menu(self, category_list):
-		self.category_list = category_list
-
-		#print("Menu de catégories \n Mode d'emploi : Rentrez le numéro correspondant au choix.\n \
-			#Rentrez lavaleur q pour quitter le programme.")
-
-		for category in self.category_list:
-			self.tuple_value = category
-			self.ctg_id, self.ctg_name = self.tuple_value
-			print(" {0} : {1}.".format(self.ctg_id, self.ctg_name))
+		print(" {0} : {1}.".format(self.Catgory.category_id, self.Catgory.catégories_name))
 
 
 	def products_menu(self, products_list):
@@ -40,6 +35,11 @@ class Interface:
 			self.tuple_products = product
 			self.product_id, self.product_name = self.tuple_products
 			print("{0} : {1}".format(self.product_id, self.product_name))
+
+	def display_prouct_value(self, product_value):
+		self.product_value = product_value
+
+
 
 
 
