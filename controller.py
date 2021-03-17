@@ -17,26 +17,23 @@ class Interface:
 		q : Quitter le programme."
 		print(self.text_m1)
 
-	def category_menu(self, ctg1, ctg2, ctg3, ctg4):
+	def category_menu(self, category_list):
+		self.category_list = category_list
 
-		self.ctg1 = ctg1
-		self.ctg2 = ctg2
-		self.ctg3 = ctg3
-		self.ctg4 = ctg4
-
-		self.text_m2 = "Menu des catégories \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-		1 : {0} \n \
-		2 : {1}\n \
-		3 : {2} \n \
-		4 : {3} \n\
-		q : Quitter le programme.".format(self.ctg1, self.ctg2, self.ctg3, self.ctg4)
-
-
-		print(self.text_m2)
-
+		i=0
+		print("Menu de catégories \n Mode d'emploi : Rentrez le numéro correspondant au choix.\n \
+			Rentrez lavaleur q pour quitter le programme.")
+		"""for category self.category_list:
+			print("{0} : {1}.".format(i, category))
+			i+=1
+"""
 	def products_menu(self, products_list):
 		i = 1
 		self.products_list = products_list
+		txt_prod = "Liste de poruits\n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+			Rentrez la valeur q pour quitter le programme."
+		print(txt_prod)
+
 		for product in self.products_list:
 			print("{0} : {1}".format(i, product))
 			i+=1
