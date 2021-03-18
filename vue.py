@@ -9,15 +9,15 @@ import model
 Obj_prd = model.Product()
 Obj_cat = model.Category()
 Obj_Fav = model.Favorite()
-inter = Interface(Obj_prd, Obj_cat, Obj_Fav)
+Inter = Interface()
 
 
-database = Database(tables.TABLES)
+database = Database(tables.TABLES, Inter)
 
 def main():
 
 
-	inter.main_menu()
+	Inter.main_menu()
 	menu = 'main_menu'
 	event = 0
 
@@ -28,6 +28,20 @@ def main():
 				database.get_category_list()
 				menu = 'category_menu'
 				event = 0
+		if menu == 'category_menu' and event != 0:
+			if event == 'r':
+				menu = 'main_menu'
+				Inter.main_menu()
+				event = 0
+			if event == '1':
+				database.get_product_list(event)
+				ind_product = event
+				menu = 'product_menu'
+				event = 0
+		if menu == 'product_menu':
+			if event == 'r':
+				database.get_category_list()
+				menu = 'category_menu'
 
 		if event == 'q':
 			quit()

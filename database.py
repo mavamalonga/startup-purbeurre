@@ -8,8 +8,8 @@ import model
 
 class Database:
 
-	def __init__(self, table):
-	
+	def __init__(self, table, Interface):
+		self.Interface = Interface
 		self.Id = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.Id.cursor()
 
@@ -52,21 +52,24 @@ class Database:
 		self.connect_database()
 		self.cursor.execute("select distinct id, categories from category order by id;")
 
+		self.each_tuple_list = []
 		for each_tuple in self.cursor:
 			self.ctg_id, self.ctg_name = each_tuple
-
-			model.Category(categories_id=self.ctg_id, categories_name=self.ctg_name)
+			self.Interface.category_menu(self.ctg_id, self.ctg_name)
 			
 
-	def get_food_list(self, category_choice ):
+	def get_product_list(self, category_choice ):
+
 		self.category_choice = category_choice
-		print(self.category_choice)
+		self.connect_database()
 		self.connect_database()
 		self.cursor.execute("select distinct id, product_name from food where category_id = {0} order by id".format(self.category_choice))
+		
 		self.products_list = []
 		for products in self.cursor:
-			self.products_list.append(products)
-		self.controller.products_menu(self.products_list)
+			self.product_id, self.product_name = products
+			self.Interface.products_menu(self.product_id, self.product_name)
+
 
 	def get_product(self, product_choice):
 		self.product_choice = product_choice

@@ -1,3 +1,5 @@
+import controller
+
 class Product:
 
 	def __init__(self, product_id=None, product_name=None, brands=None, category_id=None, ingredients_text=None, 
@@ -19,6 +21,8 @@ class Category:
 	def __init__(self, categories_id=None, categories_name=None):
 		self.category_id = categories_id
 		self.categories_name = categories_name
+		print("{0}: {1}".format(self.category_id, self.categories_name))
+
 
 
 class Favorite:
