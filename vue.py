@@ -45,12 +45,13 @@ def main():
 				database.get_category_list()
 				menu = 'category'
 			if event == '1':
+				menu = 'value'
+				Inter.display_help(menu)
 				database.get_product(event)
-				menu = 'product'
 				event=0
-		if menu == 'product':
+		if menu == 'value':
 			if event == 'r':
-				menu == 'produc'
+				menu == 'product'
 				database.get_product_list('1')
 
 		if event == 'q':

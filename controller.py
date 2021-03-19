@@ -18,10 +18,17 @@ class Interface:
 			2 : Choisir un aliment à substitué. \n \
 			q : Quitter le programme."
 
-		self.txt_other = "			Cetegory menu \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_other = "			Menu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-		"
+		".format(self.menu)
+
+		self.txt_value = "			Menu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			s : Enregistrer \n \
+		".format(self.menu)
+
 
 		if self.menu == 'main':
 			print(self.txt_main)
@@ -30,7 +37,7 @@ class Interface:
 		if self.menu == 'product':
 			print(self.txt_other)
 		if self.menu == 'value':
-			print(self.txt_other)
+			print(self.txt_value)
 
 
 	def category_menu(self, ctg_id, ctg_name):
@@ -48,17 +55,18 @@ class Interface:
 		self.name = name
 		self.brands = brands 
 		self.nutriments = nutriments
-		print("Nom produit : {0}".format(self.name))
-		print("Marque : {0}".format(self.brands))
-		print("Nutriments : {0}".format(self.nutriments))
+		print("			Nom produit : {0}".format(self.name))
+		print("			Marque : {0}".format(self.brands))
+		print("			Nutriments : {0}".format(self.nutriments))
 
 	def display_substitue(self, name, brands, nutriments):
 		self.name = name
 		self.brands = brands 
 		self.nutriments = nutriments
-		print("Nom produit : {0}".format(self.name))
-		print("Marque : {0}".format(self.brands))
-		print("Nutriments : {0}".format(self.nutriments))
+		print("\n 			Substitue  ")
+		print("			Nom produit : {0}".format(self.name))
+		print("			Marque : {0}".format(self.brands))
+		print("			Nutriments : {0}".format(self.nutriments))
 
 
 

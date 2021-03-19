@@ -82,6 +82,12 @@ class Database:
 		for product in self.cursor:
 			self.value = product
 		self.Interface.display_substitue(self.value[0], self.value[1], self.value[2])
+
+	def save_product_at_favorite(self, product_id, substitue_id):
+		self.product_id = product_id
+		self.substitue_id = substitue_id
+		self.connect_database()
+		self.cursor.execute("insert into favorite (id_food, id_substitue) values ({0}, {0})".format(self.product_id, self.substitue_id)
 		
 
 
