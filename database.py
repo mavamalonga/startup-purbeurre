@@ -51,14 +51,13 @@ class Database:
 	def get_category_list(self):
 		self.connect_database()
 		self.cursor.execute("select distinct id, categories from category order by id;")
-
 		self.each_tuple_list = []
 		for each_tuple in self.cursor:
 			self.ctg_id, self.ctg_name = each_tuple
 			self.Interface.category_menu(self.ctg_id, self.ctg_name)
 			
 
-	def get_product_list(self, category_choice ):
+	def get_product_list(self, category_choice):
 
 		self.category_choice = category_choice
 		self.connect_database()
@@ -74,12 +73,18 @@ class Database:
 	def get_product(self, product_choice):
 		self.product_choice = product_choice
 		self.connect_database()
-		self.value_product = []
-		self.cursor.execute("select * from food where id = {0}".format(self.product_choice))
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0}".format(self.product_choice))
 		for product in self.cursor:
-			self.value_product.append(product)
-			print(self.value_product[0])
+			self.value = product
+		self.Interface.display_product(self.value[0], self.value[1], self.value[2])
 
-	
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0} + '1'".format(self.product_choice))
+		for product in self.cursor:
+			self.value = product
+		self.Interface.display_substitue(self.value[0], self.value[1], self.value[2])
+		
+
+
+			
 
 

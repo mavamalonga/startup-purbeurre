@@ -17,31 +17,41 @@ database = Database(tables.TABLES, Inter)
 def main():
 
 
-	Inter.main_menu()
-	menu = 'main_menu'
+	menu = 'main'
+	Inter.display_help(menu)
 	event = 0
 
 	while True:
 		
-		if menu == 'main_menu':
+		if menu == 'main':
 			if event == '1':
+				menu = 'category'
+				Inter.display_help(menu)
 				database.get_category_list()
-				menu = 'category_menu'
 				event = 0
-		if menu == 'category_menu' and event != 0:
+		if menu == 'category':
 			if event == 'r':
-				menu = 'main_menu'
-				Inter.main_menu()
+				menu = 'main'
+				Inter.display_help(menu)
 				event = 0
 			if event == '1':
+				menu = 'product'
+				Inter.display_help(menu)
 				database.get_product_list(event)
-				ind_product = event
-				menu = 'product_menu'
 				event = 0
-		if menu == 'product_menu':
+				ind = event
+		if menu == 'product':
 			if event == 'r':
 				database.get_category_list()
-				menu = 'category_menu'
+				menu = 'category'
+			if event == '1':
+				database.get_product(event)
+				menu = 'product'
+				event=0
+		if menu == 'product':
+			if event == 'r':
+				menu == 'produc'
+				database.get_product_list('1')
 
 		if event == 'q':
 			quit()
