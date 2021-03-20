@@ -51,13 +51,9 @@ class Database:
 	def get_category_list(self):
 		self.connect_database()
 		self.cursor.execute("select distinct id, categories from category order by id;")
-		self.category_id_list = []
 		for each_tuple in self.cursor:
 			self.ctg_id, self.ctg_name = each_tuple
 			self.Interface.category_menu(self.ctg_id, self.ctg_name)
-			self.category_id_list.append(self.ctg_id)
-		self.nb_categorie = len(self.category_id_list)
-
 
 
 			
@@ -70,7 +66,6 @@ class Database:
 		self.cursor.execute("select distinct id, product_name from food where category_id = {0} \
 			order by id".format(self.category_choice))
 		
-		self.products_list = []
 		for products in self.cursor:
 			self.product_id, self.product_name = products
 			self.Interface.products_menu(self.product_id, self.product_name)

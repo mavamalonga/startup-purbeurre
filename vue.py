@@ -38,25 +38,31 @@ def main():
 				menu = 'main'
 				Inter.display_help(menu)
 				event = 0
-			if int(str(event)) > 0 and int(str(event)) <= database.nb_categorie:
+			if int(str(event)) > 0:
 				menu = 'product'
 				Inter.display_help(menu)
 				database.get_product_list(event)
-				event = 0
 				ind = event
+				event = 0
 		if menu == 'product':
 			if event == 'r':
-				database.get_category_list()
 				menu = 'category'
-			if event == '1':
+				Inter.display_help(menu)
+				database.get_category_list()
+				event = 0
+			if int(str(event)) > 0:
 				menu = 'value'
 				Inter.display_help(menu)
 				database.get_product(event)
 				event=0
 		if menu == 'value':
 			if event == 'r':
-				menu == 'product'
-				database.get_product_list('1')
+				menu = 'product'
+				Inter.display_help('product')
+				database.get_product_list(ind)
+				event=0
+			if event == 's':
+				pass
 
 		if event == 'q':
 			quit()
