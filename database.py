@@ -51,10 +51,15 @@ class Database:
 	def get_category_list(self):
 		self.connect_database()
 		self.cursor.execute("select distinct id, categories from category order by id;")
-		self.each_tuple_list = []
+		self.category_id_list = []
 		for each_tuple in self.cursor:
 			self.ctg_id, self.ctg_name = each_tuple
 			self.Interface.category_menu(self.ctg_id, self.ctg_name)
+			self.category_id_list.append(self.ctg_id)
+		self.nb_categorie = len(self.category_id_list)
+
+
+
 			
 
 	def get_product_list(self, category_choice):
@@ -62,7 +67,8 @@ class Database:
 		self.category_choice = category_choice
 		self.connect_database()
 		self.connect_database()
-		self.cursor.execute("select distinct id, product_name from food where category_id = {0} order by id".format(self.category_choice))
+		self.cursor.execute("select distinct id, product_name from food where category_id = {0} \
+			order by id".format(self.category_choice))
 		
 		self.products_list = []
 		for products in self.cursor:
@@ -83,14 +89,10 @@ class Database:
 			self.value = product
 		self.Interface.display_substitue(self.value[0], self.value[1], self.value[2])
 
+"""
 	def save_product_at_favorite(self, product_id, substitue_id):
 		self.product_id = product_id
 		self.substitue_id = substitue_id
 		self.connect_database()
 		self.cursor.execute("insert into favorite (id_food, id_substitue) values ({0}, {0})".format(self.product_id, self.substitue_id)
-		
-
-
-			
-
-
+"""

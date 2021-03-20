@@ -1,11 +1,8 @@
+from pynput import keyboard
+
+def on_press(key):
+	print(key)
 
 
-a = [1, 2, 3, 4]
-
-event = 0
-event = input("choix : ")
-
-for i in a:
-	if event == str(i):
-		print("La liste contient la valeur : {0}".format(event))
-
+with keyboard.Listener(on_press=on_press) as listener:
+	listener.join()

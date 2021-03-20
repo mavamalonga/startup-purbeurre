@@ -1,6 +1,7 @@
 import requests
 from database import Database
 from api import get_data_api
+from pynput import keyboard
 from controller import Interface
 import tables
 import model
@@ -13,6 +14,7 @@ Inter = Interface()
 
 
 database = Database(tables.TABLES, Inter)
+
 
 def main():
 
@@ -29,12 +31,14 @@ def main():
 				Inter.display_help(menu)
 				database.get_category_list()
 				event = 0
+			if event == '2':
+				pass
 		if menu == 'category':
 			if event == 'r':
 				menu = 'main'
 				Inter.display_help(menu)
 				event = 0
-			if event == '1':
+			if int(str(event)) > 0 and int(str(event)) <= database.nb_categorie:
 				menu = 'product'
 				Inter.display_help(menu)
 				database.get_product_list(event)
@@ -57,6 +61,7 @@ def main():
 		if event == 'q':
 			quit()
 		event = input("choix : ")
+
 
 if __name__ == '__main__':
 	main()

@@ -13,17 +13,17 @@ class Interface:
 	def display_help(self, menu):
 		self.menu = menu
 
-		self.txt_main = "			Menu principal \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_main = "			\nMenu principal \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			1 : Sélectionnez une catégorie \n \
 			2 : Choisir un aliment à substitué. \n \
 			q : Quitter le programme."
 
-		self.txt_other = "			Menu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_other = "			\nMenu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 		".format(self.menu)
 
-		self.txt_value = "			Menu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_value = "			\nMenu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			s : Enregistrer \n \
@@ -41,6 +41,7 @@ class Interface:
 
 
 	def category_menu(self, ctg_id, ctg_name):
+		self.ctg_id_list = []
 		self.ctg_id = ctg_id
 		self.ctg_name = ctg_name
 		print("			{0} : {1}".format(self.ctg_id, self.ctg_name))
