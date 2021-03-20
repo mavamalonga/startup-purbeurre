@@ -74,20 +74,47 @@ class Database:
 	def get_product(self, product_choice):
 		self.product_choice = product_choice
 		self.connect_database()
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0}".format(self.product_choice))
+		self.cursor.execute("select id, product_name, brands, nutrition_grades from food where id = {0}".format(self.product_choice))
 		for product in self.cursor:
 			self.value = product
-		self.Interface.display_product(self.value[0], self.value[1], self.value[2])
+		self.Interface.display_product(self.value[0], self.value[1], self.value[2], self.value[3])
 
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0} + '1'".format(self.product_choice))
+		self.cursor.execute("select id, product_name, brands, nutrition_grades from food where id = {0} + '1'".format(self.product_choice))
 		for product in self.cursor:
 			self.value = product
-		self.Interface.display_substitue(self.value[0], self.value[1], self.value[2])
+		self.Interface.display_substitue(self.value[0], self.value[1], self.value[2], self.value[3])
 
-"""
-	def save_product_at_favorite(self, product_id, substitue_id):
+
+	def save_product_favorite(self, product_id, substitue_id):
 		self.product_id = product_id
 		self.substitue_id = substitue_id
 		self.connect_database()
-		self.cursor.execute("insert into favorite (id_food, id_substitue) values ({0}, {0})".format(self.product_id, self.substitue_id)
-"""
+		self.cursor.execute("insert into favorite (id_food, id_substitute) values ({0}, {0})".format(self.product_id, self.substitue_id))
+		self.Id.commit()
+		print("Les produits ont été ajoutés au favories.")
+
+	def display_favorite(self):
+		self.list_fav_sub = []
+		self.list_fav_food = []
+		self.connect_database()
+		self.cursor.execute("select id_food, id_substitute from favorite")
+		for prod_sub in self.cursor:
+			self.id_food, self.id_sub = product
+			self.list_fav_food.appent(self.id_food)
+			self.list_fav_sub.append(self.id_sub)
+		display_favorite(self.list_fav_food, self.list_fav_sub)
+
+
+	def display_favorite(self, list_favfood,list_favsub):
+		self.list_favfood = list_favfood
+		self.list_favsub = list_favsub
+		for id_food, id_sub in zip(list_favfood, list_favsub):
+			self.connect_database()
+			self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0}".format(id_food))
+			
+
+
+
+
+
+		

@@ -54,6 +54,7 @@ def main():
 				menu = 'value'
 				Inter.display_help(menu)
 				database.get_product(event)
+				id_product = event
 				event=0
 		if menu == 'value':
 			if event == 'r':
@@ -62,7 +63,9 @@ def main():
 				database.get_product_list(ind)
 				event=0
 			if event == 's':
-				pass
+				database.save_product_favorite(Inter.prod_id, Inter.prod_id_sub)
+	
+				
 
 		if event == 'q':
 			quit()

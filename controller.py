@@ -52,15 +52,18 @@ class Interface:
 		self.product_name = product_name
 		print("			{0} : {1}".format(self.product_id, self.product_name))
 
-	def display_product(self, name, brands, nutriments):
+	def display_product(self, prod_id, name, brands, nutriments):
+		self.prod_id = prod_id
 		self.name = name
 		self.brands = brands 
 		self.nutriments = nutriments
 		print("			Nom produit : {0}".format(self.name))
 		print("			Marque : {0}".format(self.brands))
 		print("			Nutriments : {0}".format(self.nutriments))
+		return self.prod_id
 
-	def display_substitue(self, name, brands, nutriments):
+	def display_substitue(self, product_id_sub, name, brands, nutriments):
+		self.prod_id_sub = product_id_sub
 		self.name = name
 		self.brands = brands 
 		self.nutriments = nutriments
@@ -68,6 +71,12 @@ class Interface:
 		print("			Nom produit : {0}".format(self.name))
 		print("			Marque : {0}".format(self.brands))
 		print("			Nutriments : {0}".format(self.nutriments))
+
+	def display_favorite(self, id_food, id_substitue):
+		self.id_food = id_food
+		self.id_substitue = id_substitue
+		
+
 
 
 
