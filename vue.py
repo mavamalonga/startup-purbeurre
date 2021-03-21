@@ -12,8 +12,7 @@ Obj_cat = model.Category()
 Obj_Fav = model.Favorite()
 Inter = Interface()
 
-
-database = Database(tables.TABLES, Inter)
+database = Database(tables.TABLES)
 
 
 def main():

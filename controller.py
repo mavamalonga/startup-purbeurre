@@ -2,7 +2,7 @@
 import tables
 import tkinter as tk
 import model
-
+import database
 
 
 class Interface:
@@ -40,11 +40,10 @@ class Interface:
 			print(self.txt_value)
 
 
-	def category_menu(self, ctg_id, ctg_name):
-		self.ctg_id_list = []
-		self.ctg_id = ctg_id
-		self.ctg_name = ctg_name
-		print("			{0} : {1}".format(self.ctg_id, self.ctg_name))
+	def category_menu(self, category_id, category_name):
+		self.category_id = category_id
+		self.category_name = category_name
+		print("			{0} : {1}".format(self.category_id, self.category_name))
 
 
 	def products_menu(self, product_id, product_name):
@@ -52,25 +51,16 @@ class Interface:
 		self.product_name = product_name
 		print("			{0} : {1}".format(self.product_id, self.product_name))
 
-	def display_product(self, prod_id, name, brands, nutriments):
-		self.prod_id = prod_id
-		self.name = name
-		self.brands = brands 
-		self.nutriments = nutriments
-		print("			Nom produit : {0}".format(self.name))
-		print("			Marque : {0}".format(self.brands))
-		print("			Nutriments : {0}".format(self.nutriments))
+	def display_product(self):
+		print("			Produit : Substitute")
+		print("			Nom  \
+			{0} : {1}".format())
+		print("			Marque  \
+			{0} : {1}".format(self.brands))
+		print("			Nutriments \
+		 	{0} : {1}".format(self.nutriments))
 
-	def display_substitue(self, product_id_sub, name, brands, nutriments):
-		self.prod_id_sub = product_id_sub
-		self.name = name
-		self.brands = brands 
-		self.nutriments = nutriments
-		print("\n 			Substitue  ")
-		print("			Nom produit : {0}".format(self.name))
-		print("			Marque : {0}".format(self.brands))
-		print("			Nutriments : {0}".format(self.nutriments))
-
+	
 	def display_favorite(self, id_food, id_substitue):
 		self.id_food = id_food
 		self.id_substitue = id_substitue
