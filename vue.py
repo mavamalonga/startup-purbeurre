@@ -32,7 +32,7 @@ def main():
 				database.get_category_list()
 				event = 0
 			if event == '2':
-				pass
+				database.get_favorite()
 		if menu == 'category':
 			if event == 'r':
 				menu = 'main'
@@ -63,7 +63,7 @@ def main():
 				database.get_product_list(ind)
 				event=0
 			if event == 's':
-				database.save_product_favorite(Inter.prod_id, Inter.prod_id_sub)
+				database.save_product_favorite()
 	
 				
 

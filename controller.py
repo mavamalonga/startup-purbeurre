@@ -60,7 +60,6 @@ class Interface:
 		print("			Nom produit : {0}".format(self.name))
 		print("			Marque : {0}".format(self.brands))
 		print("			Nutriments : {0}".format(self.nutriments))
-		return self.prod_id
 
 	def display_substitue(self, product_id_sub, name, brands, nutriments):
 		self.prod_id_sub = product_id_sub
