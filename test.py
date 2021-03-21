@@ -1,8 +1,10 @@
-from pynput import keyboard
-
-def on_press(key):
-	print(key)
 
 
-with keyboard.Listener(on_press=on_press) as listener:
-	listener.join()
+event = input("choix : ")
+
+event_trasform = int(str(event))
+
+if type(event_trasform) == str :
+	print("ok")
+else:
+	print("event est un entier")

@@ -23,12 +23,15 @@ def main():
 	event = 0
 
 	while True:
+	
+		if event == 'q':
+			quit()
 		
 		if menu == 'main':
 			if event == '1':
 				menu = 'category'
 				Inter.display_help(menu)
-				database.get_category_list()
+				database.get_category()
 				event = 0
 			if event == '2':
 				database.get_favorite()
@@ -40,36 +43,36 @@ def main():
 			if int(str(event)) > 0:
 				menu = 'product'
 				Inter.display_help(menu)
-				database.get_product_list(event)
+				database.get_product(event)
 				ind = event
 				event = 0
 		if menu == 'product':
 			if event == 'r':
 				menu = 'category'
 				Inter.display_help(menu)
-				database.get_category_list()
+				database.get_category()
 				event = 0
 			if int(str(event)) > 0:
 				menu = 'value'
 				Inter.display_help(menu)
-				database.get_product(event)
+				database.get_feature(event)
 				id_product = event
 				event=0
 		if menu == 'value':
 			if event == 'r':
 				menu = 'product'
 				Inter.display_help('product')
-				database.get_product_list(ind)
+				database.get_product(ind)
 				event=0
 			if event == 's':
-				database.save_product_favorite()
+				database.save_product()
 	
 				
 
-		if event == 'q':
-			quit()
 		event = input("choix : ")
 
 
 if __name__ == '__main__':
 	main()
+
+

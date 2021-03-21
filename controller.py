@@ -51,14 +51,15 @@ class Interface:
 		self.product_name = product_name
 		print("			{0} : {1}".format(self.product_id, self.product_name))
 
-	def display_product(self):
+	def display_feature(self, feature_list):
+		self.feature_list = feature_list
 		print("			Produit : Substitute")
 		print("			Nom  \
-			{0} : {1}".format())
+			{0} : {1}".format(self.feature_list[0][1], self.feature_list[1][1]))
 		print("			Marque  \
-			{0} : {1}".format(self.brands))
+			{0} : {1}".format(self.feature_list[0][2], self.feature_list[1][2]))
 		print("			Nutriments \
-		 	{0} : {1}".format(self.nutriments))
+		 	{0} : {1}".format(self.feature_list[0][3], self.feature_list[1][3]))
 
 	
 	def display_favorite(self, id_food, id_substitue):

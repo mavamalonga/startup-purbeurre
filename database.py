@@ -44,44 +44,41 @@ class Database(controller.Interface):
 			"delete from Category"
 			"delete from Favorite")
 
-	def get_category_list(self):
+	def get_category(self):
 		self.cursor.execute("select distinct id, categories from category order by id;")
 		for category_tuple in self.cursor:
 			self.category_menu(category_tuple[0], category_tuple[1])
 
 
-	def get_product_list(self, category_choice):
+	def get_product(self, category_choice):
 
 		self.category_choice = category_choice
 		self.cursor.execute("select distinct id, product_name from food where category_id = {0} \
 			order by id".format(self.category_choice))
 		
 		for products in self.cursor:
-			self.product_id, self.product_name = products
-			self.Interface.products_menu(self.product_id, self.product_name)
+			self.products_menu(products[0], products[1])
 
-
-	def get_product(self, product_choice):
+	def get_feature(self, product_choice):
 		self.product_choice = product_choice
-		self.cursor.execute("select id, product_name, brands, nutrition_grades from food where id = {0}".format(self.product_choice))
-		for product in self.cursor:
-			self.value = product
-		self.Interface.display_product(self.value[0], self.value[1], self.value[2], self.value[3])
-
 		self.product_substitute = int(str(self.product_choice)) + 1
 		self.product_substitute = str(self.product_substitute)
+		self.cursor.execute("select id, product_name, brands, nutrition_grades from food where id = {0} \
+			union select id, product_name, brands, nutrition_grades from food where id = {1} \
+			".format(self.product_choice, self.product_substitute))
 
-		self.cursor.execute("select id, product_name, brands, nutrition_grades from food where id = {0}".format(self.product_substitute))
-		for product in self.cursor:
-			self.value = product
-		self.Interface.display_substitue(self.value[0], self.value[1], self.value[2], self.value[3])
+		self.feature_list = []
+		for feature in self.cursor:
+			self.feature_list.append(feature)
+		self.display_feature(self.feature_list)
 
 
-	def save_product_favorite(self):
+	def save_product(self):
 		print("{0} : {1} ".format(self.product_choice, self.product_substitute))
 		self.cursor.execute("insert into favorite (id_food, id_substitute) values ({0}, {1})".format(self.product_choice, self.product_substitute))
 		self.cnx.commit()
 		print("Les produits ont été ajoutés au favories.")
+		
 
 	def get_favorite(self):
 		self.list_fav_sub = []
