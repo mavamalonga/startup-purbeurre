@@ -61,9 +61,15 @@ class Interface:
 		 	{0} : {1}".format(self.feature_list[0][3], self.feature_list[1][3]))
 
 	
-	def display_favorite(self, id_food, id_substitue):
-		self.id_food = id_food
-		self.id_substitue = id_substitue
+	def display_favorite(self, list_index, list_id_food, list_id_substitue):
+		self.list_fav_index = list_index
+		self.list_fav_food = list_id_food
+		self.list_fav_sub = list_id_substitue
+		for tuple_favorite in zip(self.list_fav_index, self.list_fav_food, self.list_fav_sub):
+
+			print("	{0}		Nom  	{1} : {2}".format(tuple_favorite[0][0], tuple_favorite[1][0], tuple_favorite[2][0]))
+			print("			Marque  {0} : {1}".format(tuple_favorite[1][1], tuple_favorite[2][1]))
+			print("			Nutriments {0} : {1} \n".format(tuple_favorite[1][2], tuple_favorite[2][2]))
 		
 
 

@@ -83,16 +83,25 @@ class Database(controller.Interface):
 	def get_favorite(self):
 		self.list_fav_sub = []
 		self.list_fav_food = []
+		self.list_fav_index = []
 		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_food from favorite)")
 		for prod_food in self.cursor:
 			self.list_fav_food.append(prod_food)
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_substitue from favorite)")
+
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_substitute from favorite)")
 		for prod_sub in self.cursor:
 			self.list_fav_sub.append(prod_sub)
 
-		self.display_favorite(self.list_fav_food, self.list_fav_sub)
+		self.cursor.execute("select id from favorite order by id")
+		for index in self.cursor:
+			self.list_fav_index.append(index)
 
-			
+		self.display_favorite(self.list_fav_index, self.list_fav_food, self.list_fav_sub)
+		
+	def delete_favorite(self, choice_favorite):
+		self.choice_favorite = choice_favorite
+		self.cursor.execute("delete from favorite where id = {0}".format(self.choice_favorite))
+
 
 
 
