@@ -1,7 +1,6 @@
 
 import tables
 import tkinter as tk
-import model
 import database
 
 
@@ -36,7 +35,7 @@ class Interface:
 			print(self.txt_other)
 		if self.menu == 'product':
 			print(self.txt_other)
-		if self.menu == 'value':
+		if self.menu == 'feature':
 			print(self.txt_value)
 
 

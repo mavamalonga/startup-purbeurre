@@ -4,12 +4,8 @@ from api import get_data_api
 from pynput import keyboard
 from controller import Interface
 import tables
-import model
 
 
-Obj_prd = model.Product()
-Obj_cat = model.Category()
-Obj_Fav = model.Favorite()
 Inter = Interface()
 
 database = Database(tables.TABLES)
@@ -53,12 +49,12 @@ def main():
 				database.get_category()
 				event = 0
 			if int(str(event)) > 0:
-				menu = 'value'
+				menu = 'feature'
 				Inter.display_help(menu)
 				database.get_feature(event)
 				id_product = event
 				event=0
-		if menu == 'value':
+		if menu == 'feature':
 			if event == 'r':
 				menu = 'product'
 				Inter.display_help('product')

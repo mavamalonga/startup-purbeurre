@@ -83,11 +83,14 @@ class Database(controller.Interface):
 	def get_favorite(self):
 		self.list_fav_sub = []
 		self.list_fav_food = []
-		self.cursor.execute("select id_food, id_substitute from favorite")
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_food from favorite)")
+		for prod_food in self.cursor:
+			self.list_fav_food.append(prod_food)
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_substitue from favorite)")
 		for prod_sub in self.cursor:
-			print(prod_sub)
-			self.id_food, self.id_sub = prod_sub
-			self.display_favorite()
+			self.list_fav_sub.append(prod_sub)
+
+		self.display_favorite(self.list_fav_food, self.list_fav_sub)
 
 			
 
