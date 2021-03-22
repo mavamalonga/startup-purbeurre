@@ -30,7 +30,19 @@ def main():
 				database.get_category()
 				event = 0
 			if event == '2':
+				menu = 'favorite'
+				Inter.display_help(menu)
 				database.get_favorite()
+				event = 0
+		if menu == 'favorite':
+			if event == 's':
+				pass
+			if int(str(event)) > 0:
+				menu = 'favorite'
+				Inter.display_help(menu)
+				database.focus_favorite(event)
+				event = 0
+
 		if menu == 'category':
 			if event == 'r':
 				menu = 'main'
@@ -60,7 +72,7 @@ def main():
 				Inter.display_help('product')
 				database.get_product(ind)
 				event=0
-			if event == 's':
+			if event == 'e':
 				database.save_product()
 	
 				

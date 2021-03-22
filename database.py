@@ -102,6 +102,23 @@ class Database(controller.Interface):
 		self.choice_favorite = choice_favorite
 		self.cursor.execute("delete from favorite where id = {0}".format(self.choice_favorite))
 
+	def focus_favorite(self, choice_display):
+		self.index_food = 0
+		self.index_substitute = 0
+		self.choice_display = choice_display
+		self.cursor.execute("select id_food, id_substitute from favorite where id = {0}".format(self.choice_display))
+		for tuple_favorite in self.cursor:
+			self.index_food_substitute = tuple_favorite
+
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0}\
+			union select product_name, brands, nutrition_grades from food where id = {1} ".format(self.index_food_substitute[0],
+			self.index_food_substitute[1]))
+
+		for tuple_fav in self.cursor:
+			print(tuple_fav)
+
+
+
 
 
 

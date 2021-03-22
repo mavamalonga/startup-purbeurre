@@ -25,7 +25,13 @@ class Interface:
 		self.txt_value = "			\nMenu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-			s : Enregistrer \n \
+			e : Enregistrer \n \
+		".format(self.menu)
+
+		self.text_favorite ="		\nMenu {0} \n Mode d'emploi : Pour modifier ou supprimer un favori, rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			s : Supprimer\n \
 		".format(self.menu)
 
 
@@ -37,6 +43,8 @@ class Interface:
 			print(self.txt_other)
 		if self.menu == 'feature':
 			print(self.txt_value)
+		if self.menu == 'favorite':
+			print(self.text_favorite)
 
 
 	def category_menu(self, category_id, category_name):
