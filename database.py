@@ -3,11 +3,11 @@ from mysql.connector.cursor import MySQLCursorPrepared
 from mysql.connector import errorcode
 import tables
 import tkinter as tk
-import controller
+import template
 
 
 
-class Database(controller.Interface):
+class Database(template.Interface):
 
 	def __init__(self, table):
 		super().__init__()
