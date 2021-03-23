@@ -1,49 +1,43 @@
 import requests
-from database import Database
+from database import Data
 from api import get_data_api
 from pynput import keyboard
 from template import Interface
 import tables
+from controller import Controlboard
 
+ctrl = Controlboard(tables.TABLES)
 
 display = Interface()
 
-database = Database(tables.TABLES)
+database = Data(tables.TABLES)
 
 
 
 
 def main():
 
-
-	menu = 'main'
-	display.display_help(menu)
-	event = 0
-
+	ctrl.ctrl_main()
+	
 	while True:
 
 			event = input("choix : ")
 
-			if event != 'r' and event != 'q' and int(str(event)) == str:
-				print("erreur")
-
 			if event == 'q':
 				quit()
 
-			if menu == 'main':
+			if ctrl.menu == 'main':
 				if event == 'r':
 					print("Veillez rentrer une valeur correspondant aux choix.")
 				if event == '1':
-					menu = 'category'
-					display.display_help(menu)
-					database.get_category()
+					ctrl.ctrl_category()
 					event = 0
 				if event == '2':
-					menu = 'favorite'
-					display.display_help(menu)
-					database.get_favorite()
+					ctrl.ctrl_favorite()
 					event = 0
-			if menu == 'favorite':
+
+
+			if ctrl.menu == 'favorite':
 				if event == 's':
 					pass
 				if int(str(event)) > 0:
@@ -52,38 +46,33 @@ def main():
 					database.focus_favorite(event)
 					event = 0
 
-			if menu == 'category':
+
+			if ctrl.menu == 'categorie':
 				if event == 'r':
-					menu = 'main'
-					display.display_help(menu)
+					pass
 					event = 0
 				if int(str(event)) > 0:
-					menu = 'product'
-					display.display_help(menu)
-					database.get_product(event)
-					ind = event
+					ctrl.ctrl_product(event)
 					event = 0
-			if menu == 'product':
+
+
+			if ctrl.menu == 'product':
 				if event == 'r':
-					menu = 'category'
-					display.display_help(menu)
+					display.display_help(menu, event)
 					database.get_category()
 					event = 0
 				if int(str(event)) > 0:
-					menu = 'feature'
-					display.display_help(menu)
-					database.get_feature(event)
-					id_product = event
+					ctrl.ctrl_feature(event)
 					event=0
-			if menu == 'feature':
+
+			if ctrl.menu == 'feature':
 				if event == 'r':
-					menu = 'product'
-					display.display_help('product')
-					database.get_product(ind)
+					pass
 					event=0
 				if event == 'e':
 					database.save_product()
 
+			event = 0
 
 if __name__ == '__main__':
 	main()

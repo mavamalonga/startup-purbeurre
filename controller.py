@@ -1,9 +1,15 @@
 import template
 import database
+import tables
 
-class Controller(template.Interface, database.Database):
-	def __init__(self):
-		super().__init__()
+class Controlboard (database.Data):
+	def __init__(self, table):
+		super().__init__(table)
+
+	def ctrl_main(self):
+		self.menu = 'main'
+		self.display_help(self.menu)
+		return self.menu
 
 	def ctrl_category(self):
 		self.menu = 'categorie'
@@ -11,11 +17,10 @@ class Controller(template.Interface, database.Database):
 		self.get_category()
 		return self.menu
 
-	def ctrl_favorite(self, event):
-		self.event = event
-		self.menu = 'favorie'
+	def ctrl_favorite(self):
+		self.menu = 'Favorie'
 		self.display_help(self.menu)
-		self.get_favorite(self.event)
+		self.get_favorite()
 		return self.menu
 
 	def ctrl_product(self, event):
@@ -23,16 +28,15 @@ class Controller(template.Interface, database.Database):
 		self.menu = 'product'
 		self.display_help(self.menu)
 		self.get_product(self.event)
+		return self.menu
 
 	def ctrl_feature(self, event):
-		
+		self.event = event 
+		self.menu = 'feature'
+		self.display_help(self.menu)
+		self.get_feature(self.event)
+		return self.menu
 
-
-
-
-
-
-
-
-
-
+	def ctrl_save(self):
+		self.display_help(self.menu)
+		self.save_product()
