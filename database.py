@@ -84,11 +84,11 @@ class Database(controller.Interface):
 		self.list_fav_sub = []
 		self.list_fav_food = []
 		self.list_fav_index = []
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_food from favorite)")
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_food from favorite order by id)")
 		for prod_food in self.cursor:
 			self.list_fav_food.append(prod_food)
 
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_substitute from favorite)")
+		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_substitute from favorite order by id)")
 		for prod_sub in self.cursor:
 			self.list_fav_sub.append(prod_sub)
 
