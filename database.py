@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import mysql.connector
 from mysql.connector.cursor import MySQLCursorPrepared
 from mysql.connector import errorcode
@@ -6,17 +8,23 @@ import tkinter as tk
 import template
 
 
-
 class Data(template.Interface):
 
 	def __init__(self, table):
 		super().__init__()
+		self.table = table
+		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330', charset='utf8')
+		self.cursor = self.cnx.cursor()
+		self.cursor.execute("use Purbeurre")
+
+	def connect_database(self):
 		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.cnx.cursor()
 		self.cursor.execute("use Purbeurre")
 
 	def create_database(self):
 		try:
+			self.connect_database()
 			self.cursor.execute("create database Purbeurre default character set 'utf8'")
 		except mysql.connector.Error as err:
 			print("Failed creating database Purbeurre")
@@ -27,7 +35,6 @@ class Data(template.Interface):
 			table_description = self.table[table_name]
 			try:
 				self.connect_database()
-
 				print("creating table {}:".format(table_name))
 				self.cursor.execute(table_description)
 			except mysql.connector.Error as err:
@@ -53,7 +60,7 @@ class Data(template.Interface):
 	def get_product(self, category_choice):
 
 		self.category_choice = category_choice
-		self.cursor.execute("select distinct id, product_name from food where category_id = {0} \
+		self.cursor.execute("select distinct id, product_name from product where category_id = {0} \
 			order by id".format(self.category_choice))
 		
 		for products in self.cursor:
@@ -63,7 +70,7 @@ class Data(template.Interface):
 		self.product_choice = product_choice
 		self.product_substitute = int(str(self.product_choice)) + 1
 		self.product_substitute = str(self.product_substitute)
-		self.cursor.execute("select id, product_name, brands, nutrition_grades from food where id = {0} \
+		self.cursor.execute("select id, product_name, brands, nutrition_grades from product where id = {0} \
 			union select id, product_name, brands, nutrition_grades from food where id = {1} \
 			".format(self.product_choice, self.product_substitute))
 
@@ -85,11 +92,11 @@ class Data(template.Interface):
 		self.list_fav_sub = []
 		self.list_fav_food = []
 		self.list_fav_index = []
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_food from favorite order by id)")
+		self.cursor.execute("select product_name, brands, nutrition_grades from product where id in ( select id_food from favorite order by id)")
 		for prod_food in self.cursor:
 			self.list_fav_food.append(prod_food)
 
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id in ( select id_substitute from favorite order by id)")
+		self.cursor.execute("select product_name, brands, nutrition_grades from product where id in ( select id_substitute from favorite order by id)")
 		for prod_sub in self.cursor:
 			self.list_fav_sub.append(prod_sub)
 
@@ -117,11 +124,6 @@ class Data(template.Interface):
 
 		for tuple_fav in self.cursor:
 			print(tuple_fav)
-
-
-
-
-
 
 
 

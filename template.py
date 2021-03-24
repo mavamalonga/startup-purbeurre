@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 import tables
 import tkinter as tk
@@ -66,9 +67,9 @@ class Interface:
 		self.feature_list = feature_list
 
 		for feature in feature_list:
-			print("Nom : {0}".format(feature[1]))
-			print("Marque : {0}".format(feature[2]))
-			print("Nutriments : {0} \n".format(feature[3]))
+			print("			Nom : {0}".format(feature[1]))
+			print("			Marque : {0}".format(feature[2]))
+			print("			Nutriments : {0} \n".format(feature[3]))
 
 
 	

@@ -1,14 +1,16 @@
+# -*- coding: utf-8 -*-
+
 import requests
 import mysql.connector
 from mysql.connector.cursor import MySQLCursorPrepared
 from mysql.connector import errorcode
 
-class get_data_api:
+class Api_OPFF:
 	def __init__(self):
 		self.Id = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.Id.cursor()
 		self.cursor.execute("use Purbeurre")
-		self.categories = ['Mueslis', 'Boissons', 'Pains de mie', 'Pâtes à tartiner']
+		self.categories = ['Mueslis', 'Boissons', 'Desserts', 'Fruits', 'Viandes', 'Fromages']
 		self.data_api = []
 
 	def load_data(self):
@@ -22,7 +24,7 @@ class get_data_api:
 			self.data_api.append(response)
 
 
-	def insert_category(self):
+	def insert_categories(self):
 		for elt, element in zip(self.categories, self.data_api):
 				insert_category = ("""insert ignore category (categories)
 									values({0})"""
@@ -49,8 +51,9 @@ class get_data_api:
 					store_tags = "\'"+",".join(value['stores_tags']).replace("'","")+"\'"
 					link = "\'"+value['url'].replace("'","")+"\'"
 
-					insert_food = ("""insert ignore into food (product_name, brands, category_id, 
+					insert_product = ("""insert ignore into Product (product_name, brands, category_id, 
 						ingredients_text, nutrition_grades, nutriments, quantity, store, link)
 						values({0}, {1}, (select id from category where categories = {2}), {3}, {4}, {5}, {6}, {7}, {8})""".format(product_name, brands, "\'"+elt+"\'", ingredients_text, nutrition_grades, nutriments, quantity, store_tags, link))
-					self.cursor.execute(insert_food)
+					self.cursor.execute(insert_product)
 					self.Id.commit()
+

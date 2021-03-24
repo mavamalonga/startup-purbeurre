@@ -1,8 +1,8 @@
 
 TABLES = {}
 
-TABLES['Food'] = ( 
-	"create table Food("
+TABLES['Product'] = ( 
+	"create table Product("
 	"id int unsigned auto_increment not null primary key,"
 	"product_name varchar(100) not null unique,"
 	"brands varchar(100) null,"
@@ -26,25 +26,25 @@ TABLES['Category'] = (
 TABLES['Favorite'] = (
 	"create table Favorite("
 	"id int unsigned auto_increment not null primary key,"
-	"id_food int unsigned not null,"
-	"id_substitute int unsigned not null,"
-	"unique uni_food_substitute (id_food, id_substitute)"
+	"product_id int unsigned not null,"
+	"substitute_id int unsigned not null,"
+	"unique uniq_product_substitute (product_id, substitute_id)"
 	")engine = InnoDB;"
 	)
 
-TABLES['Ind_nutriscore'] = (
-	"alter table Food add index ind_nutriscore(nutrition_grades);"
+TABLES['Ind_nutri-score'] = (
+	"alter table Product add index ind_nutri_score(nutrition_grades);"
 	)
 
 TABLES['Fk_favorite_category'] = (
-	"alter table Food add constraint fk_food_category foreign key (category_id) references category (id);"
+	"alter table Product add constraint fk_product_category foreign key (category_id) references category (id);"
 	)
 
-TABLES['Fk_favorite_food'] = (
-	"alter table Favorite add constraint fk_favorite_food foreign key (id_food) references Food (id);"
+TABLES['Fk_favorite_product'] = (
+	"alter table Favorite add constraint fk_favorite_product foreign key (product_id) references Product (id);"
 	)
 
 TABLES['Fk_favorite_substitute'] = (
-	"alter table Favorite add constraint fk_favorite_substitute foreign key (id_substitute) references Food (id);"
+	"alter table Favorite add constraint fk_favorite_substitute foreign key (substitute_id) references Product (id);"
 	)
 

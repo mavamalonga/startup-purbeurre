@@ -1,7 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import requests
 from database import Data
-from api import get_data_api
-from pynput import keyboard
 from template import Interface
 import tables
 from controller import Controlboard
@@ -9,8 +9,6 @@ from controller import Controlboard
 ctrl = Controlboard(tables.TABLES)
 display = Interface()
 database = Data(tables.TABLES)
-
-
 
 
 def main():
