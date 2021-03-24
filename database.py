@@ -72,11 +72,9 @@ class Data(template.Interface):
 			self.feature_list.append(feature)
 		self.display_feature(self.feature_list)
 
-		return self.product_choice, self.product_substitute
-
 
 	def save_product(self):
-		print("{0} : {1}".format(self.product_choice, self.product_substitute))
+		print("{0} ".format(self.product_substitute))
 
 		#self.cursor.execute("insert into favorite (id_food, id_substitute) values ({0}, {1})".format(self.product_choice, self.product_substitute))
 		#self.cnx.commit()

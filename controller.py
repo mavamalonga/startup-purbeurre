@@ -9,34 +9,37 @@ class Controlboard (database.Data):
 	def ctrl_main(self):
 		self.menu = 'main'
 		self.display_help(self.menu)
-		return self.menu
 
 	def ctrl_category(self):
-		self.menu = 'categorie'
+		self.menu = 'category'
 		self.display_help(self.menu)
 		self.get_category()
-		return self.menu
 
 	def ctrl_favorite(self):
-		self.menu = 'Favorie'
+		self.menu = 'favorie'
 		self.display_help(self.menu)
 		self.get_favorite()
-		return self.menu
 
-	def ctrl_product(self, event):
-		self.event = event
+	def ctrl_product(self, index):
+		self.index = index
 		self.menu = 'product'
 		self.display_help(self.menu)
-		self.get_product(self.event)
-		return self.menu
+		self.get_product(self.index)
+		return self.index
 
-	def ctrl_feature(self, event):
-		self.event = event 
+	def ctrl_feature(self, index):
+		self.index = index
 		self.menu = 'feature'
 		self.display_help(self.menu)
-		self.get_feature(self.event)
-		return self.menu
+		self.get_feature(self.index)
+		return self.index
 
 	def ctrl_save(self):
 		self.display_help(self.menu)
 		self.save_product()
+
+	def ctrl_delete(self):
+		self.menu = 'delete'
+		self.display_help(self.menu)
+		self.delete_porduct(self.index)
+

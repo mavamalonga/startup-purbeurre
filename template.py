@@ -12,23 +12,27 @@ class Interface:
 	def display_help(self, menu):
 		self.menu = menu
 
-		self.txt_main = "			\nMenu principal \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_main = "		########## Menu principal ##########\n \
+		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			1 : Sélectionnez une catégorie \n \
 			2 : Choisir un aliment à substitué. \n \
 			q : Quitter le programme."
 
-		self.txt_other = "			\nMenu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_main_path = "\n 		########## Menu {0} ###########\n \
+		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 		".format(self.menu)
 
-		self.txt_value = "			\nMenu {0} \n Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+		self.txt_feature ="\n 		########## Menu {0} ########## \n \
+		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			e : Enregistrer \n \
 		".format(self.menu)
 
-		self.text_favorite ="		\nMenu {0} \n Mode d'emploi : Pour modifier ou supprimer un favori, rentrez le numéro correspondant au choix. \n \
+		self.text_favorite ="\n 		########## Menu {0} ########## \n \
+		Mode d'emploi : Pour modifier ou supprimer un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			s : Supprimer\n \
@@ -38,11 +42,11 @@ class Interface:
 		if self.menu == 'main':
 			print(self.txt_main)
 		if self.menu == 'category':
-			print(self.txt_other)
+			print(self.txt_main_path)
 		if self.menu == 'product':
-			print(self.txt_other)
+			print(self.txt_main_path)
 		if self.menu == 'feature':
-			print(self.txt_value)
+			print(self.txt_feature)
 		if self.menu == 'favorite':
 			print(self.text_favorite)
 
@@ -60,13 +64,12 @@ class Interface:
 
 	def display_feature(self, feature_list):
 		self.feature_list = feature_list
-		print("			Produit : Substitute")
-		print("			Nom  \
-			{0} : {1}".format(self.feature_list[0][1], self.feature_list[1][1]))
-		print("			Marque  \
-			{0} : {1}".format(self.feature_list[0][2], self.feature_list[1][2]))
-		print("			Nutriments \
-		 	{0} : {1}".format(self.feature_list[0][3], self.feature_list[1][3]))
+
+		for feature in feature_list:
+			print("Nom : {0}".format(feature[1]))
+			print("Marque : {0}".format(feature[2]))
+			print("Nutriments : {0} \n".format(feature[3]))
+
 
 	
 	def display_favorite(self, list_index, list_id_food, list_id_substitue):

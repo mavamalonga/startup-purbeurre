@@ -7,9 +7,7 @@ import tables
 from controller import Controlboard
 
 ctrl = Controlboard(tables.TABLES)
-
 display = Interface()
-
 database = Data(tables.TABLES)
 
 
@@ -37,19 +35,20 @@ def main():
 					event = 0
 
 
-			if ctrl.menu == 'favorite':
+			if ctrl.menu == 'favorie':
+				if event == 'r':
+					ctrl.ctrl_main()
+					event = 0
 				if event == 's':
 					pass
+
 				if int(str(event)) > 0:
-					menu = 'favorite'
-					display.display_help(menu)
-					database.focus_favorite(event)
+					pass
 					event = 0
 
-
-			if ctrl.menu == 'categorie':
+			if ctrl.menu == 'category':
 				if event == 'r':
-					pass
+					ctrl.ctrl_main()
 					event = 0
 				if int(str(event)) > 0:
 					ctrl.ctrl_product(event)
@@ -58,8 +57,7 @@ def main():
 
 			if ctrl.menu == 'product':
 				if event == 'r':
-					display.display_help(menu, event)
-					database.get_category()
+					ctrl.ctrl_category()
 					event = 0
 				if int(str(event)) > 0:
 					ctrl.ctrl_feature(event)
@@ -67,7 +65,7 @@ def main():
 
 			if ctrl.menu == 'feature':
 				if event == 'r':
-					pass
+					ctrl.ctrl_product(ctrl.index)
 					event=0
 				if event == 'e':
 					database.save_product()
