@@ -45,14 +45,9 @@ class Data(template.Interface):
 			else:
 				print("OK")
 		self.cursor.close()
-		
-	def delete_data(self):
-		self.cursor("delete from Food;"
-			"delete from Category"
-			"delete from Favorite")
 
 	def get_category(self):
-		self.cursor.execute("select distinct id, categories from category order by id;")
+		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
 			self.category_menu(category_tuple[0], category_tuple[1])
 
@@ -61,23 +56,25 @@ class Data(template.Interface):
 
 		self.category_choice = category_choice
 		self.cursor.execute("select distinct id, product_name from product where category_id = {0} \
-			order by id".format(self.category_choice))
+			order by id".format(self.category_choice))# set @category = {}
 		
 		for products in self.cursor:
 			self.products_menu(products[0], products[1])
 
+
 	def get_feature(self, product_choice):
 		self.product_choice = product_choice
-		self.product_substitute = int(str(self.product_choice)) + 1
-		self.product_substitute = str(self.product_substitute)
-		self.cursor.execute("select id, product_name, brands, nutrition_grades from product where id = {0} \
-			union select id, product_name, brands, nutrition_grades from food where id = {1} \
-			".format(self.product_choice, self.product_substitute))
+		self.cursor.execute("select id, product_name, brands, nutrition_grades from product where id = {0}\
+			".format(self.product_choice)) # set @product = {}
 
 		self.feature_list = []
 		for feature in self.cursor:
 			self.feature_list.append(feature)
 		self.display_feature(self.feature_list)
+
+	def select_substitute(self, product_choice):
+		self.cursor.execute("select nutrition_grades from product order by nutrition_grades")
+
 
 
 	def save_product(self):
