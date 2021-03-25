@@ -13,9 +13,6 @@ class Data(template.Interface):
 	def __init__(self, table):
 		super().__init__()
 		self.table = table
-		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330', charset='utf8')
-		self.cursor = self.cnx.cursor()
-		self.cursor.execute("use Purbeurre")
 
 	def connect_database(self):
 		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
@@ -47,37 +44,39 @@ class Data(template.Interface):
 		self.cursor.close()
 
 	def get_category(self):
+		self.connect_database()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
 			self.category_menu(category_tuple[0], category_tuple[1])
 
-		self.cursor.close()
-
 	def get_product(self, category_choice):
-		self.connect_database()
+
 		self.category_choice = category_choice
 		self.cursor.execute("set @category_choice = {0}".format(self.category_choice))
 		self.cursor.execute("call get_product(@category_choice)")
 
 		for products in self.cursor:
 			self.products_menu(products[0], products[1])
-		self.cursor.close()
 		
 	def get_feature(self, product_choice):
-		self.connect_database()
+
 		self.product_choice = product_choice
 		self.cursor.execute("set @product_choice = {0}".format(self.product_choice))
 		self.cursor.execute("call get_feature(@product_choice)")
-		
+
 		for feature in self.cursor:
+			print(feature)
 			self.display_feature(feature[0], feature[1], feature[2], feature[3], feature[4],
 				feature[5], feature[6])
+		self.cursor.close()
+		self.select_substitute()
 
-	def select_substitute(self, product_choice):
-		self.product_choice = product_choice
-		self.cursor.execute("select nutrition_grades from product order by nutrition_grades")
+	def select_substitute(self):
 
-
+		self.cursor.execute("select @category_choice, @product_choice")
+		self.cursor.execute("call select_substitute(@category_choice, @product_choice)")
+		for substitute in self.cursor:
+			print(substitute)
 
 	def save_product(self):
 		print("{0} ".format(self.product_substitute))
