@@ -27,7 +27,6 @@ class Controlboard (database.Data):
 		self.menu = 'product'
 		self.display_help(self.menu)
 		self.get_product(self.index)
-		return self.index
 
 	def ctrl_feature(self, index):
 		self.index = index

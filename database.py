@@ -51,19 +51,20 @@ class Data(template.Interface):
 		for category_tuple in self.cursor:
 			self.category_menu(category_tuple[0], category_tuple[1])
 
+		self.cursor.close()
 
 	def get_product(self, category_choice):
-
+		self.connect_database()
 		self.category_choice = category_choice
-		self.cursor.execute("select distinct id, product_name from product where category_id = {0} \
-			order by id".format(self.category_choice))# set @category = {}
-		
+		self.cursor.execute("set @category_choice = {0}".format(self.category_choice))
+		self.cursor.execute("call get_product(@category_choice)")
+
 		for products in self.cursor:
 			self.products_menu(products[0], products[1])
-
-
+		
 	def get_feature(self, product_choice):
 		self.product_choice = product_choice
+		self.cursor.execute("set @product_choice = {0}".format(self.product_choice))
 		self.cursor.execute("select id, product_name, brands, nutrition_grades from product where id = {0}\
 			".format(self.product_choice)) # set @product = {}
 
