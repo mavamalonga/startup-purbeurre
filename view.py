@@ -49,6 +49,7 @@ def main():
 					ctrl.ctrl_main()
 					event = 0
 				if int(str(event)) > 0:
+					category_choice = event
 					ctrl.ctrl_product(event)
 					event = 0
 
@@ -58,7 +59,8 @@ def main():
 					ctrl.ctrl_category()
 					event = 0
 				if int(str(event)) > 0:
-					ctrl.ctrl_feature(event)
+					product_choice = event
+					ctrl.ctrl_feature(category_choice, product_choice)
 					event=0
 
 			if ctrl.menu == 'feature':

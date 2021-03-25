@@ -71,8 +71,10 @@ class Interface:
 		print("			Nutriments : {0}".format(feature3))
 		print("			Nutri-score : {0}".format(feature4))
 		print("			Quantity : {0}".format(feature5))
-		print("			Magasin(s): {0}".format(feature6))
+		print("			Magasin(s): {0}\n".format(feature6))
 
+	def display_substitute(self, sub_id, name, nutriscore):
+		print("			{0} : {1} {2}".format(sub_id, name, nutriscore ))
 
 	
 	def display_favorite(self, list_index, list_id_food, list_id_substitue):
