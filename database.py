@@ -61,19 +61,20 @@ class Data(template.Interface):
 
 		for products in self.cursor:
 			self.products_menu(products[0], products[1])
+		self.cursor.close()
 		
 	def get_feature(self, product_choice):
+		self.connect_database()
 		self.product_choice = product_choice
 		self.cursor.execute("set @product_choice = {0}".format(self.product_choice))
-		self.cursor.execute("select id, product_name, brands, nutrition_grades from product where id = {0}\
-			".format(self.product_choice)) # set @product = {}
-
-		self.feature_list = []
+		self.cursor.execute("call get_feature(@product_choice)")
+		
 		for feature in self.cursor:
-			self.feature_list.append(feature)
-		self.display_feature(self.feature_list)
+			self.display_feature(feature[0], feature[1], feature[2], feature[3], feature[4],
+				feature[5], feature[6])
 
 	def select_substitute(self, product_choice):
+		self.product_choice = product_choice
 		self.cursor.execute("select nutrition_grades from product order by nutrition_grades")
 
 

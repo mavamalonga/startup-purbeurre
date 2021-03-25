@@ -63,13 +63,15 @@ class Interface:
 		self.product_name = product_name
 		print("			{0} : {1}".format(self.product_id, self.product_name))
 
-	def display_feature(self, feature_list):
-		self.feature_list = feature_list
-
-		for feature in feature_list:
-			print("			Nom : {0}".format(feature[1]))
-			print("			Marque : {0}".format(feature[2]))
-			print("			Nutriments : {0} \n".format(feature[3]))
+	def display_feature(self, feature0, feature1, feature2, feature3, feature4,
+		feature5, feature6):
+		print("			Nom : {0}".format(feature0))
+		print("			Marque : {0}".format(feature1))
+		print("			Ingredients: {0}".format(feature2))
+		print("			Nutriments : {0}".format(feature3))
+		print("			Nutri-score : {0}".format(feature4))
+		print("			Quantity : {0}".format(feature5))
+		print("			Magasin(s): {0}".format(feature6))
 
 
 	
