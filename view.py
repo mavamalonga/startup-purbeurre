@@ -60,7 +60,8 @@ def main():
 					event = 0
 				if int(str(event)) > 0:
 					product_choice = event
-					ctrl.ctrl_feature(category_choice, product_choice)
+					substitute = 0
+					ctrl.ctrl_feature(category_choice, product_choice, substitute)
 					event=0
 
 			if ctrl.menu == 'feature':
@@ -69,6 +70,11 @@ def main():
 					event=0
 				if event == 'e':
 					database.save_product()
+				if int(str(event)) > 0:
+					substitute = event
+					ctrl.ctrl_feature(category_choice, product_choice, substitute)
+					substitute = 0
+
 
 			event = 0
 

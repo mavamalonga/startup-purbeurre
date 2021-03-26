@@ -54,8 +54,7 @@ class Data(template.Interface):
 
 		self.connect_database()
 		self.category_choice = category_choice
-		self.cursor.execute("set @category_choice = {0}".format(self.category_choice))
-		self.cursor.execute("call get_product(@category_choice)")
+		self.cursor.execute("call get_product({0})".format(self.category_choice))
 		for products in self.cursor:
 			self.products_menu(products[0], products[1])
 		self.cursor.close()
@@ -63,23 +62,34 @@ class Data(template.Interface):
 	def get_feature(self, product_choice):
 
 		self.connect_database()
-		self.product_choice = product_choice
-		self.cursor.execute("set @product_choice = {0}".format(self.product_choice))
-		self.cursor.execute("call get_feature(@product_choice)")
+		self.cursor.execute("call get_feature({0})".format(product_choice))
 
 		for feature in self.cursor:
+
 			self.display_feature(feature[0], feature[1], feature[2], feature[3], feature[4],
 				feature[5], feature[6])
 		self.cursor.close()
 
 
-	def select_substitute(self, index_c, index_p):
+	def select_substitute_list(self, index_c, index_p):
 
 		self.connect_database()
 		self.cursor.execute("call select_substitute({0}, {1})".format(index_c, index_p))
 		for substitute in self.cursor:
 			self.display_substitute(substitute[0], substitute[1], substitute[2])
 		self.cursor.close()
+
+	def select_substitute(self, substitute):
+		
+		self.connect_database()
+		self.cursor.execute("call get_feature({0})".format(substitute))
+
+		for feature in self.cursor:
+
+			self.display_feature(feature[0], feature[1], feature[2], feature[3], feature[4],
+				feature[5], feature[6])
+		self.cursor.close()
+
 
 	def save_product(self):
 		print("{0} ".format(self.product_substitute))

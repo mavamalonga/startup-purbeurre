@@ -28,13 +28,17 @@ class Controlboard (database.Data):
 		self.display_help(self.menu)
 		self.get_product(self.index)
 
-	def ctrl_feature(self, index_c, index_p):
-		self.index_c = index_c
-		self.index_p = index_p
+	def ctrl_feature(self, category_choice, product_choice, substitute):
 		self.menu = 'feature'
-		self.display_help(self.menu)
-		self.get_feature(self.index_p)
-		self.select_substitute(self.index_c, self.index_p)
+		self.substitute = substitute
+		if int(str(substitute)) == 0:
+			self.display_help(self.menu)
+			self.get_feature(product_choice)
+			self.select_substitute_list(category_choice, product_choice)
+		elif int(str(substitute)) > 0:
+			self.display_help(self.menu)
+			self.get_feature(product_choice)
+			self.select_substitute(substitute)
 
 	def ctrl_save(self):
 		self.display_help(self.menu)
