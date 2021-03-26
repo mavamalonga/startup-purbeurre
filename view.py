@@ -68,12 +68,14 @@ def main():
 				if event == 'r':
 					ctrl.ctrl_product(ctrl.index)
 					event=0
-				if event == 'e':
-					database.save_product()
 				if int(str(event)) > 0:
 					substitute = event
 					ctrl.ctrl_feature(category_choice, product_choice, substitute)
-					substitute = 0
+
+			if ctrl.menu == 'comparison':
+				if event == 'e':
+					ctrl.ctrl_save(product_choice, substitute)
+
 
 
 			event = 0

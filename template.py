@@ -29,7 +29,6 @@ class Interface:
 		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-			e : Enregistrer \n \
 		".format(self.menu)
 
 		self.text_favorite ="\n 		########## Menu {0} ########## \n \
@@ -37,6 +36,13 @@ class Interface:
 			r : retour \n \
 			q : Quitter \n \
 			s : Supprimer\n \
+		".format(self.menu)
+
+		self.txt_comparison ="\n 		########## Menu {0} ########## \n \
+		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			e : Enregistrer \n \
 		".format(self.menu)
 
 
@@ -50,6 +56,8 @@ class Interface:
 			print(self.txt_feature)
 		if self.menu == 'favorite':
 			print(self.text_favorite)
+		if self.menu == 'comparison':
+			print(self.txt_comparison)
 
 
 	def category_menu(self, category_id, category_name):
@@ -83,7 +91,7 @@ class Interface:
 		self.list_fav_sub = list_id_substitue
 	
 		for tuple_favorite in zip(self.list_fav_index, self.list_fav_food, self.list_fav_sub):
-			print("	{0} :{1} : {2}".format(tuple_favorite[0], tuple_favorite[1], tuple_favorite[2]))
+			print("	{0} : {1} <-------> {2}".format(tuple_favorite[0][0], tuple_favorite[1][0], tuple_favorite[2][0]))
 				
 
 

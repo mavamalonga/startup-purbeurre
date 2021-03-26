@@ -29,20 +29,25 @@ class Controlboard (database.Data):
 		self.get_product(self.index)
 
 	def ctrl_feature(self, category_choice, product_choice, substitute):
-		self.menu = 'feature'
+
 		self.substitute = substitute
 		if int(str(substitute)) == 0:
+			self.menu = 'feature'
 			self.display_help(self.menu)
 			self.get_feature(product_choice)
 			self.select_substitute_list(category_choice, product_choice)
 		elif int(str(substitute)) > 0:
+
+			self.menu = 'comparison'
 			self.display_help(self.menu)
 			self.get_feature(product_choice)
 			self.select_substitute(substitute)
 
-	def ctrl_save(self):
+	def ctrl_save(self, product_choice, substitute):
+		self.menu = 'camparison'
 		self.display_help(self.menu)
-		self.save_product()
+		self.save_product(product_choice, substitute)
+		print("Les produits ont été ajoutés au favories.")
 
 	def ctrl_delete(self):
 		self.menu = 'delete'
