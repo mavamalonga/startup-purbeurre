@@ -123,20 +123,29 @@ class Data(template.Interface):
 		self.choice_favorite = choice_favorite
 		self.cursor.execute("delete from favorite where id = {0}".format(self.choice_favorite))
 
-	def focus_favorite(self, choice_display):
-		self.index_food = 0
-		self.index_substitute = 0
-		self.choice_display = choice_display
-		self.cursor.execute("select id_food, id_substitute from favorite where id = {0}".format(self.choice_display))
-		for tuple_favorite in self.cursor:
-			self.index_food_substitute = tuple_favorite
+	def select_favorite_one(self, favorite_id):
+		self.favorite_id = favorite_id
+		self.connect_database()
+		self.cursor.execute("select product_id from favorite where id = {0}".format(self.favorite_id))
+		for product_id in self.cursor:
+			self.product_id = product_id[0]
+		self.cursor.close()
 
-		self.cursor.execute("select product_name, brands, nutrition_grades from food where id = {0}\
-			union select product_name, brands, nutrition_grades from food where id = {1} ".format(self.index_food_substitute[0],
-			self.index_food_substitute[1]))
+		self.connect_database()
+		self.cursor.execute("select substitute_id from favorite where id = {0} ".format(self.favorite_id))
+		for substitute_id in self.cursor:
+			self.substitute_id = substitute_id[0]
+		self.cursor.close()
 
-		for tuple_fav in self.cursor:
-			print(tuple_fav)
+		self.connect_database()
+		self.cursor.execute("select category_id from product where id = {0} ".format(self.substitute_id))
+		for category_id in self.cursor:
+			self.category_id = category_id[0]
+		self.cursor.close()
+
+
+		self.get_feature(self.product_id)
+		self.select_substitute(self.substitute_id)
 
 
 

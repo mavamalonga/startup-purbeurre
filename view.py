@@ -33,12 +33,16 @@ def main():
 					event = 0
 
 
-			if ctrl.menu == 'favorie':
+			if ctrl.menu == 'favorite':
 				if event == 'r':
 					ctrl.ctrl_main()
 					event = 0
-				if event == 's':
-					pass
+				if int(str(event)) > 0:
+					ctrl.ctrl_favorite_one(event)
+					event = 0
+			if ctrl.menu == 'favorite_one':
+				pass
+
 
 				if int(str(event)) > 0:
 					pass

@@ -18,7 +18,7 @@ class Controlboard (database.Data):
 		self.get_category()
 
 	def ctrl_favorite(self):
-		self.menu = 'favorie'
+		self.menu = 'favorite'
 		self.display_help(self.menu)
 		self.get_favorite()
 
@@ -31,6 +31,7 @@ class Controlboard (database.Data):
 	def ctrl_feature(self, category_choice, product_choice, substitute):
 
 		self.substitute = substitute
+
 		if int(str(substitute)) == 0:
 			self.menu = 'feature'
 			self.display_help(self.menu)
@@ -48,6 +49,11 @@ class Controlboard (database.Data):
 		self.display_help(self.menu)
 		self.save_product(product_choice, substitute)
 		print("Les produits ont été ajoutés au favories.")
+
+	def ctrl_favorite_one(self, favorite_id):
+		self.menu = 'feature'
+		self.display_help(self.menu)
+		self.select_favorite_one(favorite_id)
 
 	def ctrl_delete(self):
 		self.menu = 'delete'

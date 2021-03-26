@@ -32,10 +32,9 @@ class Interface:
 		".format(self.menu)
 
 		self.text_favorite ="\n 		########## Menu {0} ########## \n \
-		Mode d'emploi : Pour modifier ou supprimer un favori, rentrez le numéro correspondant au choix. \n \
+		Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-			s : Supprimer\n \
 		".format(self.menu)
 
 		self.txt_comparison ="\n 		########## Menu {0} ########## \n \
