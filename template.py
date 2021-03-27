@@ -53,7 +53,7 @@ class Interface:
 			print(self.txt_main_path)
 		if self.menu == 'feature':
 			print(self.txt_feature)
-		if self.menu == 'favorite':
+		if self.menu == 'favorite' or self.menu == 'feature_favorite':
 			print(self.text_favorite)
 		if self.menu == 'comparison':
 			print(self.txt_comparison)

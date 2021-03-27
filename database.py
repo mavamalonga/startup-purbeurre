@@ -124,7 +124,7 @@ class Data(template.Interface):
 		self.choice_favorite = choice_favorite
 		self.cursor.execute("delete from favorite where id = {0}".format(self.choice_favorite))
 
-	def select_favorite_one(self, favorite_id):
+	def select_feature_favorite(self, favorite_id):
 		self.favorite_id = favorite_id
 		self.connect_database()
 		self.cursor.execute("select product_id from favorite where id = {0}".format(self.favorite_id))

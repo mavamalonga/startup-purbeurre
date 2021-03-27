@@ -42,10 +42,13 @@ def main():
 					ctrl.ctrl_main()
 					event = 0
 				if int(str(event)) > 0:
-					ctrl.ctrl_favorite_one(event)
+					ctrl.ctrl_feature_favorite(event)
 					event = 0
-			if ctrl.menu == 'favorite_one':
-				pass
+			if ctrl.menu == 'feature_favorite':
+				if event == 'r':
+					ctrl.ctrl_favorite()
+					event = 0
+
 
 
 				if int(str(event)) > 0:
@@ -84,13 +87,16 @@ def main():
 				if event == 'e':
 					ctrl.ctrl_save(product_choice, substitute)
 				if event == 'r':
-					print("ok")
+					substitute = 0
 					ctrl.ctrl_feature(category_choice, product_choice, substitute)
+					event = 0
 
-			
+
 			print(category_choice)
 			print(product_choice)
 			print(substitute)
+			print(ctrl.menu)
+			print(event)
 
 
 

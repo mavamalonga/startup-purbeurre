@@ -49,10 +49,10 @@ class Controlboard (database.Data):
 		self.display_help(self.menu)
 		self.save_product(product_choice, substitute)
 
-	def ctrl_favorite_one(self, favorite_id):
-		self.menu = 'feature'
+	def ctrl_feature_favorite(self, favorite_id):
+		self.menu = 'feature_favorite'
 		self.display_help(self.menu)
-		self.select_favorite_one(favorite_id)
+		self.select_feature_favorite(favorite_id)
 
 	def ctrl_delete(self):
 		self.menu = 'delete'
