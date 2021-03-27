@@ -45,7 +45,7 @@ class Controlboard (database.Data):
 			self.select_substitute(substitute)
 
 	def ctrl_save(self, product_choice, substitute):
-		self.menu = 'camparison'
+		self.menu = 'comparison'
 		self.display_help(self.menu)
 		self.save_product(product_choice, substitute)
 

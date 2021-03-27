@@ -105,18 +105,22 @@ class Data(template.Interface):
 		self.list_fav_index = []
 
 		self.connect_database()
-	
 		self.cursor.execute("select product_name from product where id in ( select product_id from favorite order by id)")
 		for prod_food in self.cursor:
 			self.list_fav_food.append(prod_food)
+		self.cursor.close()
 
+		self.connect_database()
 		self.cursor.execute("select product_name from product where id in ( select substitute_id from favorite order by id)")
 		for prod_sub in self.cursor:
 			self.list_fav_sub.append(prod_sub)
+		self.cursor.close()
 
+		self.connect_database()
 		self.cursor.execute("select id from favorite order by id")
 		for index in self.cursor:
 			self.list_fav_index.append(index)
+		self.cursor.close()
 
 		self.display_favorite(self.list_fav_index, self.list_fav_food, self.list_fav_sub)
 		

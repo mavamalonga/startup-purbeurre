@@ -82,10 +82,13 @@ def main():
 				if int(str(event)) > 0:
 					substitute = event
 					ctrl.ctrl_feature(category_choice, product_choice, substitute)
+					event = 0
 
 			if ctrl.menu == 'comparison':
 				if event == 'e':
 					ctrl.ctrl_save(product_choice, substitute)
+					event = 0
+					ctrl.ctrl_feature(category_choice, product_choice, substitute)
 				if event == 'r':
 					substitute = 0
 					ctrl.ctrl_feature(category_choice, product_choice, substitute)
