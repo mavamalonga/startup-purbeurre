@@ -96,6 +96,7 @@ class Data(template.Interface):
 		self.cursor.execute("insert into favorite (product_id, substitute_id) values ({0}, {1})".format(product_choice, substitute))
 		self.cnx.commit()
 		self.cursor.close()
+		self.display_success_save()
 
 	def get_favorite(self):
 

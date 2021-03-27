@@ -14,6 +14,10 @@ database = Data(tables.TABLES)
 def main():
 
 	ctrl.ctrl_main()
+
+	category_choice = 0
+	product_choice = 0
+	substitute = 0
 	
 	while True:
 
@@ -79,6 +83,15 @@ def main():
 			if ctrl.menu == 'comparison':
 				if event == 'e':
 					ctrl.ctrl_save(product_choice, substitute)
+				if event == 'r':
+					print("ok")
+					ctrl.ctrl_feature(category_choice, product_choice, substitute)
+
+			
+			print(category_choice)
+			print(product_choice)
+			print(substitute)
+
 
 
 

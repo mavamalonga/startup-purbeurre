@@ -48,7 +48,6 @@ class Controlboard (database.Data):
 		self.menu = 'camparison'
 		self.display_help(self.menu)
 		self.save_product(product_choice, substitute)
-		print("Les produits ont été ajoutés au favories.")
 
 	def ctrl_favorite_one(self, favorite_id):
 		self.menu = 'feature'

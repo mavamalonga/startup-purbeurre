@@ -91,9 +91,9 @@ class Interface:
 	
 		for tuple_favorite in zip(self.list_fav_index, self.list_fav_food, self.list_fav_sub):
 			print("	{0} : {1} <-------> {2}".format(tuple_favorite[0][0], tuple_favorite[1][0], tuple_favorite[2][0]))
-				
-
-
+	
+	def display_success_save(self):
+		print("Enregistrement validé.")
 
 
 
