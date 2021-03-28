@@ -8,46 +8,37 @@ class Controlboard (database.Data):
 	def __init__(self, table):
 		super().__init__(table)
 
-	def ctrl_main(self):
-		self.menu = 'main'
-		self.display_help(self.menu)
+	def main(self, url):
+		self.displayHelp(url)
 
-	def ctrl_category(self):
-		self.menu = 'category'
-		self.display_help(self.menu)
-		self.get_category()
-
-	def ctrl_favorite(self):
-		self.menu = 'favorite'
-		self.display_help(self.menu)
+	def favorite(self, url):
+		self.display_help(url)
 		self.get_favorite()
 
-	def ctrl_product(self, index):
-		self.index = index
-		self.menu = 'product'
-		self.display_help(self.menu)
-		self.get_product(self.index)
+	def categories(self, url):
+		self.displayHelp(url)
+		self.get_category()
 
-	def ctrl_feature(self, category_choice, product_choice, substitute):
+	def products(self, url, category_id):
+		self.displayHelp(url, category_id=category_id)
+		self.get_product(category_id)
 
-		self.substitute = substitute
+	def select_product(self, url, category_id, product_id, substitute_id):
 
-		if int(str(substitute)) == 0:
-			self.menu = 'feature'
-			self.display_help(self.menu)
-			self.get_feature(product_choice)
-			self.select_substitute_list(category_choice, product_choice)
-		elif int(str(substitute)) > 0:
+		if int(str(substitute_id)) == 0:
+			self.displayHelp(url, category_id, product_id)
+			self.get_feature(product_id)
+			self.select_substitute_list(category_id, product_id)
+		elif int(str(substitute_id)) > 0:
 
-			self.menu = 'comparison'
-			self.display_help(self.menu)
-			self.get_feature(product_choice)
-			self.select_substitute(substitute)
+			self.displayHelp(url, category_id, product_id, substitute_id)
+			self.get_feature(product_id)
+			self.select_substitute(substitute_id)
 
-	def ctrl_save(self, product_choice, substitute):
+	def save(self, product_choice, substitute):
 		self.menu = 'comparison'
-		self.display_help(self.menu)
 		self.save_product(product_choice, substitute)
+		print('Produits ajoutés !')
 
 	def ctrl_feature_favorite(self, favorite_id):
 		self.menu = 'feature_favorite'

@@ -5,58 +5,83 @@ import tkinter as tk
 import database
 
 
+
+
+
 class Interface:
 
 	def __init__(self):
 		self.echa = 0
 
-	def display_help(self, menu):
-		self.menu = menu
+	def displayHelp(self, url, category_id=0, product_id=0, substitute_id=0):
+		self.url = url
+		self.category_id = category_id
+		self.product_id = product_id
+		self.substitute_id = substitute_id
 
-		self.txt_main = "		########## Menu principal ##########\n \
-		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			1 : Sélectionnez une catégorie \n \
-			2 : Choisir un aliment à substitué. \n \
-			q : Quitter le programme."
-
-		self.txt_main_path = "\n 		########## Menu {0} ###########\n \
-		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-		".format(self.menu)
-
-		self.txt_feature ="\n 		########## Menu {0} ########## \n \
-		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-		".format(self.menu)
 
 		self.text_favorite ="\n 		########## Menu {0} ########## \n \
 		Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-		".format(self.menu)
+		".format(self.url)
 
-		self.txt_comparison ="\n 		########## Menu {0} ########## \n \
-		Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+
+		if self.url == 'main':
+			self.txt_main = "		########## Menu principal ##########\n \
+			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+			1 : Sélectionnez une catégorie \n \
+			2 : Choisir un aliment à substitué. \n \
+			q : Quitter le programme. \n \
+			"
+			print(self.txt_main)
+
+
+
+		if self.url == 'main/categories' or self.url == 'main/categories/':
+			self.txt_categories = "\n 		########## url : {0}{1} ###########\n \
+			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			".format(self.url, self.category_id)
+			print(self.txt_categories)
+
+
+
+		if self.url == 'main/categories/{0}products/':
+			self.url = self.url.format(self.category_id)
+			self.txt_product ="\n 		########## url : {0}{1} ########## \n \
+			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			".format(self.url, self.product_id)
+			print(self.txt_product)
+
+	
+
+		if self.url == 'main/categories/{0}/products/{1}/':
+
+			self.url =  self.url.format(self.category_id, self.product_id)
+			self.txt_substitute ="\n 		########## url : {0}{1} ########## \n \
+			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			e : Enregistrer \n \
-		".format(self.menu)
+			".format(self.url, self.substitute_id)
+
+			print(self.txt_substitute)
+	
 
 
-		if self.menu == 'main':
-			print(self.txt_main)
-		if self.menu == 'category':
-			print(self.txt_main_path)
-		if self.menu == 'product':
-			print(self.txt_main_path)
-		if self.menu == 'feature':
-			print(self.txt_feature)
-		if self.menu == 'favorite' or self.menu == 'feature_favorite':
+
+		if self.url == 'favorite' or self.url == 'feature_favorite':
 			print(self.text_favorite)
-		if self.menu == 'comparison':
+		if self.url == 'comparison':
 			print(self.txt_comparison)
+
+		return self.url
+
+
 
 
 	def category_menu(self, category_id, category_name):
@@ -93,6 +118,7 @@ class Interface:
 		for tuple_favorite in zip(self.list_fav_food, self.list_fav_sub):
 			print("	{0} : {1} <-------> {2}".format(self.list_fav_index[self.i][0], tuple_favorite[0][0], tuple_favorite[1][0]))
 			self.i += 1
+
 	def display_success_save(self):
 		print("Enregistrement validé.")
 
