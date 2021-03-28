@@ -20,13 +20,6 @@ class Interface:
 		self.substitute_id = substitute_id
 
 
-		self.text_favorite ="\n 		########## Menu {0} ########## \n \
-		Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-		".format(self.url)
-
-
 		if self.url == 'main':
 			self.txt_main = "		########## Menu principal ##########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
@@ -68,18 +61,27 @@ class Interface:
 			q : Quitter \n \
 			e : Enregistrer \n \
 			".format(self.url, self.substitute_id)
-
 			print(self.txt_substitute)
-	
 
 
+		if self.url == 'main/favorites':
 
-		if self.url == 'favorite' or self.url == 'feature_favorite':
+			self.text_favorite ="\n 		########## url : {0} ########## \n \
+			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			".format(self.url)
 			print(self.text_favorite)
-		if self.url == 'comparison':
-			print(self.txt_comparison)
 
-		return self.url
+		if self.url == 'main/favorites/':
+			self.text_favorite ="\n 		########## url : {0}{1} ########## \n \
+			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
+			r : retour \n \
+			q : Quitter \n \
+			s : Supprimer \n \
+			".format(self.url, self.product_id)
+			print(self.text_favorite)
+
 
 
 
@@ -116,7 +118,7 @@ class Interface:
 
 		self.i = 0
 		for tuple_favorite in zip(self.list_fav_food, self.list_fav_sub):
-			print("	{0} : {1} <-------> {2}".format(self.list_fav_index[self.i][0], tuple_favorite[0][0], tuple_favorite[1][0]))
+			print("			{0} : {1} <-------> {2}".format(self.list_fav_index[self.i][0], tuple_favorite[0][0], tuple_favorite[1][0]))
 			self.i += 1
 
 	def display_success_save(self):

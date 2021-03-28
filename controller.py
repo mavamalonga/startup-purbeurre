@@ -12,7 +12,7 @@ class Controlboard (database.Data):
 		self.displayHelp(url)
 
 	def favorite(self, url):
-		self.display_help(url)
+		self.displayHelp(url)
 		self.get_favorite()
 
 	def categories(self, url):
@@ -40,13 +40,12 @@ class Controlboard (database.Data):
 		self.save_product(product_choice, substitute)
 		print('Produits ajoutés !')
 
-	def ctrl_feature_favorite(self, favorite_id):
-		self.menu = 'feature_favorite'
-		self.display_help(self.menu)
+	def select_favorite(self, url, favorite_id):
+		self.displayHelp(url, product_id=favorite_id)
 		self.select_feature_favorite(favorite_id)
 
-	def ctrl_delete(self):
-		self.menu = 'delete'
-		self.display_help(self.menu)
-		self.delete_porduct(self.index)
+	def delete_favorite_id(self, favorite_id):
+		print(favorite_id)
+		self.delete_favorite(favorite_id)
+		print("Le favori {0} à été supprimé.".format(favorite_id))
 

@@ -124,9 +124,12 @@ class Data(template.Interface):
 
 		self.display_favorite(self.list_fav_index, self.list_fav_food, self.list_fav_sub)
 		
-	def delete_favorite(self, choice_favorite):
-		self.choice_favorite = choice_favorite
-		self.cursor.execute("delete from favorite where id = {0}".format(self.choice_favorite))
+	def delete_favorite(self, favorite_id):
+		self.favorite_id = favorite_id
+		self.connect_database()
+		self.cursor.execute("delete from favorite where id = {0}".format(self.favorite_id))
+		self.cnx.commit()
+		self.cursor.close()
 
 	def select_feature_favorite(self, favorite_id):
 		self.favorite_id = favorite_id

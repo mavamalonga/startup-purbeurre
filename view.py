@@ -34,24 +34,31 @@ def main():
 					board.categories(url)
 					event = 0
 				if event == '2':
-					board.favorite()
 					url = 'main/favorites'
+					board.favorite(url)
 					event = 0
 
 
 			if url == 'main/favorites':
 				if event == 'r':
-					board.main()                      
+					url = 'main'
+					board.main(url)
+					event = 0                     
 				if int(str(event)) > 0:
-					board.ctrl_feature_favorite(event)
+					product_id = event
+					url = 'main/favorites/'
+					board.select_favorite(url, event)
 					event = 0
 
 
-			if url == 'main/favorites/details':
+			if url == 'main/favorites/':
 				if event == 'r':
-					board.favorite()
-				if event == 'm':
-					pass
+					url = 'main/favorites'
+					board.favorite(url)
+					event = 0
+				if event == 's':
+					board.delete_favorite_id(product_id)
+					event = 0
 				if int(str(event)) > 0:
 					pass
 				event = 0
@@ -104,6 +111,7 @@ def main():
 
 
 			event = 0
+
 
 if __name__ == '__main__':
 	main()
