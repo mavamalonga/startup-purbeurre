@@ -3,10 +3,11 @@
 import template
 import database
 import tables
+import windows
 
 class Controlboard (database.Data):
-	def __init__(self, table):
-		super().__init__(table)
+	def __init__(self, table, window_dict):
+		super().__init__(table, window_dict)
 
 	def main(self, url):
 		self.displayHelp(url)

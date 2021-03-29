@@ -6,12 +6,13 @@ from mysql.connector import errorcode
 import tables
 import tkinter as tk
 import template
+import windows
 
 
 class Data(template.Interface):
 
-	def __init__(self, table):
-		super().__init__()
+	def __init__(self, table, window_dict):
+		super().__init__(window_dict)
 		self.table = table
 
 	def connect_database(self):

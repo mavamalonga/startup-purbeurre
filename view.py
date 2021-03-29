@@ -5,10 +5,11 @@ from database import Data
 from template import Interface
 import tables
 from controller import Controlboard
+import windows 
 
-board = Controlboard(tables.TABLES)
-display = Interface()
-database = Data(tables.TABLES)
+board = Controlboard(tables.TABLES, windows.window_dict)
+display = Interface(windows.window_dict)
+database = Data(tables.TABLES, windows.window_dict)
 
 
 def main():

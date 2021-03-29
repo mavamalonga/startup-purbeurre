@@ -5,13 +5,10 @@ import tkinter as tk
 import database
 
 
-
-
-
 class Interface:
 
-	def __init__(self):
-		self.echa = 0
+	def __init__(self, window_dict):
+		self.window_dict = window_dict
 
 	def displayHelp(self, url, category_id=0, product_id=0, substitute_id=0):
 		self.url = url
@@ -19,6 +16,11 @@ class Interface:
 		self.product_id = product_id
 		self.substitute_id = substitute_id
 
+		for url in self.window_dict:
+			if url == self.url:
+				print(self.window_dict[self.url])
+
+		"""
 
 		if self.url == 'main':
 			self.txt_main = "		########## Menu principal ##########\n \
@@ -83,7 +85,7 @@ class Interface:
 			print(self.text_favorite)
 
 
-
+		"""
 
 
 	def category_menu(self, category_id, category_name):
