@@ -64,11 +64,8 @@ class Data(template.Interface):
 
 		self.connect_database()
 		self.cursor.execute("call get_feature({0})".format(product_choice))
-
 		for feature in self.cursor:
-
-			self.display_feature(feature[0], feature[1], feature[2], feature[3], feature[4],
-				feature[5], feature[6])
+			self.display_feature(feature)
 		self.cursor.close()
 
 
@@ -86,9 +83,7 @@ class Data(template.Interface):
 		self.cursor.execute("call get_feature({0})".format(substitute))
 
 		for feature in self.cursor:
-
-			self.display_feature(feature[0], feature[1], feature[2], feature[3], feature[4],
-				feature[5], feature[6])
+			self.display_feature(feature)
 		self.cursor.close()
 
 

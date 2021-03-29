@@ -109,8 +109,17 @@ class Interface:
 		self.product_name = product_name
 		print("			{0} : {1}".format(self.product_id, self.product_name))
 
-	def display_feature(self, feature0, feature1, feature2, feature3, feature4,
-		feature5, feature6):
+	def display_feature(self, feature):
+		self.list_name = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
+		'Quantity', 'Magasin(s)']
+		self.feature = feature
+
+		for name, value in zip(self.list_name, self.feature):
+			print("			{0} : {1}".format(name, value))
+		print("\n")
+
+
+		"""
 		print("			Nom : {0}".format(feature0))
 		print("			Marque : {0}".format(feature1))
 		print("			Ingredients: {0}".format(feature2))
@@ -118,6 +127,7 @@ class Interface:
 		print("			Nutri-score : {0}".format(feature4))
 		print("			Quantity : {0}".format(feature5))
 		print("			Magasin(s): {0}\n".format(feature6))
+		"""
 
 	def display_substitute(self, sub_id, name, nutriscore):
 		print("			{0} : {1} {2}".format(sub_id, name, nutriscore ))
