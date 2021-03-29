@@ -6,11 +6,12 @@ from template import Interface
 import tables
 from controller import Controlboard
 import windows 
+from manager import Manager
 
 board = Controlboard(tables.TABLES, windows.window_dict)
 display = Interface(windows.window_dict)
 database = Data(tables.TABLES, windows.window_dict)
-
+manager = Manager(tables.TABLES, windows.window_dict)
 
 def main():
 
@@ -19,17 +20,23 @@ def main():
 	substitute_id = 0
 	url = 'main'
 
-	board.main(url)
+	manager.main(url)
+	#board.main(url)
+
+
+
 	
 	while True:
 
 			event = input("choix : ")
 
+
 			if event == 'q':
 				quit()
 
 			if url == 'main':
-
+				"""
+				
 				if event == '1':
 					url = 'main/categories'
 					board.categories(url)
@@ -38,8 +45,7 @@ def main():
 					url = 'main/favorites'
 					board.favorite(url)
 					event = 0
-
-
+				"""
 			if url == 'main/favorites':
 				if event == 'r':
 					url = 'main'
@@ -109,6 +115,8 @@ def main():
 					substitute_id = 0
 					board.select_product(url, category_id, product_id, substitute_id)
 				event=0
+
+			print(url)
 
 
 			event = 0

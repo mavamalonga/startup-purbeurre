@@ -30,73 +30,6 @@ class Interface:
 				print(window)
 				print(len(self.url))
 
-		"""
-
-		if self.url == 'main':
-			self.txt_main = "		########## Menu principal ##########\n \
-			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			1 : Sélectionnez une catégorie \n \
-			2 : Choisir un aliment à substitué. \n \
-			q : Quitter le programme. \n \
-			"
-			print(self.txt_main)
-
-
-
-		if self.url == 'main/categories' or self.url == 'main/categories/':
-			self.txt_categories = "\n 		########## url : {0}{1} ###########\n \
-			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-			".format(self.url, self.category_id)
-			print(self.txt_categories)
-
-
-
-		if self.url == 'main/categories/{0}products/':
-			self.url = self.url.format(self.category_id)
-			self.txt_product ="\n 		########## url : {0}{1} ########## \n \
-			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-			".format(self.url, self.product_id)
-			print(self.txt_product)
-
-	
-
-		if self.url == 'main/categories/{0}/products/{1}/':
-
-			self.url =  self.url.format(self.category_id, self.product_id)
-			self.txt_substitute ="\n 		########## url : {0}{1} ########## \n \
-			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-			e : Enregistrer \n \
-			".format(self.url, self.substitute_id)
-			print(self.txt_substitute)
-
-
-		if self.url == 'main/favorites':
-
-			self.text_favorite ="\n 		########## url : {0} ########## \n \
-			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-			".format(self.url)
-			print(self.text_favorite)
-
-		if self.url == 'main/favorites/':
-			self.text_favorite ="\n 		########## url : {0}{1} ########## \n \
-			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
-			r : retour \n \
-			q : Quitter \n \
-			s : Supprimer \n \
-			".format(self.url, self.product_id)
-			print(self.text_favorite)
-
-
-		"""
-
 
 	def category_menu(self, category_id, category_name):
 		self.category_id = category_id
@@ -118,16 +51,6 @@ class Interface:
 			print("			{0} : {1}".format(name, value))
 		print("\n")
 
-
-		"""
-		print("			Nom : {0}".format(feature0))
-		print("			Marque : {0}".format(feature1))
-		print("			Ingredients: {0}".format(feature2))
-		print("			Nutriments : {0}".format(feature3))
-		print("			Nutri-score : {0}".format(feature4))
-		print("			Quantity : {0}".format(feature5))
-		print("			Magasin(s): {0}\n".format(feature6))
-		"""
 
 	def display_substitute(self, sub_id, name, nutriscore):
 		print("			{0} : {1} {2}".format(sub_id, name, nutriscore ))
