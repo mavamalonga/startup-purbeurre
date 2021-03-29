@@ -83,13 +83,13 @@ def main():
 					board.categories(url)
 					event = 0
 				if int(str(event)) > 0:
-					url = 'main/categories/{0}products/'
+					url = 'main/categories/{0}/products/'
 					product_id = event
 					substitute_id = 0
 					board.select_product(url, category_id, product_id, substitute_id)
 				event=0
 
-			if url == 'main/categories/{0}products/':
+			if url == 'main/categories/{0}/products/':
 				if event == 'r':
 					url = 'main/categories/'
 					board.products(url, category_id)
@@ -105,7 +105,7 @@ def main():
 					board.save(product_id, substitute_id)
 					board.details(category_choice, product_choice, substitute)
 				if event == 'r':
-					url = 'main/categories/{0}products/'
+					url = 'main/categories/{0}/products/'
 					substitute_id = 0
 					board.select_product(url, category_id, product_id, substitute_id)
 				event=0

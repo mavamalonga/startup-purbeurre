@@ -16,9 +16,19 @@ class Interface:
 		self.product_id = product_id
 		self.substitute_id = substitute_id
 
-		for url in self.window_dict:
-			if url == self.url:
-				print(self.window_dict[self.url])
+		for urls in self.window_dict:
+			if urls == self.url:
+				window = self.window_dict[self.url]
+				if len(self.url) <= 16 :
+					window = window.format(self.url, self.category_id)
+				elif 16 < len(self.url) <= 27:
+					self.url = self.url.format(self.category_id)
+					window = window.format(self.url, self.product_id)
+				elif len(self.url) > 28:
+					self.url =  self.url.format(self.category_id, self.product_id)
+					window = window.format(self.url, self.substitute_id)
+				print(window)
+				print(len(self.url))
 
 		"""
 

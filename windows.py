@@ -14,7 +14,7 @@ window_dict = {
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-			.",
+			",
 
 
 		"main/categories/" : "\n 		########## url : {0}{1} ###########\n \
@@ -25,7 +25,7 @@ window_dict = {
 
 
 
-		"main/categories/{0}products/": "\n 		########## url : {0}{1} ########## \n \
+		"main/categories/{0}/products/": "\n 		########## url : {0}{1} ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
