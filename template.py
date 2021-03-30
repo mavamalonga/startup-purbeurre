@@ -53,10 +53,14 @@ class Interface:
 		self.list_fav_food = list_id_food
 		self.list_fav_sub = list_id_substitue
 
-		self.i = 0
-		for tuple_favorite in zip(self.list_fav_food, self.list_fav_sub):
-			print("			{0} : {1} <-------> {2}".format(self.list_fav_index[self.i][0], tuple_favorite[0][0], tuple_favorite[1][0]))
-			self.i += 1
+		if len(self.list_fav_index) == 0:
+			print("				Liste vide !")
+
+		else:
+			self.i = 0
+			for tuple_favorite in zip(self.list_fav_food, self.list_fav_sub):
+				print("			{0} : {1} <-------> {2}".format(self.list_fav_index[self.i][0], tuple_favorite[0][0], tuple_favorite[1][0]))
+				self.i += 1
 
 	def display_success_save(self):
 		print("Enregistrement validé.")

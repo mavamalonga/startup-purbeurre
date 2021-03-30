@@ -48,9 +48,10 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
+
 			self.category_menu(category_tuple[0], category_tuple[1])
 		self.cursor.close()
-
+	
 	def get_product(self, category_choice):
 
 		self.connect_database()

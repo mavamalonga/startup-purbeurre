@@ -19,8 +19,8 @@ class Manager (database.Data):
 			self.display_help(self.url)
 			self.get_category()
 		elif self.event == '2':
-			self.url = 'home_favorites'
-			self.displayHelp(self.url)
+			self.url = 'all_favorites'
+			self.display_help(self.url)
 			self.get_favorite()
 
 	def all_categories(self):
@@ -55,19 +55,6 @@ class Manager (database.Data):
 			self.substitute_id = 0
 			self.check_substitute()
 
-	def favorite(self, event):
-		self.event
-		if self.event == 'r':
-			self.url = 'main/favorites'
-			self.board.favorite(self.url)
-			self.event =0
-		if self.event == 's':
-			self.board.delete_favorite_id(self.product)
-			self.event = 0
-		if int(str(self.event)) > 0:
-			pass
-		self.event = 0
-
 
 	def product(self):
 		if self.event == 'r':
@@ -82,13 +69,31 @@ class Manager (database.Data):
 
 	def product_substitute(self):
 		if  self.event == 'e':
-			self.board.save(self.product_id, self.substitute_id)
-			self.board.details(self.category_id, self.product_id,
-				self.substitute_id)
+			self.save_product(self.product_id, self.substitute_id)
 		elif self.event == 'r':
 			self.url = 'product'
 			self.substitute_id = 0
 			self.check_substitute()
+
+	def all_favorites(self):
+		if self.event == 'r':
+			self.url = 'open_home'
+			self.open_home()
+		elif int(str(self.event)) > 0:
+			self.favorite_id = self.event
+			self.url = 'favorite'
+			self.display_help(self.url)
+			self.select_feature_favorite(self.favorite_id)
+
+
+	def favorite(self):
+		if self.event == 'r':
+			self.url = 'all_favorites'
+			self.display_help(self.url)
+			self.get_favorite()
+		elif self.event == 's':
+			self.delete_favorite(self.favorite_id)
+		
 
 	def main(self):
 
@@ -118,6 +123,15 @@ class Manager (database.Data):
 
 			elif self.url == 'product_substitute':
 				self.product_substitute()
+				self.event = 0
+
+			elif self.url == 'all_favorites':
+				self.all_favorites()
+				self.favorite_id = self.event
+				self.event = 0
+
+			elif self.url == 'favorite':
+				self.favorite()
 				self.event = 0
 
 
