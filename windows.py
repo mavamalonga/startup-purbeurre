@@ -10,14 +10,14 @@ window_dict = {
 			",
 	
 
-		"main/categories" : "\n 		########## url : {0}{1} ###########\n \
+		"all_categories" : "\n 		########## Tout les catégories ###########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			",
 
 
-		"main/categories/" : "\n 		########## url : {0}{1} ###########\n \
+		"all_products" : "\n 		########## Tout les produits ###########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
@@ -25,14 +25,14 @@ window_dict = {
 
 
 
-		"main/categories/{0}/products/": "\n 		########## url : {0}{1} ########## \n \
+		"product": "\n 		########## Produit ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			.",
 	
 
-		"main/categories/{0}/products/{1}/" : "\n 		########## url : {0}{1} ########## \n \
+		"product_substitute" : "\n 		########## Produit et substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
@@ -40,7 +40,7 @@ window_dict = {
 			.",
 
 
-		"main/favorites" : "\n 		########## url : {0} ########## \n \
+		"" : "\n 		########## url : {0} ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
