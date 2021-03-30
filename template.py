@@ -10,25 +10,11 @@ class Interface:
 	def __init__(self, window_dict):
 		self.window_dict = window_dict
 
-	def displayHelp(self, url, category_id=0, product_id=0, substitute_id=0):
+	def display_help(self, url):
 		self.url = url
-		self.category_id = category_id
-		self.product_id = product_id
-		self.substitute_id = substitute_id
 
-		for urls in self.window_dict:
-			if urls == self.url:
-				window = self.window_dict[self.url]
-				if len(self.url) <= 16 :
-					window = window.format(self.url, self.category_id)
-				elif 16 < len(self.url) <= 27:
-					self.url = self.url.format(self.category_id)
-					window = window.format(self.url, self.product_id)
-				elif len(self.url) > 28:
-					self.url =  self.url.format(self.category_id, self.product_id)
-					window = window.format(self.url, self.substitute_id)
-				print(window)
-				print(len(self.url))
+		if self.url == 'home':
+			print(self.window_dict['home'])
 
 
 	def category_menu(self, category_id, category_name):

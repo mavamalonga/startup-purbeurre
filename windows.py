@@ -2,7 +2,7 @@
 
 window_dict = {
 	
-		"main" : "	########## Menu principal ##########\n \
+		"home" : "	########## Menu principal ##########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			1 : Sélectionnez une catégorie \n \
 			2 : Choisir un aliment à substitué. \n \

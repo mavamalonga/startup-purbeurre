@@ -15,13 +15,11 @@ manager = Manager(tables.TABLES, windows.window_dict)
 
 def main():
 
-	category_id = 0
-	product_id = 0
-	substitute_id = 0
-	url = 'main'
-
-	manager.main(url)
-	#board.main(url)
+	manager.category_id = 0
+	manager.product_id = 0
+	manager.substitute_id = 0
+	manager.main()
+	url = manager.url
 
 
 
@@ -33,96 +31,39 @@ def main():
 
 			if event == 'q':
 				quit()
-
-			if url == 'main':
-				"""
-				
-				if event == '1':
-					url = 'main/categories'
-					board.categories(url)
-					event = 0
-				if event == '2':
-					url = 'main/favorites'
-					board.favorite(url)
-					event = 0
-				"""
-			if url == 'main/favorites':
-				if event == 'r':
-					url = 'main'
-					board.main(url)
-					event = 0                     
-				if int(str(event)) > 0:
-					product_id = event
-					url = 'main/favorites/'
-					board.select_favorite(url, event)
-					event = 0
+			if manager.url == 'main':
+				manager.man_main(event)
+			
+			if manager.url == 'main/favorites':
+				manager.man_favorite1(event)
 
 
-			if url == 'main/favorites/':
-				if event == 'r':
-					url = 'main/favorites'
-					board.favorite(url)
-					event = 0
-				if event == 's':
-					board.delete_favorite_id(product_id)
-					event = 0
-				if int(str(event)) > 0:
-					pass
-				event = 0
+			if manager.url == 'main/favorites/':
+				man_favorite2(event)
 
 
-			if url == 'main/categories':
-				if event == 'r':
-					url = 'main'
-					board.main(url)
-					event = 0
-				if int(str(event)) > 0:
-					url = 'main/categories/'
-					category_id = event
-					board.products(url, category_id)
-				event = 0
+			if manager.url == 'main/categories':
+				manager.man_categories1(event)
+
+	
+			if manager.url == 'main/categories/':
+				manager.man_categories2(event)
 
 
-			if url == 'main/categories/':
-				if event == 'r':
-					url = 'main/categories'
-					board.categories(url)
-					event = 0
-				if int(str(event)) > 0:
-					url = 'main/categories/{0}/products/'
-					product_id = event
-					substitute_id = 0
-					board.select_product(url, category_id, product_id, substitute_id)
-				event=0
+			if manager.url == 'main/categories/{0}/products/':
+				pass
 
-			if url == 'main/categories/{0}/products/':
-				if event == 'r':
-					url = 'main/categories/'
-					board.products(url, category_id)
-					event = 0
-				if int(str(event)) > 0:
-					url = 'main/categories/{0}/products/{1}/'
-					substitute_id = event
-					board.select_product(url, category_id, product_id, substitute_id)
-				event = 0
-
-			if url == 'main/categories/{0}/products/{1}/':
-				if event == 'e':
-					board.save(product_id, substitute_id)
-					board.details(category_choice, product_choice, substitute)
-				if event == 'r':
-					url = 'main/categories/{0}/products/'
-					substitute_id = 0
-					board.select_product(url, category_id, product_id, substitute_id)
-				event=0
-
-			print(url)
+			if manager.url == 'main/categories/{0}/products/{1}/':
+				pass
 
 
 			event = 0
 
 
 if __name__ == '__main__':
-	main()
+	manager.main()
+
+
+	
 
 
