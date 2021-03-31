@@ -15,11 +15,11 @@ class Manager (database.Data):
 
 	def home(self):
 		try :
-			if (self.event != 0) and int(self.event) == 1:
+			if int(self.event) == 1:
 				self.url = 'all_categories'
 				self.display_help(self.url)
 				self.get_category()
-			elif (self.event != 0) and int(self.event) == 2:
+			elif int(self.event) == 2:
 				self.url = 'all_favorites'
 				self.display_help(self.url)
 				self.get_favorite()
@@ -28,25 +28,27 @@ class Manager (database.Data):
 		
 	def all_categories(self):
 		try:
-			if (self.event != 0) and self.event == 'r':
+			if str(self.event) == 'r':
 				self.open_home()
-			elif (self.event != 0) and int(self.event) > 0:
+			elif int(self.event) > 0:
 				self.url = 'all_products'
-				self.category_id = self.event
+				self.category_id = self.event  			#target variable category choice
 				self.display_help(self.url)
 				self.get_product(self.category_id)
 		except:
 			print("Veillez rentrer une valeur valide.")
 
 
+    # method select list substitute or one substitute when substitute_id > 0
+
 	def check_substitute(self):
 
 		try:
-			if (self.event != 0 ) and int(self.substitute_id) > 0:
+			if int(self.substitute_id) == 0:
 				self.display_help(self.url)
 				self.get_feature(self.product_id)
 				self.select_substitute_list(self.category_id, self.product_id)
-			elif (self.event != 0) and int(self.substitute_id) > 0:
+			elif int(self.substitute_id) > 0:
 
 				self.display_help(self.url)
 				self.get_feature(self.product_id)
@@ -57,11 +59,11 @@ class Manager (database.Data):
 	def all_products(self):
 
 		try: 
-			if (self.event != 0) and self.event == 'r':
+			if str(self.event) == 'r':
 				self.url = 'all_categories'
 				self.display_help(self.url)
 				self.get_category()
-			elif (self.event !=0) and int(self.event) > 0:
+			elif int(self.event) > 0:
 				self.url = 'product'
 				self.product_id = self.event
 				self.substitute_id = 0
@@ -72,12 +74,12 @@ class Manager (database.Data):
 
 	def product(self):
 		try:
-			if (self.event != 0) and self.event == 'r':
+			if str(self.event) == 'r':
 				self.url = 'all_products'
 				self.display_help(self.url)
 				self.get_product(self.category_id)
 				self.select_feature_favorite()
-			elif (self.event != 0) and self.event > 0:
+			elif int(self.event) > 0:
 				self.url = 'product_substitute'
 				self.substitute_id = self.event
 				self.check_substitute()
@@ -87,18 +89,22 @@ class Manager (database.Data):
 
 	def product_substitute(self):
 		try:
-			if  (self.event != 0) and self.event == 'e':
+
+			if  str(self.event) == 'e':
 				self.save_product(self.product_id, self.substitute_id)
-			elif (self.even !=0) and self.event == 'r':
+			elif str(self.event) == 'r':
 				self.url = 'product'
 				self.substitute_id = 0
 				self.check_substitute()
+			else:
+				print("Veillez rentrer une valeur valide.")
+
 		except:
 			print("Veillez rentrer une valeur valide.")
 
 	def all_favorites(self):
 		try:
-			if self.event == 'r':
+			if str(self.event) == 'r':
 				self.url = 'open_home'
 				self.open_home()
 			elif int(self.event) > 0:
@@ -117,6 +123,9 @@ class Manager (database.Data):
 				self.get_favorite()
 			elif self.event == 's':
 				self.delete_favorite(self.favorite_id)
+			elif int(self.event) != 0:
+				print("Veillez rentrer une valeur valide.")
+				
 		except:
 			print("Veillez rentrer une valeur valide.")
 		

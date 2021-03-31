@@ -49,7 +49,7 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
-
+		
 			self.category_menu(category_tuple[0], category_tuple[1])
 			self.list_category_id.append(category_tuple[0])
 		self.cursor.close()
@@ -60,9 +60,12 @@ class Data(template.Interface):
 		self.category_choice = category_choice
 		self.cursor.execute("call get_product({0})".format(self.category_choice))
 		for products in self.cursor:
+
+			print(len(products))
+		"""
 			self.products_menu(products[0], products[1])
 		self.cursor.close()
-
+		"""
 	def get_feature(self, product_choice):
 
 		self.connect_database()
