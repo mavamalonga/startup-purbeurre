@@ -14,14 +14,19 @@ class Manager (database.Data):
 		self.display_help(self.url)
 
 	def home(self):
-		if self.event == '1':
-			self.url = 'all_categories'
-			self.display_help(self.url)
-			self.get_category()
-		elif self.event == '2':
-			self.url = 'all_favorites'
-			self.display_help(self.url)
-			self.get_favorite()
+		try :
+			int(self.event) == 1 or int(self.event) == 2
+		except:
+			print("Veillez rentrer une valeur valide.")
+		else:
+			if self.event == '1':
+				self.url = 'all_categories'
+				self.display_help(self.url)
+				self.get_category()
+			elif self.event == '2':
+				self.url = 'all_favorites'
+				self.display_help(self.url)
+				self.get_favorite()
 
 	def all_categories(self):
 		if self.event == 'r':
@@ -102,6 +107,7 @@ class Manager (database.Data):
 
 			self.event = input("choix : ")
 
+			
 			if self.event == 'q':
 				quit()
 
@@ -133,10 +139,6 @@ class Manager (database.Data):
 			elif self.url == 'favorite':
 				self.favorite()
 				self.event = 0
-
-
-
-
 
 
 
