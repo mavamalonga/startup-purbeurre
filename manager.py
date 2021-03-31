@@ -15,89 +15,110 @@ class Manager (database.Data):
 
 	def home(self):
 		try :
-			int(self.event) == 1 or int(self.event) == 2
-		except:
-			print("Veillez rentrer une valeur valide.")
-		else:
-			if self.event == '1':
+			if (self.event != 0) and int(self.event) == 1:
 				self.url = 'all_categories'
 				self.display_help(self.url)
 				self.get_category()
-			elif self.event == '2':
+			elif (self.event != 0) and int(self.event) == 2:
 				self.url = 'all_favorites'
 				self.display_help(self.url)
 				self.get_favorite()
-
+		except:
+			print("Veillez rentrer une valeur valide.")
+		
 	def all_categories(self):
-		if self.event == 'r':
-			self.open_home()
-		elif int(str(self.event)) > 0:
-			self.url = 'all_products'
-			self.category_id = self.event
-			self.display_help(self.url)
-			self.get_product(self.category_id)
+		try:
+			if (self.event != 0) and self.event == 'r':
+				self.open_home()
+			elif (self.event != 0) and int(self.event) > 0:
+				self.url = 'all_products'
+				self.category_id = self.event
+				self.display_help(self.url)
+				self.get_product(self.category_id)
+		except:
+			print("Veillez rentrer une valeur valide.")
+
 
 	def check_substitute(self):
 
-		if int(str(self.substitute_id)) == 0:
-			self.display_help(self.url)
-			self.get_feature(self.product_id)
-			self.select_substitute_list(self.category_id, self.product_id)
-		elif int(str(self.substitute_id)) > 0:
+		try:
+			if (self.event != 0 ) and int(self.substitute_id) > 0:
+				self.display_help(self.url)
+				self.get_feature(self.product_id)
+				self.select_substitute_list(self.category_id, self.product_id)
+			elif (self.event != 0) and int(self.substitute_id) > 0:
 
-			self.display_help(self.url)
-			self.get_feature(self.product_id)
-			self.select_substitute(self.substitute_id)
+				self.display_help(self.url)
+				self.get_feature(self.product_id)
+				self.select_substitute(self.substitute_id)
+		except:
+			print("Veillez rentrer une valeur valide.")
 
 	def all_products(self):
-		if self.event == 'r':
-			self.url = 'all_categories'
-			self.display_help(self.url)
-			self.get_category()
-		elif int(str(self.event)) > 0:
-			self.url = 'product'
-			self.product_id = self.event
-			self.substitute_id = 0
-			self.check_substitute()
+
+		try: 
+			if (self.event != 0) and self.event == 'r':
+				self.url = 'all_categories'
+				self.display_help(self.url)
+				self.get_category()
+			elif (self.event !=0) and int(self.event) > 0:
+				self.url = 'product'
+				self.product_id = self.event
+				self.substitute_id = 0
+				self.check_substitute()
+		except: 
+			print("Veillez rentrer une valeur valide.")
 
 
 	def product(self):
-		if self.event == 'r':
-			self.url = 'all_products'
-			self.display_help(self.url)
-			self.get_product(self.category_id)
-			self.event = 0
-		elif int(str(self.event)) > 0:
-			self.url = 'product_substitute'
-			self.substitute_id = self.event
-			self.check_substitute()
+		try:
+			if (self.event != 0) and self.event == 'r':
+				self.url = 'all_products'
+				self.display_help(self.url)
+				self.get_product(self.category_id)
+				self.select_feature_favorite()
+			elif (self.event != 0) and self.event > 0:
+				self.url = 'product_substitute'
+				self.substitute_id = self.event
+				self.check_substitute()
+		except:
+			print("Veillez rentrer une valeur valide.")
+
 
 	def product_substitute(self):
-		if  self.event == 'e':
-			self.save_product(self.product_id, self.substitute_id)
-		elif self.event == 'r':
-			self.url = 'product'
-			self.substitute_id = 0
-			self.check_substitute()
+		try:
+			if  (self.event != 0) and self.event == 'e':
+				self.save_product(self.product_id, self.substitute_id)
+			elif (self.even !=0) and self.event == 'r':
+				self.url = 'product'
+				self.substitute_id = 0
+				self.check_substitute()
+		except:
+			print("Veillez rentrer une valeur valide.")
 
 	def all_favorites(self):
-		if self.event == 'r':
-			self.url = 'open_home'
-			self.open_home()
-		elif int(str(self.event)) > 0:
-			self.favorite_id = self.event
-			self.url = 'favorite'
-			self.display_help(self.url)
-			self.select_feature_favorite(self.favorite_id)
-
+		try:
+			if self.event == 'r':
+				self.url = 'open_home'
+				self.open_home()
+			elif int(self.event) > 0:
+				self.favorite_id = self.event
+				self.url = 'favorite'
+				self.display_help(self.url)
+				self.select_feature_favorite(self.favorite_id)
+		except:
+			print("Veillez rentrer une valeur valide.")
 
 	def favorite(self):
-		if self.event == 'r':
-			self.url = 'all_favorites'
-			self.display_help(self.url)
-			self.get_favorite()
-		elif self.event == 's':
-			self.delete_favorite(self.favorite_id)
+		try:
+			if self.event == 'r':
+				self.url = 'all_favorites'
+				self.display_help(self.url)
+				self.get_favorite()
+			elif self.event == 's':
+				self.delete_favorite(self.favorite_id)
+		except:
+			print("Veillez rentrer une valeur valide.")
 		
 
 	def main(self):
