@@ -14,7 +14,6 @@ database = Data(tables.TABLES, windows.window_dict)
 manager = Manager(tables.TABLES, windows.window_dict)
 
 
-
 if __name__ == '__main__':
 	manager.main()
 

@@ -54,18 +54,23 @@ class Data(template.Interface):
 			self.list_category_id.append(category_tuple[0])
 		self.cursor.close()
 	
-	def get_product(self, category_choice):
+	def get_product(self, url, category_id):
 
+		self.url = url
+		self.category_id = category_id
 		self.connect_database()
-		self.category_choice = category_choice
-		self.cursor.execute("call get_product({0})".format(self.category_choice))
-		for products in self.cursor:
-
-			print(len(products))
-		"""
-			self.products_menu(products[0], products[1])
+		self.select_products_list = []
+		self.cursor.execute("call get_product({0})".format(self.category_id))
+		for id_and_product in self.cursor:
+			self.select_products_list.append(id_and_product)
+		
+		if len(self.select_products_list) == 0:
+			self.display_error()
+		else:									
+			self.display_help(self.url)
+			self.products_menu(self.select_products_list)
 		self.cursor.close()
-		"""
+		
 	def get_feature(self, product_choice):
 
 		self.connect_database()

@@ -10,6 +10,9 @@ class Interface:
 	def __init__(self, window_dict):
 		self.window_dict = window_dict
 
+	def displayError(self):
+		print("			Veillez rentrer une valeur valide.")
+
 	def display_help(self, url):
 		self.url = url
 
@@ -29,10 +32,10 @@ class Interface:
 		print("			{0} : {1}".format(self.category_id, self.category_name))
 
 
-	def products_menu(self, product_id, product_name):
-		self.product_id = product_id
-		self.product_name = product_name
-		print("			{0} : {1}".format(self.product_id, self.product_name))
+	def products_menu(self, select_product_list):
+		self.select_product_list = select_product_list
+		for id_and_product in self.select_product_list:
+			print("			{0} : {1}".format(id_and_product[0], id_and_product[1]))
 
 	def display_feature(self, feature):
 		self.list_name = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
