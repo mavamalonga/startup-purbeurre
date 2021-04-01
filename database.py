@@ -15,38 +15,44 @@ class Data(template.Interface):
 		super().__init__(window_dict)
 		self.table = table
 
-	def connect_database(self):
+	def connectDatabase(self):
 		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.cnx.cursor()
 		self.cursor.execute("use Purbeurre")
 
-	def create_database(self):
+	def createDatabase(self):
+		self.action = "createData"
 		try:
-			self.connect_database()
+			self.connectDatabase()
 			self.cursor.execute("create database Purbeurre default character set 'utf8'")
+			self.response = "SuccessData"
 		except mysql.connector.Error as err:
-			print("Failed creating database Purbeurre")
+			self.response = "FailedData"
 			exit(1)
+		self.initData(self.action, self.self.response)
 
-	def create_table(self):
+	def createTable(self):
+		self.action = "createTable"
 		for table_name in self.table:
 			table_description = self.table[table_name]
 			try:
-				self.connect_database()
-				print("creating table {}:".format(table_name))
+				self.connectDatabase()
 				self.cursor.execute(table_description)
 			except mysql.connector.Error as err:
 				if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-					print("already exists.")
+					self.response = "already exists."
+					initData(self.action, self.response)
 				else:
-					print(err.msg)
+					self.response = err.msg
+					initData(self.action, self.response)
 			else:
-				print("OK")
+				self.response = table_name
+				initData(self.action, self.response)
 		self.cursor.close()
 
-	def get_category(self):
+	def selectCategories(self):
 		self.list_category_id = []
-		self.connect_database()
+		self.connectDatabase()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
 		
@@ -152,15 +158,15 @@ class Data(template.Interface):
 			self.substitute_id = substitute_id[0]
 		self.cursor.close()
 
-		self.connect_database()
+		self.connectDatabase()
 		self.cursor.execute("select category_id from product where id = {0} ".format(self.substitute_id))
 		for category_id in self.cursor:
 			self.category_id = category_id[0]
 		self.cursor.close()
 
 
-		self.get_feature(self.product_id)
-		self.select_substitute(self.substitute_id)
+		self.selectProductId(self.product_id)
+		self.selectSubstitute(self.substitute_id)
 
 
 

@@ -10,6 +10,14 @@ class Interface:
 	def __init__(self, window_dict):
 		self.window_dict = window_dict
 
+	def InitData(self, action, response):
+		self.action = action
+		self.response = response
+		if self.action == "createData":
+			print(		"{0}".format(self.response))
+		if self.action == "createTable":
+
+
 	def displayError(self):
 		print("			Veillez rentrer une valeur valide.")
 

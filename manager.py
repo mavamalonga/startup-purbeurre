@@ -11,20 +11,20 @@ class Manager (database.Data):
 
 	def home(self):
 		self.url = 'home'
-		self.display_help(self.url)
+		self.displayHelp(self.url)
 
 	def dashboard(self):
 		try :
 			if int(self.event) == 1:
 				self.url = 'all_categories'
-				self.display_help(self.url)
-				self.get_category()
+				self.displayHelp(self.url)
+				self.selectCategories()
 			elif int(self.event) == 2:
 				self.url = 'all_favorites'
-				self.display_help(self.url)
-				self.get_favorite()
+				self.displayHelp(self.url)
+				self.selectFavorites()
 			else: 
-				self.displayError()
+				errorValue = 1/0
 		except:
 			self.displayError()
 		
@@ -35,9 +35,11 @@ class Manager (database.Data):
 			elif int(self.event) > 0:
 				self.category_id = self.event
 				self.url = 'all_products'
-				self.get_product(self.url, self.category_id)
+				self.selectProducts(self.url, self.category_id)
+			else:
+				errorValue = 1/0
 		except:
-			print("Veillez rentrer une valeur valide.")
+			self.displayError()
 
 
     # method select list substitute or one substitute when substitute_id > 0
@@ -46,29 +48,31 @@ class Manager (database.Data):
 
 		try:
 			if int(self.substitute_id) == 0:
-				self.display_help(self.url)
-				self.get_feature(self.product_id)
-				self.select_substitute_list(self.category_id, self.product_id)
+				self.displayHelp(self.url)
+				self.selectProductId(self.product_id)
+				self.selectSubstituteList(self.category_id, self.product_id)
 			elif int(self.substitute_id) > 0:
 
-				self.display_help(self.url)
-				self.get_feature(self.product_id)
-				self.select_substitute(self.substitute_id)
+				self.displayHelp(self.url)
+				self.selectProductId(self.product_id)
+				self.selectSubstituteId(self.substitute_id)
+			else:
+				errorValue = 1/0
 		except:
-			print("Veillez rentrer une valeur valide.")
+			self.displayError()
 
 	def choiceProduct(self):
 
 		try: 
 			if str(self.event) == 'r':
 				self.url = 'all_categories'
-				self.display_help(self.url)
-				self.get_category()
+				self.displayHelp(self.url)
+				self.selectCategories()
 			elif int(self.event) > 0:
 				self.url = 'product'
 				self.product_id = self.event
 				self.substitute_id = 0
-				self.check_substitute()
+				self.checkSubstitute()
 		except: 
 			print("Veillez rentrer une valeur valide.")
 
@@ -77,31 +81,33 @@ class Manager (database.Data):
 		try:
 			if str(self.event) == 'r':
 				self.url = 'all_products'
-				self.display_help(self.url)
-				self.get_product(self.url, self.category_id)
+				self.displayHelp(self.url)
+				self.selectProducts(self.url, self.category_id)
 				self.select_feature_favorite()
 			elif int(self.event) > 0:
 				self.url = 'product_substitute'
 				self.substitute_id = self.event
-				self.check_substitute()
+				self.checkSubstitute()
+			else:
+				errorValue = 1/0
 		except:
-			print("Veillez rentrer une valeur valide.")
+			self.displayError()
 
 
 	def comparisonChart(self):
 		try:
 
 			if  str(self.event) == 'e':
-				self.save_product(self.product_id, self.substitute_id)
+				self.save(self.product_id, self.substitute_id)
 			elif str(self.event) == 'r':
 				self.url = 'product'
 				self.substitute_id = 0
-				self.check_substitute()
+				self.checkSubstitute()
 			else:
-				print("Veillez rentrer une valeur valide.")
+				errorValue = 1/0
 
 		except:
-			print("Veillez rentrer une valeur valide.")
+			self.displayError()
 
 	def choiceFavorite(self):
 		try:
@@ -111,25 +117,27 @@ class Manager (database.Data):
 			elif int(self.event) > 0:
 				self.favorite_id = self.event
 				self.url = 'favorite'
-				self.display_help(self.url)
+				self.displayHelp(self.url)
 				self.select_feature_favorite(self.favorite_id)
+			else:
+				errorValue = 1/0
+
 		except:
-			print("Veillez rentrer une valeur valide.")
+			self.displayError()
 
 	def comparisonChartFavorite(self):
 		try:
 			if self.event == 'r':
 				self.url = 'all_favorites'
-				self.display_help(self.url)
-				self.get_favorite()
+				self.displayHelp(self.url)
+				self.selectFavorites()
 			elif self.event == 's':
-				self.delete_favorite(self.favorite_id)
-			elif int(self.event) != 0:
-				print("Veillez rentrer une valeur valide.")
+				self.deleteFavoriteId(self.favorite_id)
+			else
+				errorValue = 1/0
 				
 		except:
-			print("Veillez rentrer une valeur valide.")
-		
+			self.displayError()
 
 	def main(self):
 
