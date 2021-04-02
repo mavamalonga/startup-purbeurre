@@ -88,7 +88,8 @@ class Data(template.Interface):
 
 	def save_product(self, product_choice, substitute):
 		self.connect_database()
-		self.cursor.execute("insert into favorite (product_id, substitute_id) values ({0}, {1})".format(product_choice, substitute))
+		self.cursor.execute("insert into favorite (product_id, substitute_id) \
+			values ({0}, {1})".format(product_choice, substitute))
 		self.cnx.commit()
 		self.cursor.close()
 		self.displaySaveMsg()
@@ -100,13 +101,15 @@ class Data(template.Interface):
 		self.list_fav_index = []
 
 		self.connect_database()
-		self.cursor.execute("select product_name from product where id in ( select product_id from favorite order by id)")
+		self.cursor.execute("select product_name from product where id in \
+			( select product_id from favorite order by id)")
 		for prod_food in self.cursor:
 			self.list_fav_food.append(prod_food)
 		self.cursor.close()
 
 		self.connect_database()
-		self.cursor.execute("select product_name from product where id in ( select substitute_id from favorite order by id)")
+		self.cursor.execute("select product_name from product where id in \
+			( select substitute_id from favorite order by id)")
 		for prod_sub in self.cursor:
 			self.list_fav_sub.append(prod_sub)
 		self.cursor.close()

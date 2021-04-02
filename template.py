@@ -55,7 +55,8 @@ class Interface:
 
 		self.i = 0
 		for tuple_favorite in zip(self.list_fav_food, self.list_fav_sub):
-			print("			{0} : {1} <-------> {2}".format(self.list_fav_index[self.i][0], tuple_favorite[0][0], tuple_favorite[1][0]))
+			print("			{0} : {1} &".format(self.list_fav_index[self.i][0], tuple_favorite[0][0]))
+			print("			{0}\n".format(tuple_favorite[1][0]))
 			self.i += 1
 
 	def displaySaveMsg(self):
