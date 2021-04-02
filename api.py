@@ -56,4 +56,3 @@ class Api_OPFF:
 						values({0}, {1}, (select id from category where categories = {2}), {3}, {4}, {5}, {6}, {7}, {8})""".format(product_name, brands, "\'"+elt+"\'", ingredients_text, nutrition_grades, nutriments, quantity, store_tags, link))
 					self.cursor.execute(insert_product)
 					self.Id.commit()
-

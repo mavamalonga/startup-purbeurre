@@ -9,181 +9,114 @@ class Manager (database.Data):
 	def __init__(self, table, windows_dict):
 		super().__init__(table, windows_dict)
 
-	def home(self):
+	def open_home(self):
 		self.url = 'home'
-		self.displayHelp(self.url)
+		self.display_help(self.url)
 
-	def dashboard(self):
-		try :
-			if int(self.event) == 1:
-				self.url = 'all_categories'
-				self.displayHelp(self.url)
-				self.selectCategories()
-			elif int(self.event) == 2:
-				self.url = 'all_favorites'
-				self.displayHelp(self.url)
-				self.selectFavorites()
-			else: 
-				errorValue = 1/0
-		except:
-			self.displayError()
-		
-	def choiceCategory(self):
-		try:
-			if str(self.event) == 'r':
-				self.home()
-			elif int(self.event) > 0:
-				self.category_id = self.event
-				self.url = 'all_products'
-				self.selectProducts(self.url, self.category_id)
-			else:
-				errorValue = 1/0
-		except:
-			self.displayError()
+	def home(self):
+		if self.event == '1':
+			self.url = 'all_categories'
+			self.display_help(self.url)
+			self.get_category()
+		elif self.event == '2':
+			self.url = 'home_favorites'
+			self.displayHelp(self.url)
+			self.get_favorite()
 
-
-    # method select list substitute or one substitute when substitute_id > 0
+	def all_categories(self):
+		if self.event == 'r':
+			self.open_home()
+		elif int(str(self.event)) > 0:
+			self.url = 'all_products'
+			self.category_id = self.event
+			self.display_help(self.url)
+			self.get_product(self.category_id)
 
 	def check_substitute(self):
 
-		try:
-			if int(self.substitute_id) == 0:
-				self.displayHelp(self.url)
-				self.selectProductId(self.product_id)
-				self.selectSubstituteList(self.category_id, self.product_id)
-			elif int(self.substitute_id) > 0:
+		if int(str(self.substitute_id)) == 0:
+			self.display_help(self.url)
+			self.get_feature(self.product_id)
+			self.select_substitute_list(self.category_id, self.product_id)
+		elif int(str(self.substitute_id)) > 0:
 
-				self.displayHelp(self.url)
-				self.selectProductId(self.product_id)
-				self.selectSubstituteId(self.substitute_id)
-			else:
-				errorValue = 1/0
-		except:
-			self.displayError()
+			self.display_help(self.url)
+			self.get_feature(self.product_id)
+			self.select_substitute(self.substitute_id)
 
-	def choiceProduct(self):
+	def all_products(self):
+		if self.event == 'r':
+			self.url = 'all_categories'
+			self.display_help(self.url)
+			self.get_category()
+		elif int(str(self.event)) > 0:
+			self.url = 'product'
+			self.product_id = self.event
+			self.substitute_id = 0
+			self.check_substitute()
 
-		try: 
-			if str(self.event) == 'r':
-				self.url = 'all_categories'
-				self.displayHelp(self.url)
-				self.selectCategories()
-			elif int(self.event) > 0:
-				self.url = 'product'
-				self.product_id = self.event
-				self.substitute_id = 0
-				self.checkSubstitute()
-		except: 
-			print("Veillez rentrer une valeur valide.")
-
-
-	def choiceSubstitute(self):
-		try:
-			if str(self.event) == 'r':
-				self.url = 'all_products'
-				self.displayHelp(self.url)
-				self.selectProducts(self.url, self.category_id)
-				self.select_feature_favorite()
-			elif int(self.event) > 0:
-				self.url = 'product_substitute'
-				self.substitute_id = self.event
-				self.checkSubstitute()
-			else:
-				errorValue = 1/0
-		except:
-			self.displayError()
+	def favorite(self, event):
+		self.event
+		if self.event == 'r':
+			self.url = 'main/favorites'
+			self.board.favorite(self.url)
+			self.event =0
+		if self.event == 's':
+			self.board.delete_favorite_id(self.product)
+			self.event = 0
+		if int(str(self.event)) > 0:
+			pass
+		self.event = 0
 
 
-	def comparisonChart(self):
-		try:
+	def product(self):
+		if self.event == 'r':
+			self.url = 'all_products'
+			self.display_help(self.url)
+			self.get_product(self.category_id)
+			self.event = 0
+		elif int(str(self.event)) > 0:
+			self.url = 'product_substitute'
+			self.substitute_id = self.event
+			self.check_substitute()
 
-			if  str(self.event) == 'e':
-				self.save(self.product_id, self.substitute_id)
-			elif str(self.event) == 'r':
-				self.url = 'product'
-				self.substitute_id = 0
-				self.checkSubstitute()
-			else:
-				errorValue = 1/0
-
-		except:
-			self.displayError()
-
-	def choiceFavorite(self):
-		try:
-			if str(self.event) == 'r':
-				self.url = 'open_home'
-				self.home()
-			elif int(self.event) > 0:
-				self.favorite_id = self.event
-				self.url = 'favorite'
-				self.displayHelp(self.url)
-				self.select_feature_favorite(self.favorite_id)
-			else:
-				errorValue = 1/0
-
-		except:
-			self.displayError()
-
-	def comparisonChartFavorite(self):
-		try:
-			if self.event == 'r':
-				self.url = 'all_favorites'
-				self.displayHelp(self.url)
-				self.selectFavorites()
-			elif self.event == 's':
-				self.deleteFavoriteId(self.favorite_id)
-			else
-				errorValue = 1/0
-				
-		except:
-			self.displayError()
+	def product_substitute(self):
+		if  self.event == 'e':
+			self.board.save(self.product_id, self.substitute_id)
+			self.board.details(self.category_id, self.product_id,
+				self.substitute_id)
+		elif self.event == 'r':
+			self.url = 'product'
+			self.substitute_id = 0
+			self.check_substitute()
 
 	def main(self):
 
-		self.home()
+		self.open_home()
 		while True:
 
 			self.event = input("choix : ")
 
-			
 			if self.event == 'q':
 				quit()
 
 			elif self.url == 'home':
-				self.dashboard()
+				self.home()
 				self.event = 0
 
 			elif self.url == 'all_categories':
-				self.choiceCategory()
+				self.all_categories()
 				self.event = 0
 			
 			elif self.url == 'all_products':
-				self.choiceProduct()
+				self.all_products()
 				self.event = 0
 
 			elif self.url == 'product':
-				self.choiceSubstitute()
+				self.product()
 				self.event = 0
 
 			elif self.url == 'product_substitute':
-				self.comparisonChart()
+				self.product_substitute()
 				self.event = 0
 
-			elif self.url == 'all_favorites':
-				self.choiceFavorite()
-				self.favorite_id = self.event
-				self.event = 0
-
-			elif self.url == 'favorite':
-				self.comparisonChartFavorite()
-				self.event = 0
-
-
-
-
-
-
-
-
-####for debug

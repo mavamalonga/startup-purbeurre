@@ -15,68 +15,51 @@ class Data(template.Interface):
 		super().__init__(window_dict)
 		self.table = table
 
-	def connectDatabase(self):
+	def connect_database(self):
 		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
 		self.cursor = self.cnx.cursor()
 		self.cursor.execute("use Purbeurre")
 
-	def createDatabase(self):
-		self.action = "createData"
+	def create_database(self):
 		try:
-			self.connectDatabase()
+			self.connect_database()
 			self.cursor.execute("create database Purbeurre default character set 'utf8'")
-			self.response = "SuccessData"
 		except mysql.connector.Error as err:
-			self.response = "FailedData"
+			print("Failed creating database Purbeurre")
 			exit(1)
-		self.initData(self.action, self.self.response)
 
-	def createTable(self):
-		self.action = "createTable"
+	def create_table(self):
 		for table_name in self.table:
 			table_description = self.table[table_name]
 			try:
-				self.connectDatabase()
+				self.connect_database()
+				print("creating table {}:".format(table_name))
 				self.cursor.execute(table_description)
 			except mysql.connector.Error as err:
 				if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-					self.response = "already exists."
-					initData(self.action, self.response)
+					print("already exists.")
 				else:
-					self.response = err.msg
-					initData(self.action, self.response)
+					print(err.msg)
 			else:
-				self.response = table_name
-				initData(self.action, self.response)
+				print("OK")
 		self.cursor.close()
 
-	def selectCategories(self):
-		self.list_category_id = []
-		self.connectDatabase()
+	def get_category(self):
+		self.connect_database()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
-		
 			self.category_menu(category_tuple[0], category_tuple[1])
-			self.list_category_id.append(category_tuple[0])
 		self.cursor.close()
-	
-	def get_product(self, url, category_id):
 
-		self.url = url
-		self.category_id = category_id
+	def get_product(self, category_choice):
+
 		self.connect_database()
-		self.select_products_list = []
-		self.cursor.execute("call get_product({0})".format(self.category_id))
-		for id_and_product in self.cursor:
-			self.select_products_list.append(id_and_product)
-		
-		if len(self.select_products_list) == 0:
-			self.display_error()
-		else:									
-			self.display_help(self.url)
-			self.products_menu(self.select_products_list)
+		self.category_choice = category_choice
+		self.cursor.execute("call get_product({0})".format(self.category_choice))
+		for products in self.cursor:
+			self.products_menu(products[0], products[1])
 		self.cursor.close()
-		
+
 	def get_feature(self, product_choice):
 
 		self.connect_database()
@@ -158,16 +141,12 @@ class Data(template.Interface):
 			self.substitute_id = substitute_id[0]
 		self.cursor.close()
 
-		self.connectDatabase()
+		self.connect_database()
 		self.cursor.execute("select category_id from product where id = {0} ".format(self.substitute_id))
 		for category_id in self.cursor:
 			self.category_id = category_id[0]
 		self.cursor.close()
 
 
-		self.selectProductId(self.product_id)
-		self.selectSubstitute(self.substitute_id)
-
-
-
-		
+		self.get_feature(self.product_id)
+		self.select_substitute(self.substitute_id)
