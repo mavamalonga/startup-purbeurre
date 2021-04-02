@@ -48,7 +48,7 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
-			self.category_menu(category_tuple[0], category_tuple[1])
+			self.displayCategories(category_tuple[0], category_tuple[1])
 		self.cursor.close()
 
 	def get_product(self, category_choice):
@@ -57,7 +57,7 @@ class Data(template.Interface):
 		self.category_choice = category_choice
 		self.cursor.execute("call get_product({0})".format(self.category_choice))
 		for products in self.cursor:
-			self.products_menu(products[0], products[1])
+			self.displayProductList(products[0], products[1])
 		self.cursor.close()
 
 	def get_feature(self, product_choice):
@@ -65,7 +65,7 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call get_feature({0})".format(product_choice))
 		for feature in self.cursor:
-			self.display_feature(feature)
+			self.displayProductId(feature)
 		self.cursor.close()
 
 
@@ -74,16 +74,15 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call select_substitute({0}, {1})".format(index_c, index_p))
 		for substitute in self.cursor:
-			self.display_substitute(substitute[0], substitute[1], substitute[2])
+			self.displaySubstituteList(substitute[0], substitute[1], substitute[2])
 		self.cursor.close()
 
 	def select_substitute(self, substitute):
 
 		self.connect_database()
 		self.cursor.execute("call get_feature({0})".format(substitute))
-
 		for feature in self.cursor:
-			self.display_feature(feature)
+			self.displayProductId(feature)
 		self.cursor.close()
 
 
@@ -92,7 +91,7 @@ class Data(template.Interface):
 		self.cursor.execute("insert into favorite (product_id, substitute_id) values ({0}, {1})".format(product_choice, substitute))
 		self.cnx.commit()
 		self.cursor.close()
-		self.display_success_save()
+		self.displaySaveMsg()
 
 	def get_favorite(self):
 
@@ -118,7 +117,7 @@ class Data(template.Interface):
 			self.list_fav_index.append(index)
 		self.cursor.close()
 
-		self.display_favorite(self.list_fav_index, self.list_fav_food, self.list_fav_sub)
+		self.displayFavoriteList(self.list_fav_index, self.list_fav_food, self.list_fav_sub)
 		
 	def delete_favorite(self, favorite_id):
 		self.favorite_id = favorite_id

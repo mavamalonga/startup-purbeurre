@@ -11,12 +11,12 @@ class Manager (database.Data):
 
 	def open_home(self):
 		self.url = 'home'
-		self.display_help(self.url)
+		self.displayHelp(self.url)
 
 	def home(self):
 		if self.event == '1':
 			self.url = 'all_categories'
-			self.display_help(self.url)
+			self.displayHelp(self.url)
 			self.get_category()
 		elif self.event == '2':
 			self.url = 'home_favorites'
@@ -29,25 +29,25 @@ class Manager (database.Data):
 		elif int(str(self.event)) > 0:
 			self.url = 'all_products'
 			self.category_id = self.event
-			self.display_help(self.url)
+			self.displayHelp(self.url)
 			self.get_product(self.category_id)
 
 	def check_substitute(self):
 
 		if int(str(self.substitute_id)) == 0:
-			self.display_help(self.url)
+			self.displayHelp(self.url)
 			self.get_feature(self.product_id)
 			self.select_substitute_list(self.category_id, self.product_id)
 		elif int(str(self.substitute_id)) > 0:
 
-			self.display_help(self.url)
+			self.displayHelp(self.url)
 			self.get_feature(self.product_id)
 			self.select_substitute(self.substitute_id)
 
 	def all_products(self):
 		if self.event == 'r':
 			self.url = 'all_categories'
-			self.display_help(self.url)
+			self.displayHelp(self.url)
 			self.get_category()
 		elif int(str(self.event)) > 0:
 			self.url = 'product'
@@ -72,7 +72,7 @@ class Manager (database.Data):
 	def product(self):
 		if self.event == 'r':
 			self.url = 'all_products'
-			self.display_help(self.url)
+			self.displayHelp(self.url)
 			self.get_product(self.category_id)
 			self.event = 0
 		elif int(str(self.event)) > 0:
