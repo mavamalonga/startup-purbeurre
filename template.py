@@ -16,11 +16,24 @@ class Interface:
 		if self.url == 'home':
 			print(self.window_dict['home'])
 
-		if self.url == 'all_categories':
+		elif self.url == 'all_categories':
 			print(self.window_dict['all_categories'])
 
-		if self.url == 'all_products':
+		elif self.url == 'all_products':
 			print(self.window_dict['all_products'])
+
+		elif self.url == 'product':
+			print(self.window_dict['product'])
+
+		elif self.url == 'product_substitute':
+			print(self.window_dict['product_substitute'])
+
+
+		elif self.url == 'home_favorites':
+			print(self.window_dict['home_favorites'])
+
+		elif self.url == 'favorite':
+			print(self.window_dict['favorite']) 
 
 
 	def displayCategories(self, category_id, category_name):

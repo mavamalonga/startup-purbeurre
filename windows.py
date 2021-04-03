@@ -2,7 +2,7 @@
 
 window_dict = {
 	
-		"home" : "	########## Menu principal ##########\n \
+		"home" : "\n 		########## Menu principal ##########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			1 : Sélectionnez une catégorie \n \
 			2 : Choisir un aliment à substitué. \n \
@@ -40,13 +40,13 @@ window_dict = {
 			.",
 
 
-		"" : "\n 		########## url : {0} ########## \n \
+		"home_favorites" : "\n 		########## Liste de favories ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			.",
 
-		"main/favorites/" : "\n 		########## url : {0}{1} ########## \n \
+		"favorite" : "\n 		########## tableau de commparaison ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \

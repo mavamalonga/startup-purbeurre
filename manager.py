@@ -51,6 +51,7 @@ class Manager (database.Data):
 			self.get_category()
 		elif int(str(self.event)) > 0:
 			self.url = 'product'
+			self.displayHelp(self.url)
 			self.product_id = self.event
 			self.substitute_id = 0
 			self.check_substitute()
@@ -63,6 +64,7 @@ class Manager (database.Data):
 			self.event = 0
 		elif int(str(self.event)) > 0:
 			self.url = 'product_substitute'
+			self.displayHelp(self.url)
 			self.substitute_id = self.event
 			self.check_substitute()
 
