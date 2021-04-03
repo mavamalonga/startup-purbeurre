@@ -10,6 +10,9 @@ class Interface:
 	def __init__(self, window_dict):
 		self.window_dict = window_dict
 
+	def error(self):
+		print("			Veillez rentrer une valeur valide.")
+
 	def displayHelp(self, url):
 		self.url = url
 
