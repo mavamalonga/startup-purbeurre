@@ -46,12 +46,17 @@ window_dict = {
 			q : Quitter \n \
 			.",
 
-		"favorite" : "\n 		########## tableau de commparaison ########## \n \
+		"favorie" : "\n 		########## tableau de commparaison ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			s : Supprimer \n \
 			.",
+
+		"displayList" : "			{0} : {1} \n \
+		."
+
+
 
 
 }

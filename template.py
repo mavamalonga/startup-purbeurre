@@ -10,51 +10,33 @@ class Interface:
 	def __init__(self, window_dict):
 		self.window_dict = window_dict
 
-	def error(self):
-		print("			Veillez rentrer une valeur valide.")
+
+	"""Display notify of errors or message return after 
+	execute method, database execute cursor.execute"""
+
+	def displayNotify(self, msg):
+		print("{0}".format(msg))
+
+	"""Display in each window the instruction commands about it, this method take argument url for display ythe true 
+	message in function of window"""
 
 	def displayHelp(self, url):
 		self.url = url
-
-		if self.url == 'home':
-			print(self.window_dict['home'])
-
-		elif self.url == 'all_categories':
-			print(self.window_dict['all_categories'])
-
-		elif self.url == 'all_products':
-			print(self.window_dict['all_products'])
-
-		elif self.url == 'product':
-			print(self.window_dict['product'])
-
-		elif self.url == 'product_substitute':
-			print(self.window_dict['product_substitute'])
-
-
-		elif self.url == 'home_favorites':
-			print(self.window_dict['home_favorites'])
-
-		elif self.url == 'favorite':
-			print(self.window_dict['favorite']) 
-
+		for url, theme in self.window_dict.items():
+			if self.url == url:
+				print(self.window_dict[self.url])
 
 	def displayCategories(self, category_id, category_name):
-		self.category_id = category_id
-		self.category_name = category_name
-		print("			{0} : {1}".format(self.category_id, self.category_name))
+		print("			{0} : {1}".format(category_id, category_name))
 
 
 	def displayProductList(self, product_id, product_name):
-		self.product_id = product_id
-		self.product_name = product_name
-		print("			{0} : {1}".format(self.product_id, self.product_name))
+		print("			{0} : {1}".format(product_id, product_name))
 
 	def displayProductId(self, feature):
 		self.list_name = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
 		'Quantity', 'Magasin(s)']
 		self.feature = feature
-
 		for name, value in zip(self.list_name, self.feature):
 			print("			{0} : {1}".format(name, value))
 		print("\n")
@@ -74,9 +56,6 @@ class Interface:
 			print("			{0} : {1} &".format(self.list_fav_index[self.i][0], tuple_favorite[0][0]))
 			print("			{0}\n".format(tuple_favorite[1][0]))
 			self.i += 1
-
-	def displaySaveMsg(self):
-		print("Enregistrement validé.")
 
 
 

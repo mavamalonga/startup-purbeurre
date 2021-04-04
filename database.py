@@ -14,6 +14,7 @@ class Data(template.Interface):
 	def __init__(self, table, window_dict):
 		super().__init__(window_dict)
 		self.table = table
+		self.msg = "			successful recording"
 
 	def connect_database(self):
 		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
@@ -92,7 +93,7 @@ class Data(template.Interface):
 			values ({0}, {1})".format(product_choice, substitute))
 		self.cnx.commit()
 		self.cursor.close()
-		self.displaySaveMsg()
+		self.displayNotify(self.msg)
 
 	def get_favorite(self):
 
@@ -124,9 +125,11 @@ class Data(template.Interface):
 		
 	def delete_favorite(self, favorite_id):
 		self.favorite_id = favorite_id
+		print(self.favorite_id)
 		self.connect_database()
 		self.cursor.execute("delete from favorite where id = {0}".format(self.favorite_id))
 		self.cnx.commit()
+		self.displayNotify(self.msg)
 		self.cursor.close()
 
 	def select_feature_favorite(self, favorite_id):

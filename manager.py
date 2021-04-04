@@ -7,6 +7,8 @@ import windows
 class Manager (database.Data):
 	def __init__(self, table, windows_dict):
 		super().__init__(table, windows_dict)
+		self.error = "Veillez rentrer une valeur valide." 
+
 
 	def open_home(self):
 		self.url = 'home'
@@ -26,7 +28,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNotify(self.error)
 		self.event = 0
 
 	def all_categories(self):
@@ -41,7 +43,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNotify(self.error)
 		self.event = 0
 
 
@@ -60,7 +62,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNotify(self.error)
 		self.event = 0
 
 	def all_products(self):
@@ -79,7 +81,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNotify(self.error)
 		self.event = 0
 
 	def product(self):
@@ -97,7 +99,7 @@ class Manager (database.Data):
 			else :
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNotify(self.error)
 		self.event = 0
 
 	def product_substitute(self):
@@ -111,39 +113,38 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNorify(self.error)
 		self.event = 0
 
 
 	def select_favorite(self):
 		try :
 			if self.event == 'r':
-				self.favorite_id = self.event
 				self.url = 'home'
 				self.open_home()
 			elif int(self.event) > 0:
-				self.url = 'favorite'
-				self.favorite_id = self.event
+				self.url = 'favorie'
+				self.favorite_id = self.event                 
 				self.displayHelp(self.url)
 				self.select_feature_favorite(self.favorite_id)
 			else :
 				self.bad_value = 1/0
 		except :
-			self.error()
+			self.displayNotify(self.error)
 		self.event = 0
 
 	def favorite(self):
 		try :
-			if self.event == 'r':
+			if self.event == 's':
+				self.url = 'favorie'
+				self.delete_favorite(self.favorite_id)         
+			elif self.event == 'r':
 				self.url = 'home_favorites'
 				self.get_favorite()
-			elif self.event == 's':
-				self.board.delete_favorite_id(self.product)
-				self.event = 0
 			else :
 				self.bad_value = 1/0
 		except :
-			self.bad_value = 1/0
+			self.displayNotify(self.error)
 		self.event = 0
 
 	def main(self):
@@ -181,6 +182,6 @@ class Manager (database.Data):
 				self.select_favorite()
 				self.event = 0
 
-			elif self.url == 'favorite':
+			elif self.url == 'favorie':
 				self.favorite()
 				self.event = 0
