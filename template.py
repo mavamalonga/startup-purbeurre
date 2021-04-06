@@ -9,7 +9,10 @@ class Interface:
 
 	def __init__(self, window_dict):
 		self.window_dict = window_dict
-
+		self.emptyCase = ' '
+		self.featureNameList = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
+		'Quantity', 'Magasin(s)']
+		self.i = 0
 
 	"""Display notify of errors or message return after 
 	execute method, database execute cursor.execute"""
@@ -26,35 +29,32 @@ class Interface:
 			if self.url == url:
 				print(self.window_dict[self.url])
 
-	def displayCategories(self, category_id, category_name):
-		print("			{0} : {1}".format(category_id, category_name))
+	"""method display categorires list, produicts list and substitutes list
+	when value3='none' => value1= id, value2 = product_name
+	when value3!='none' => value1= id, value2 = prodcut_name, value3 = nutrition_grades
+	"""
+	def displayList(self, value1, value2,  value3='none'):
+		if value3 == 'none':
+			print(self.emptyCase*24 + "{0} : {1}".format(value1, value2))
+		else:
+			print(self.emptyCase*24 + "{0} : {1} {2}".format(value1, value2, value3))
 
 
-	def displayProductList(self, product_id, product_name):
-		print("			{0} : {1}".format(product_id, product_name))
-
-	def displayProductId(self, feature):
-		self.list_name = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
-		'Quantity', 'Magasin(s)']
-		self.feature = feature
-		for name, value in zip(self.list_name, self.feature):
-			print("			{0} : {1}".format(name, value))
+	def displayProductId(self, featureValue):
+		self.featureValue = featureValue
+		for name, feature in zip(self.featureNameList, self.featureValue):
+			print(self.emptyCase*24 + "{0} : {1}".format(name, feature))
 		print("\n")
 
 
-	def displaySubstituteList(self, sub_id, name, nutriscore):
-		print("			{0} : {1} {2}".format(sub_id, name, nutriscore ))
+	def displayFavoriteList(self, idList, productNameList, substituteNameList):
+		self.idList = idList
+		self.productNameList = productNameList
+		self.substituteNameList = substituteNameList
 
-	
-	def displayFavoriteList(self, list_index, list_id_food, list_id_substitue):
-		self.list_fav_index = list_index
-		self.list_fav_food = list_id_food
-		self.list_fav_sub = list_id_substitue
-
-		self.i = 0
-		for tuple_favorite in zip(self.list_fav_food, self.list_fav_sub):
-			print("			{0} : {1} &".format(self.list_fav_index[self.i][0], tuple_favorite[0][0]))
-			print("			{0}\n".format(tuple_favorite[1][0]))
+		for names in zip(self.productNameList, self.substituteNameList):
+			print(self.emptyCase*24 + "{0} : {1} &".format(self.idList[self.i][0], names[0][0]))
+			print(self.emptyCase*24 + "{0}\n".format(names[1][0]))
 			self.i += 1
 
 

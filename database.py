@@ -49,7 +49,7 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call get_categories()")
 		for category_tuple in self.cursor:
-			self.displayCategories(category_tuple[0], category_tuple[1])
+			self.displayList(category_tuple[0], category_tuple[1])
 		self.cursor.close()
 
 	def get_product(self, category_choice):
@@ -58,7 +58,7 @@ class Data(template.Interface):
 		self.category_choice = category_choice
 		self.cursor.execute("call get_product({0})".format(self.category_choice))
 		for products in self.cursor:
-			self.displayProductList(products[0], products[1])
+			self.displayList(products[0], products[1])
 		self.cursor.close()
 
 	def get_feature(self, product_choice):
@@ -75,7 +75,7 @@ class Data(template.Interface):
 		self.connect_database()
 		self.cursor.execute("call select_substitute({0}, {1})".format(index_c, index_p))
 		for substitute in self.cursor:
-			self.displaySubstituteList(substitute[0], substitute[1], substitute[2])
+			self.displayList(substitute[0], substitute[1], value3=substitute[2])
 		self.cursor.close()
 
 	def select_substitute(self, substitute):
@@ -97,31 +97,33 @@ class Data(template.Interface):
 
 	def get_favorite(self):
 
-		self.list_fav_food = []
-		self.list_fav_sub = []
-		self.list_fav_index = []
+		self.productNameList = []
+		self.substituteNameList = []
+		self.idList = []
 
 		self.connect_database()
 		self.cursor.execute("select product_name from product where id in \
 			( select product_id from favorite order by id)")
-		for prod_food in self.cursor:
-			self.list_fav_food.append(prod_food)
+		for name in self.cursor:
+			self.productNameList.append(name)
 		self.cursor.close()
 
 		self.connect_database()
 		self.cursor.execute("select product_name from product where id in \
 			( select substitute_id from favorite order by id)")
-		for prod_sub in self.cursor:
-			self.list_fav_sub.append(prod_sub)
+		for name in self.cursor:
+			self.substituteNameList.append(name)
 		self.cursor.close()
 
 		self.connect_database()
 		self.cursor.execute("select id from favorite order by id")
-		for index in self.cursor:
-			self.list_fav_index.append(index)
+		for name in self.cursor:
+			self.idList.append(name)
 		self.cursor.close()
 
-		self.displayFavoriteList(self.list_fav_index, self.list_fav_food, self.list_fav_sub)
+		self.displayFavoriteList(self.idList, self.productNameList, self.substituteNameList)
+
+		print(self.idList, self.productNameList, self.substituteNameList)
 		
 	def delete_favorite(self, favorite_id):
 		self.favorite_id = favorite_id
