@@ -17,7 +17,11 @@ class Data(template.Interface):
 		self.msg = "			successful recording"
 
 	def connect_database(self):
-		self.cnx = mysql.connector.connect(user='root', host='localhost', password='100ml80%vol.', port='330')
+		with open('loginData.yml', 'r') as file:
+			self.login = file.read().split()
+		self.cnx = mysql.connector.connect(user=self.login[0], host=self.login[1],
+		 password=self.login[2], port=self.login[3])
+
 		self.cursor = self.cnx.cursor()
 		self.cursor.execute("use Purbeurre")
 
@@ -52,28 +56,28 @@ class Data(template.Interface):
 			self.displayList(category_tuple[0], category_tuple[1])
 		self.cursor.close()
 
-	def get_product(self, category_choice):
+	def get_product(self, categoryId):
 
 		self.connect_database()
-		self.category_choice = category_choice
-		self.cursor.execute("call get_product({0})".format(self.category_choice))
+		self.categoryId = categoryId
+		self.cursor.execute("call get_product({0})".format(self.categoryId))
 		for products in self.cursor:
 			self.displayList(products[0], products[1])
 		self.cursor.close()
 
-	def get_feature(self, product_choice):
+	def get_feature(self, productId):
 
 		self.connect_database()
-		self.cursor.execute("call get_feature({0})".format(product_choice))
+		self.cursor.execute("call get_feature({0})".format(productId))
 		for feature in self.cursor:
 			self.displayProductId(feature)
 		self.cursor.close()
 
 
-	def select_substitute_list(self, index_c, index_p):
+	def select_substitute_list(self, categoryId, productId):
 
 		self.connect_database()
-		self.cursor.execute("call select_substitute({0}, {1})".format(index_c, index_p))
+		self.cursor.execute("call select_substitute({0}, {1})".format(categoryId, productId))
 		for substitute in self.cursor:
 			self.displayList(substitute[0], substitute[1], value3=substitute[2])
 		self.cursor.close()
@@ -87,10 +91,10 @@ class Data(template.Interface):
 		self.cursor.close()
 
 
-	def save_product(self, product_choice, substitute):
+	def save_product(self, productId, substituteId):
 		self.connect_database()
 		self.cursor.execute("insert into favorite (product_id, substitute_id) \
-			values ({0}, {1})".format(product_choice, substitute))
+			values ({0}, {1})".format(productId, substituteId))
 		self.cnx.commit()
 		self.cursor.close()
 		self.displayNotify(self.msg)
@@ -119,41 +123,39 @@ class Data(template.Interface):
 		self.cursor.execute("select id from favorite order by id")
 		for name in self.cursor:
 			self.idList.append(name)
-		self.cursor.close()
 
 		self.displayFavoriteList(self.idList, self.productNameList, self.substituteNameList)
-
-		print(self.idList, self.productNameList, self.substituteNameList)
+		self.cursor.close()
 		
-	def delete_favorite(self, favorite_id):
-		self.favorite_id = favorite_id
+	def delete_favorite(self, favoriteId):
+		self.favoriteId = favoriteId
 		print(self.favorite_id)
 		self.connect_database()
-		self.cursor.execute("delete from favorite where id = {0}".format(self.favorite_id))
+		self.cursor.execute("delete from favorite where id = {0}".format(self.favoriteId))
 		self.cnx.commit()
 		self.displayNotify(self.msg)
 		self.cursor.close()
 
-	def select_feature_favorite(self, favorite_id):
-		self.favorite_id = favorite_id
+	def select_feature_favorite(self, favoriteId):
+		self.favoriteId = favoriteId
 		self.connect_database()
-		self.cursor.execute("select product_id from favorite where id = {0}".format(self.favorite_id))
-		for product_id in self.cursor:
-			self.product_id = product_id[0]
+		self.cursor.execute("select product_id from favorite where id = {0}".format(self.favoriteId))
+		for productId in self.cursor:
+			self.productId = productId[0]
 		self.cursor.close()
 
 		self.connect_database()
-		self.cursor.execute("select substitute_id from favorite where id = {0} ".format(self.favorite_id))
-		for substitute_id in self.cursor:
-			self.substitute_id = substitute_id[0]
+		self.cursor.execute("select substitute_id from favorite where id = {0} ".format(self.favoriteId))
+		for substituteId in self.cursor:
+			self.substituteId = substituteId[0]
 		self.cursor.close()
 
 		self.connect_database()
-		self.cursor.execute("select category_id from product where id = {0} ".format(self.substitute_id))
-		for category_id in self.cursor:
-			self.category_id = category_id[0]
+		self.cursor.execute("select category_id from product where id = {0} ".format(self.substituteId))
+		for categoryId in self.cursor:
+			self.category_id = categoryId[0]
 		self.cursor.close()
 
 
-		self.get_feature(self.product_id)
-		self.select_substitute(self.substitute_id)
+		self.get_feature(self.productId)
+		self.select_substitute(self.substituteId)

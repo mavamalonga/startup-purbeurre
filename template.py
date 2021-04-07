@@ -12,7 +12,6 @@ class Interface:
 		self.emptyCase = ' '
 		self.featureNameList = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
 		'Quantity', 'Magasin(s)']
-		self.i = 0
 
 	"""Display notify of errors or message return after 
 	execute method, database execute cursor.execute"""
@@ -48,6 +47,7 @@ class Interface:
 
 
 	def displayFavoriteList(self, idList, productNameList, substituteNameList):
+		self.i = 0
 		self.idList = idList
 		self.productNameList = productNameList
 		self.substituteNameList = substituteNameList

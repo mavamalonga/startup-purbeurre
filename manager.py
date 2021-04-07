@@ -22,7 +22,7 @@ class Manager (database.Data):
 				self.displayHelp(self.url)
 				self.get_category()
 			elif self.event == '2':
-				self.url = 'home_favorites'
+				self.url = 'all_favorites'
 				self.displayHelp(self.url)
 				self.get_favorite()
 			else:
@@ -113,7 +113,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNorify(self.error)
+			self.displayNotify(self.error)
 		self.event = 0
 
 
@@ -123,7 +123,7 @@ class Manager (database.Data):
 				self.url = 'home'
 				self.open_home()
 			elif int(self.event) > 0:
-				self.url = 'favorie'
+				self.url = 'favorite'
 				self.favorite_id = self.event                 
 				self.displayHelp(self.url)
 				self.select_feature_favorite(self.favorite_id)
@@ -136,10 +136,10 @@ class Manager (database.Data):
 	def favorite(self):
 		try :
 			if self.event == 's':
-				self.url = 'favorie'
+				self.url = 'favorite'
 				self.delete_favorite(self.favorite_id)         
 			elif self.event == 'r':
-				self.url = 'home_favorites'
+				self.url = 'all_favorites'
 				self.get_favorite()
 			else :
 				self.bad_value = 1/0
@@ -178,10 +178,10 @@ class Manager (database.Data):
 				self.product_substitute()
 				self.event = 0
 
-			elif self.url == 'home_favorites':
+			elif self.url == 'all_favorites':
 				self.select_favorite()
 				self.event = 0
 
-			elif self.url == 'favorie':
+			elif self.url == 'favorite':
 				self.favorite()
 				self.event = 0

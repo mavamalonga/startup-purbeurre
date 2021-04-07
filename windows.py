@@ -40,13 +40,13 @@ window_dict = {
 			.",
 
 
-		"home_favorites" : "\n 		########## Liste de favories ########## \n \
+		"all_favorites" : "\n 		########## Liste de favories ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			.",
 
-		"favorie" : "\n 		########## tableau de commparaison ########## \n \
+		"favorite" : "\n 		########## tableau de commparaison ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
