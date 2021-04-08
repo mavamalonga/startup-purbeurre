@@ -10,12 +10,12 @@ class Manager (database.Data):
 		self.error = "Veillez rentrer une valeur valide." 
 
 
-	def open_home(self):
+	def home(self):
 		self.url = 'home'
 		self.displayHelp(self.url)
 
 
-	def home(self):
+	def dashboard(self):
 		try:
 			if self.event == '1':
 				self.url = 'categoriesList'
@@ -31,10 +31,10 @@ class Manager (database.Data):
 			self.displayNotify(self.error)
 		self.event = 0
 
-	def all_categories(self):
+	def choiceCategory(self):
 		try:
 			if self.event == 'r':
-				self.open_home()
+				self.home()
 			elif int(str(self.event)) > 0:
 				self.url = 'productsList'
 				self.category_id = self.event
@@ -47,7 +47,7 @@ class Manager (database.Data):
 		self.event = 0
 
 
-	def check_substitute(self):
+	def checkSubstitute(self):
 
 		try:
 			if int(str(self.substitute_id)) == 0:
@@ -65,7 +65,7 @@ class Manager (database.Data):
 			self.displayNotify(self.error)
 		self.event = 0
 
-	def all_products(self):
+	def choiceProduct(self):
 
 		try:
 			if self.event == 'r':
@@ -77,14 +77,14 @@ class Manager (database.Data):
 				self.displayHelp(self.url)
 				self.product_id = self.event
 				self.substitute_id = 0
-				self.check_substitute()
+				self.checkSubstitute()
 			else:
 				self.bad_value = 1/0
 		except :
 			self.displayNotify(self.error)
 		self.event = 0
 
-	def product(self):
+	def choiceSubstitute(self):
 		try :
 			if self.event == 'r':
 				self.url = 'productsList'
@@ -95,21 +95,21 @@ class Manager (database.Data):
 				self.url = 'productSubstitute'
 				self.displayHelp(self.url)
 				self.substitute_id = self.event
-				self.check_substitute()
+				self.checkSubstitute()
 			else :
 				self.bad_value = 1/0
 		except :
 			self.displayNotify(self.error)
 		self.event = 0
 
-	def product_substitute(self):
+	def choiceSave(self):
 		try :
 			if  self.event == 'e':
 				self.save_product(self.product_id, self.substitute_id)
 			elif self.event == 'r':
 				self.url = 'productListSubstitute'
 				self.substitute_id = 0
-				self.check_substitute()
+				self.checkSubstitute()
 			else:
 				self.bad_value = 1/0
 		except :
@@ -117,11 +117,11 @@ class Manager (database.Data):
 		self.event = 0
 
 
-	def select_favorite(self):
+	def choiceFavorite(self):
 		try :
 			if self.event == 'r':
 				self.url = 'home'
-				self.open_home()
+				self.home()
 			elif int(self.event) > 0:
 				self.url = 'displayFavorite'
 				self.favorite_id = self.event                 
@@ -133,7 +133,7 @@ class Manager (database.Data):
 			self.displayNotify(self.error)
 		self.event = 0
 
-	def favorite(self):
+	def choiceDelete(self):
 		try :
 			if self.event == 's':
 				self.url = 'displayFavorite'
@@ -149,7 +149,7 @@ class Manager (database.Data):
 
 	def main(self):
 
-		self.open_home()
+		self.home()
 
 		while True:
 
@@ -159,29 +159,29 @@ class Manager (database.Data):
 				quit()
 
 			elif self.url == 'home':
-				self.home()
+				self.dashboard()
 				self.event = 0
 
 			elif self.url == 'categoriesList':
-				self.all_categories()
+				self.choiceCategory()
 				self.event = 0
 			
 			elif self.url == 'productsList':
-				self.all_products()
+				self.choiceProduct()
 				self.event = 0
 
 			elif self.url == 'productListSubstitute':
-				self.product()
+				self.choiceSubstitute()
 				self.event = 0
 
 			elif self.url == 'productSubstitute':
-				self.product_substitute()
+				self.choiceSave()
 				self.event = 0
 
 			elif self.url == 'favoritesList':
-				self.select_favorite()
+				self.choiceFavorite()
 				self.event = 0
 
 			elif self.url == 'displayFavorite':
-				self.favorite()
+				self.choiceDelete()
 				self.event = 0
