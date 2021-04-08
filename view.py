@@ -4,7 +4,6 @@ import requests
 from database import Data
 from template import Interface
 import tables
-from controller import Controlboard
 import windows 
 from manager import Manager
 

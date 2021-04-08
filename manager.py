@@ -18,11 +18,11 @@ class Manager (database.Data):
 	def home(self):
 		try:
 			if self.event == '1':
-				self.url = 'all_categories'
+				self.url = 'categoriesList'
 				self.displayHelp(self.url)
 				self.get_category()
 			elif self.event == '2':
-				self.url = 'all_favorites'
+				self.url = 'favoritesList'
 				self.displayHelp(self.url)
 				self.get_favorite()
 			else:
@@ -36,7 +36,7 @@ class Manager (database.Data):
 			if self.event == 'r':
 				self.open_home()
 			elif int(str(self.event)) > 0:
-				self.url = 'all_products'
+				self.url = 'productsList'
 				self.category_id = self.event
 				self.displayHelp(self.url)
 				self.get_product(self.category_id)
@@ -69,11 +69,11 @@ class Manager (database.Data):
 
 		try:
 			if self.event == 'r':
-				self.url = 'all_categories'
+				self.url = 'categoriesList'
 				self.displayHelp(self.url)
 				self.get_category()
 			elif int(str(self.event)) > 0:
-				self.url = 'product'
+				self.url = 'productListSubstitute'
 				self.displayHelp(self.url)
 				self.product_id = self.event
 				self.substitute_id = 0
@@ -87,12 +87,12 @@ class Manager (database.Data):
 	def product(self):
 		try :
 			if self.event == 'r':
-				self.url = 'all_products'
+				self.url = 'productsList'
 				self.displayHelp(self.url)
 				self.get_product(self.category_id)
 				self.event = 0
 			elif int(str(self.event)) > 0:
-				self.url = 'product_substitute'
+				self.url = 'productSubstitute'
 				self.displayHelp(self.url)
 				self.substitute_id = self.event
 				self.check_substitute()
@@ -107,7 +107,7 @@ class Manager (database.Data):
 			if  self.event == 'e':
 				self.save_product(self.product_id, self.substitute_id)
 			elif self.event == 'r':
-				self.url = 'product'
+				self.url = 'productListSubstitute'
 				self.substitute_id = 0
 				self.check_substitute()
 			else:
@@ -123,7 +123,7 @@ class Manager (database.Data):
 				self.url = 'home'
 				self.open_home()
 			elif int(self.event) > 0:
-				self.url = 'favorite'
+				self.url = 'displayFavorite'
 				self.favorite_id = self.event                 
 				self.displayHelp(self.url)
 				self.select_feature_favorite(self.favorite_id)
@@ -136,10 +136,10 @@ class Manager (database.Data):
 	def favorite(self):
 		try :
 			if self.event == 's':
-				self.url = 'favorite'
+				self.url = 'displayFavorite'
 				self.delete_favorite(self.favorite_id)         
 			elif self.event == 'r':
-				self.url = 'all_favorites'
+				self.url = 'favoritesList'
 				self.get_favorite()
 			else :
 				self.bad_value = 1/0
@@ -162,26 +162,26 @@ class Manager (database.Data):
 				self.home()
 				self.event = 0
 
-			elif self.url == 'all_categories':
+			elif self.url == 'categoriesList':
 				self.all_categories()
 				self.event = 0
 			
-			elif self.url == 'all_products':
+			elif self.url == 'productsList':
 				self.all_products()
 				self.event = 0
 
-			elif self.url == 'product':
+			elif self.url == 'productListSubstitute':
 				self.product()
 				self.event = 0
 
-			elif self.url == 'product_substitute':
+			elif self.url == 'productSubstitute':
 				self.product_substitute()
 				self.event = 0
 
-			elif self.url == 'all_favorites':
+			elif self.url == 'favoritesList':
 				self.select_favorite()
 				self.event = 0
 
-			elif self.url == 'favorite':
+			elif self.url == 'displayFavorite':
 				self.favorite()
 				self.event = 0

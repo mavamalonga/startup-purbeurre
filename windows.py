@@ -10,14 +10,14 @@ window_dict = {
 			",
 	
 
-		"all_categories" : "\n 		########## Tout les catégories ###########\n \
+		"categoriesList" : "\n 		########## Catégories ###########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			",
 
 
-		"all_products" : "\n 		########## Tout les produits ###########\n \
+		"productsList" : "\n 		########## Produits ###########\n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
@@ -25,14 +25,14 @@ window_dict = {
 
 
 
-		"product": "\n 		########## Produit ########## \n \
+		"productListSubstitute": "\n 		########## Produit et liste substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			.",
 	
 
-		"product_substitute" : "\n 		########## Produit et substitue ########## \n \
+		"productSubstitute" : "\n 		########## Produit et substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
@@ -40,13 +40,13 @@ window_dict = {
 			.",
 
 
-		"all_favorites" : "\n 		########## Liste de favories ########## \n \
+		"favoritesList" : "\n 		########## Liste de favories ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			.",
 
-		"favorite" : "\n 		########## tableau de commparaison ########## \n \
+		"displayFavorite" : "\n 		########## tableau de commparaison ########## \n \
 			Mode d'emploi : Pour sélectionner un favori, rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
