@@ -7,7 +7,7 @@ import windows
 class Manager (database.Data):
 	def __init__(self, table, windows_dict):
 		super().__init__(table, windows_dict)
-		self.error = "Veillez rentrer une valeur valide." 
+		self.errorValue = "errorValue"
 
 
 	def home(self):
@@ -28,7 +28,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 	def choiceCategory(self):
@@ -43,7 +43,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 
@@ -62,7 +62,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 	def choiceProduct(self):
@@ -81,7 +81,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 	def choiceSubstitute(self):
@@ -99,7 +99,7 @@ class Manager (database.Data):
 			else :
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 	def choiceSave(self):
@@ -113,7 +113,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 
@@ -130,7 +130,7 @@ class Manager (database.Data):
 			else :
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 	def choiceDelete(self):
@@ -144,7 +144,7 @@ class Manager (database.Data):
 			else :
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.error)
+			self.displayNotify(self.errorValue)
 		self.event = 0
 
 	def main(self):

@@ -54,7 +54,9 @@ window_dict = {
 			.",
 
 		"displayList" : "			{0} : {1} \n \
-		."
+		.",
+
+		"errorValue" : "\n Veillez rentrer une valeur valide."
 
 
 

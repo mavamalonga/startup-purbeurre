@@ -16,8 +16,10 @@ class Interface:
 	"""Display notify of errors or message return after 
 	execute method, database execute cursor.execute"""
 
-	def displayNotify(self, msg):
-		print("{0}".format(msg))
+	def displayNotify(self, error):
+		for url, theme in self.window_dict.items():
+			if error == url:
+				print("{0}".format(theme))
 
 	"""Display in each window the instruction commands about it, this method take argument url for display ythe true 
 	message in function of window"""
