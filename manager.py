@@ -41,6 +41,7 @@ class Manager (database.Data):
 				self.category_id = self.event
 				self.displayHelp(self.url)
 				self.get_product(self.category_id)
+				print(self.url)
 			else:
 				self.bad_value = 1/0
 		except :

@@ -57,8 +57,10 @@ window_dict = {
 		.",
 
 		"errorValue" : "\n Veillez rentrer une valeur valide.",
-		
-		"emptyErrorCategory" : "\n Veillez rentrer un numéro de categorie valide."
+
+		"emptyErrorCategory" : "\n 				numéroLa liste de categories est vide.",
+
+		"emptyErrorCategoryId" : "\n 			Veillez rentrer un numéro de categorie valide."
 
 
 }

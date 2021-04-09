@@ -65,7 +65,13 @@ class Data(template.Interface):
 		self.categoryId = categoryId
 		self.cursor.execute("call select_products_list({0})".format(self.categoryId))
 		for products in self.cursor:
-			self.displayList(products[0], products[1])
+			if products[0] == 'empty':
+				self.url = 'categoriesList'
+				self.displayHelp(self.url)
+				self.get_category()
+				self.displayNotify('emptyErrorCategoryId')
+			else:
+ 				self.displayList(products[0], products[1])
 		self.cursor.close()
 
 	def get_feature(self, productId):
