@@ -17,11 +17,10 @@ class Data(template.Interface):
 		self.msg = "			successful recording"
 
 	def connect_database(self):
-		with open('loginData.yml', 'r') as file:
+		with open('login.yml', 'r') as file:
 			self.login = file.read().split()
 		self.cnx = mysql.connector.connect(user=self.login[0], host=self.login[1],
 		 password=self.login[2], port=self.login[3])
-
 		self.cursor = self.cnx.cursor()
 		self.cursor.execute("use Purbeurre")
 
@@ -50,17 +49,21 @@ class Data(template.Interface):
 		self.cursor.close()
 
 	def get_category(self):
+
 		self.connect_database()
-		self.cursor.execute("call get_categories()")
+		self.cursor.execute("call select_categories()")
 		for category_tuple in self.cursor:
-			self.displayList(category_tuple[0], category_tuple[1])
+			if category_tuple[0] == 'empty':
+				self.displayNotify('emptyErrorCategory')
+			else:
+				self.displayList(category_tuple[0], category_tuple[1])
 		self.cursor.close()
 
 	def get_product(self, categoryId):
 
 		self.connect_database()
 		self.categoryId = categoryId
-		self.cursor.execute("call get_product({0})".format(self.categoryId))
+		self.cursor.execute("call select_products_list({0})".format(self.categoryId))
 		for products in self.cursor:
 			self.displayList(products[0], products[1])
 		self.cursor.close()

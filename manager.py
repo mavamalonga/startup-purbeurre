@@ -29,6 +29,7 @@ class Manager (database.Data):
 				self.bad_value = 1/0
 		except :
 			self.displayNotify(self.errorValue)
+		print(self.event)
 		self.event = 0
 
 	def choiceCategory(self):
