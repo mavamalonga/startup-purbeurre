@@ -14,16 +14,10 @@ class Interface:
 		self.featureNameList = ['Nom', 'Marque', 'Ingredients', 'Nutriments', 'Nutri-score',
 		'Quantity', 'Magasin(s)']
 
-	"""Display notify of errors or message return after 
-	execute method, database execute cursor.execute"""
 
 	def displayNotify(self, error):
-		for url, theme in self.window_dict.items():
-			if error == url:
-				print("{0}".format(theme))
+		print(self.emptyCase*24 + "{0}".format(error))
 
-	"""Display in each window the instruction commands about it, this method take argument url for display ythe true 
-	message in function of window"""
 
 	def displayHelp(self, url):
 		self.url = url
@@ -44,7 +38,10 @@ class Interface:
 
 	def displayProductId(self, featureValue):
 		self.featureValue = featureValue
-		for name, feature in zip(self.featureNameList, self.featureValue):
+		for feature in self.featureValue:
+			self.feature = feature
+		
+		for name, feature in zip(self.featureNameList, self.feature):
 			print(self.emptyCase*24 + "{0} : {1}".format(name, feature))
 		print("\n")
 
@@ -59,20 +56,3 @@ class Interface:
 			print(self.emptyCase*24 + "{0} : {1} &".format(self.idList[self.i][0], names[0][0]))
 			print(self.emptyCase*24 + "{0}\n".format(names[1][0]))
 			self.i += 1
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-	
-
-

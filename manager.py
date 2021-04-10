@@ -18,9 +18,7 @@ class Manager (database.Data):
 	def dashboard(self):
 		try:
 			if self.event == '1':
-				self.url = 'categoriesList'
-				self.displayHelp(self.url)
-				self.get_category()
+				self.selectCategories()
 			elif self.event == '2':
 				self.url = 'favoritesList'
 				self.displayHelp(self.url)
@@ -28,8 +26,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.errorValue)
-		print(self.event)
+			self.displayNotify("Veillez rentrer une valeur valide.")
 		self.event = 0
 
 	def choiceCategory(self):
@@ -37,15 +34,12 @@ class Manager (database.Data):
 			if self.event == 'r':
 				self.home()
 			elif int(str(self.event)) > 0:
-				self.url = 'productsList'
 				self.category_id = self.event
-				self.displayHelp(self.url)
-				self.get_product(self.category_id)
-				print(self.url)
+				self.selectProductsList(self.category_id)
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.errorValue)
+			self.displayNotify("La valeur rentré une valeur valide.")
 		self.event = 0
 
 
@@ -53,13 +47,9 @@ class Manager (database.Data):
 
 		try:
 			if int(str(self.substitute_id)) == 0:
-				self.displayHelp(self.url)
-				self.get_feature(self.product_id)
-				self.select_substitute_list(self.category_id, self.product_id)
+				self.selectProductId(self.category_id, self.product_id)
 			elif int(str(self.substitute_id)) > 0:
-
-				self.displayHelp(self.url)
-				self.get_feature(self.product_id)
+				self.selectProductId(self.category_id, self.product_id)
 				self.select_substitute(self.substitute_id)
 			else:
 				self.bad_value = 1/0
@@ -71,28 +61,21 @@ class Manager (database.Data):
 
 		try:
 			if self.event == 'r':
-				self.url = 'categoriesList'
-				self.displayHelp(self.url)
-				self.get_category()
+				self.selectCategories()
 			elif int(str(self.event)) > 0:
-				self.url = 'productListSubstitute'
-				self.displayHelp(self.url)
 				self.product_id = self.event
 				self.substitute_id = 0
 				self.checkSubstitute()
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.errorValue)
+			self.displayNotify("La valeur rentré une valeur valide.")
 		self.event = 0
 
 	def choiceSubstitute(self):
 		try :
 			if self.event == 'r':
-				self.url = 'productsList'
-				self.displayHelp(self.url)
 				self.get_product(self.category_id)
-				self.event = 0
 			elif int(str(self.event)) > 0:
 				self.url = 'productSubstitute'
 				self.displayHelp(self.url)

@@ -48,54 +48,85 @@ class Data(template.Interface):
 				print("OK")
 		self.cursor.close()
 
-	def get_category(self):
+	def selectCategories(self):
 
 		self.connect_database()
+		self.categoriesList = []
 		self.cursor.execute("call select_categories()")
-		for category_tuple in self.cursor:
-			if category_tuple[0] == 'empty':
-				self.displayNotify('emptyErrorCategory')
-			else:
-				self.displayList(category_tuple[0], category_tuple[1])
+		for categories in self.cursor:
+			self.categoriesList.append(categories)
+
+		if self.categoriesList[0][0] == 'empty':
+			self.displayNotify('La liste de catégories est vide.')
+		else:
+			self.url = 'categoriesList'
+			self.displayHelp(self.url)
+			for category in self.categoriesList:
+				self.displayList(category[0], category[1])
+
 		self.cursor.close()
 
-	def get_product(self, categoryId):
+	def selectProductsList(self, categoryId):
 
 		self.connect_database()
+		self.productsList = []
 		self.categoryId = categoryId
 		self.cursor.execute("call select_products_list({0})".format(self.categoryId))
 		for products in self.cursor:
-			if products[0] == 'empty':
-				self.url = 'categoriesList'
-				self.displayHelp(self.url)
-				self.get_category()
-				self.displayNotify('emptyErrorCategoryId')
-			else:
+			self.productsList.append(products)
+
+		if self.productsList[0][0] == 'empty':
+				self.displayNotify('Veillez rentrer un numéro de catégorie valide.')
+		else:
+			self.url = 'productsList'
+			self.displayHelp(self.url)
+			for products in self.productsList:
  				self.displayList(products[0], products[1])
 		self.cursor.close()
 
-	def get_feature(self, productId):
+	def selectProductId(self, categoryId, productId):
 
 		self.connect_database()
-		self.cursor.execute("call get_feature({0})".format(productId))
+		self.featureList = []
+		self.cursor.execute("call select_product_id ({0}, {1})".format(categoryId, productId))
 		for feature in self.cursor:
-			self.displayProductId(feature)
+			self.featureList.append(feature)
+
+		if self.featureList[0][0] == 'empty':
+			self.displayNotify('Veillez rentrer un numéro de produit valide.')
+		else:
+			self.url = 'productListSubstitute'
+			self.displayHelp(self.url)
+			self.displayProductId(self.featureList)
 		self.cursor.close()
+		self.selectSubstituteList(self.category_id, self.product_id)
 
 
-	def select_substitute_list(self, categoryId, productId):
+	def selectSubstituteList(self, categoryId, productId):
 
 		self.connect_database()
-		self.cursor.execute("call select_substitute({0}, {1})".format(categoryId, productId))
+		self.substituteList = []
+		self.cursor.execute("call select_substitute_list({0}, {1})".format(categoryId, productId))
 		for substitute in self.cursor:
-			self.displayList(substitute[0], substitute[1], value3=substitute[2])
+			self.substituteList.append(substitute)
+
+		if self.substituteList[0][0] == 'empty':
+			self.displayNotify("Ce produit n''a pas encore de substitue dans la base.")
+		else:
+			for substitute in self.substituteList:
+				self.displayList(substitute[0], substitute[1], value3=substitute[2])
 		self.cursor.close()
 
-	def select_substitute(self, substitute):
+	def selectSubstitute(self, category_id, product_id, substitute_id):
 
 		self.connect_database()
-		self.cursor.execute("call get_feature({0})".format(substitute))
+		self.featureSubstituteList = []
+		self.cursor.execute("call select_substitute({0}, {1}, {2})".format(category_id, product_id, substitute_id))
 		for feature in self.cursor:
+			self.featureSubstituteList.append(feature)
+
+		if self.featureSubstituteList[0][0] == 'empty':
+			self.displayNotify("Veillez saisir un numéro valide.")
 			self.displayProductId(feature)
 		self.cursor.close()
 
