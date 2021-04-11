@@ -118,3 +118,149 @@ create procedure select_products_list(p_category_id int)
 			end if;
 
 		end |
+
+
+
+-- procedure retrieves the product id values ​​and substitutes 
+-- insert the values ​​in the favorite table 
+-- returns an error in case of duplicate
+
+	create procedure insert_products(in p_product_id int, in p_substitute_id int)
+		begin
+
+			declare exit handler for sqlstate '23000' 
+			begin
+				select 'duplicate';
+			end;
+
+			insert into favorite (product_id, substitute_id)
+				values (p_product_id, p_substitute_id);
+
+		end |
+
+
+-- procedure retrieves the names of the product, substitute and ids of the favorite table
+	create procedure select_favorites()
+		begin 
+
+			declare v_nb int;
+
+			select count(id) into v_nb
+			from favorite;
+
+			if v_nb = 0 then
+				select 'empty';
+			end if;
+
+			begin
+				select product_name
+				from product 
+				where id in (
+					select product_id
+					from favorite 
+					order by id
+						);
+			end;
+
+			begin
+				select product_name 
+				from product
+				where id in (
+					select substitute_id
+					from favorite
+					order by id
+					);
+			end;
+
+			begin 
+				select id 
+				from favorite
+				order by id;
+			end;
+
+	end |
+
+
+-- procedure removes the favored corresponding to the chosen id
+	create procedure delete_favorite(in favaorite_id int)
+		begin
+			declare v_nb int;
+
+			select  product_id into v_nb
+			from favorite
+			where id = favaorite_id;
+
+			if v_nb = 0 then 
+				select 'empty';
+			else
+				delete from favorite 
+				where id = favaorite_id;
+
+				select 'success';
+			end if;
+
+		end |
+
+
+-- procedure selects the values ​​of product_id and substitute_id of a favored then selects their characteristics
+	create procedure display_feature_favorite(in favaorite_id int)
+		begin
+			declare v_nb int;
+			declare v_product_id int;
+			declare v_substitute_id int;
+
+			begin
+				select product_id into v_nb
+				from favorite
+				where id = favaorite_id;
+
+				if v_nb = 0 then
+					select 'empty';	
+				end if;
+			end;
+
+			begin
+				select product_id into v_product_id
+				from favorite
+				where id = favaorite_id;
+			end;
+
+			begin
+				 select substitute_id into v_substitute_id
+				 from favorite
+				 where id = favaorite_id;
+			end;
+
+			begin
+				select product_name, brands, substring(ingredients_text, 1, 60), 
+				substring(nutriments, 1, 60), nutrition_grades,
+				quantity, store
+				from product
+				where id = v_product_id;
+			end;
+
+			begin
+				select product_name, brands, substring(ingredients_text, 1, 60), 
+				substring(nutriments, 1, 60), nutrition_grades,
+				quantity, store
+				from product
+				where id = v_substitute_id;
+			end;
+
+
+
+		end |
+
+
+
+
+
+
+
+
+
+
+
+
+
+

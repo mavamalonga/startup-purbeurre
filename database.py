@@ -131,71 +131,61 @@ class Data(template.Interface):
 		self.cursor.close()
 
 
-	def save_product(self, productId, substituteId):
+	def insertProducts(self, productId, substituteId):
 		self.connect_database()
-		self.cursor.execute("insert into favorite (product_id, substitute_id) \
-			values ({0}, {1})".format(productId, substituteId))
+		self.cursor.execute("call insert_products({0},{1}}".format(productId, substituteId))
 		self.cnx.commit()
 		self.cursor.close()
 		self.displayNotify(self.msg)
 
-	def get_favorite(self):
+	def selectFavorites(self):
 
-		self.productNameList = []
-		self.substituteNameList = []
-		self.idList = []
+		self.ids_names_list = []
 
 		self.connect_database()
-		self.cursor.execute("select product_name from product where id in \
-			( select product_id from favorite order by id)")
-		for name in self.cursor:
-			self.productNameList.append(name)
-		self.cursor.close()
+		self.cursor.execute("call select_favorites()")
+		for response_tuple in self.cursor:
+			self.ids_names_list.append(response_tuple)
 
-		self.connect_database()
-		self.cursor.execute("select product_name from product where id in \
-			( select substitute_id from favorite order by id)")
-		for name in self.cursor:
-			self.substituteNameList.append(name)
-		self.cursor.close()
+		if self.ids_names_list[0][0] == 'empty':
+			self.displayNotify("La liste de favoiries est vide.")
+		else:
+			self.url = 'favoritesList'
+			self.displayHelp(self.url)
+			self.displayFavoriteList(self.ids_names_list)
 
-		self.connect_database()
-		self.cursor.execute("select id from favorite order by id")
-		for name in self.cursor:
-			self.idList.append(name)
-
-		self.displayFavoriteList(self.idList, self.productNameList, self.substituteNameList)
 		self.cursor.close()
 		
-	def delete_favorite(self, favoriteId):
-		self.favoriteId = favoriteId
-		print(self.favorite_id)
+	def deletFavorite(self, favoriteId):
 		self.connect_database()
-		self.cursor.execute("delete from favorite where id = {0}".format(self.favoriteId))
+		self.cursor.execute("call delete_favorite({0})".format(favoriteId))
+		for response in self.cursor:
+			if response[0] == 'empty':
+				self.displayNotify("Le numéro choisit ne correpond à aucun favorie.")
+			else:
+				self.displayNotify("Suppression du favorie {0}".format(favoriteId))
 		self.cnx.commit()
-		self.displayNotify(self.msg)
 		self.cursor.close()
 
-	def select_feature_favorite(self, favoriteId):
-		self.favoriteId = favoriteId
+
+	def selectFavoriteFeature(self, favoriteId):
+		self.favoriteFeatureList = []
 		self.connect_database()
-		self.cursor.execute("select product_id from favorite where id = {0}".format(self.favoriteId))
-		for productId in self.cursor:
-			self.productId = productId[0]
+		self.cursor.execute("call display_feature_favorite({0})".format(favoriteId))
+		for doubt_tuple in self.cursor:
+			self.favoriteFeatureList.append(doubt_tuple)
+
+		if self.favoriteFeatureList[0][0] == 'empty':
+			self.displayNotify("Le numéro saisit correspond à aucun favorie.")
+		else:
+			for doubt_tuple in self.favoriteFeatureList:
+				self.url = 'displayfeaturefavorite'
+				self.displayHelp(self.url)
+				self.display_feature_favorite(doubt_tuple)
 		self.cursor.close()
 
-		self.connect_database()
-		self.cursor.execute("select substitute_id from favorite where id = {0} ".format(self.favoriteId))
-		for substituteId in self.cursor:
-			self.substituteId = substituteId[0]
-		self.cursor.close()
-
-		self.connect_database()
-		self.cursor.execute("select category_id from product where id = {0} ".format(self.substituteId))
-		for categoryId in self.cursor:
-			self.category_id = categoryId[0]
-		self.cursor.close()
+		
 
 
-		self.get_feature(self.productId)
-		self.select_substitute(self.substituteId)
+
+

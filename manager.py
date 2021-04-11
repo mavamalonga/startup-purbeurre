@@ -75,7 +75,7 @@ class Manager (database.Data):
 	def choiceSubstitute(self):
 		try :
 			if self.event == 'r':
-				self.get_product(self.category_id)
+				self.selectSubstitute(self.category_id, self.product_id, self.substitute_id)
 			elif int(str(self.event)) > 0:
 				self.url = 'productSubstitute'
 				self.displayHelp(self.url)
