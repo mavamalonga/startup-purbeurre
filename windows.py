@@ -25,14 +25,14 @@ window_dict = {
 
 
 
-		"productListSubstitute": "\n 		########## Produit et liste substitue ########## \n \
+		"product_and_ListSubstitute": "\n 		########## Produit et liste substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			.",
 	
 
-		"productSubstitute" : "\n 		########## Produit et substitue ########## \n \
+		"substitute" : "\n 		########## Produit et substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \

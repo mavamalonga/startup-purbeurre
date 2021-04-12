@@ -53,7 +53,7 @@ create procedure select_products_list(p_category_id int)
 				substring(nutriments, 1, 60), nutrition_grades,
 				quantity, store
 				from product
-				where id = p_category_id and category_id = p_category_id;
+				where id = p_product_id;
 			end if;
 		end |
 
@@ -182,19 +182,19 @@ create procedure select_products_list(p_category_id int)
 
 
 -- procedure removes the favored corresponding to the chosen id
-	create procedure delete_favorite(in favaorite_id int)
+	create procedure delete_favorite(in favorite_id int)
 		begin
 			declare v_nb int;
 
-			select  product_id into v_nb
+			select  count(product_id) into v_nb
 			from favorite
-			where id = favaorite_id;
+			where id = favorite_id;
 
 			if v_nb = 0 then 
 				select 'empty';
 			else
 				delete from favorite 
-				where id = favaorite_id;
+				where id = favorite_id;
 
 				select 'success';
 			end if;
@@ -210,7 +210,7 @@ create procedure select_products_list(p_category_id int)
 			declare v_substitute_id int;
 
 			begin
-				select product_id into v_nb
+				select count(product_id) into v_nb
 				from favorite
 				where id = favaorite_id;
 

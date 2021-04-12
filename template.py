@@ -25,34 +25,52 @@ class Interface:
 			if self.url == url:
 				print(self.window_dict[self.url])
 
-	"""method display categorires list, produicts list and substitutes list
-	when value3='none' => value1= id, value2 = product_name
-	when value3!='none' => value1= id, value2 = prodcut_name, value3 = nutrition_grades
-	"""
-	def displayList(self, value1, value2,  value3='none'):
-		if value3 == 'none':
-			print(self.emptyCase*24 + "{0} : {1}".format(value1, value2))
-		else:
-			print(self.emptyCase*24 + "{0} : {1} {2}".format(value1, value2, value3))
+	def displayCategories(self, category_id, category_name):
+		print(self.emptyCase*24 + "{0} : {1}".format(category_id, category_name))
 
 
-	def displayProductId(self, featureValue):
+	def displayProducts(self, product_id, product_name):
+		print(self.emptyCase*24 + "{0} : {1}".format(product_id, product_name))
+
+
+	def displayProductId(self, product_name, brands, ingredients, nutriments, 
+		nutriscore, quantity, store):
 		self.featureValue = featureValue
-		for feature in self.featureValue:
-			self.feature = feature
+
+		print(self.emptyCase*24 + "Nom : {0}".format(product_name))
+		print(self.emptyCase*24 + "Marque : {0}".format(brands))
+		print(self.emptyCase*24 + "Ingredients : {0}".format(ingredients))
+		print(self.emptyCase*24 + "Nutriments : {0}".format(nutriments))
+		print(self.emptyCase*24 + "Nutri-score : {0}".format(nutriscore))
+		print(self.emptyCase*24 + "Quantite : {0}".format(quantity))
+		print(self.emptyCase*24 + "Magasin(s) : {0}".format(store))
+		print("\n")
+
+	def displaySubstituteList(self, substitute_id, substitute_name, substitute_grade):
+		print(self.emptyCase*24 + "{0} : {1}" + "nutriscore": + "{2}".format(substitute_id, substitute_name, 
+			substitute_grade))
+
+
+	def displayFavoriteList(self, allId, allProductsName, allsubstitutesName):
+		self.i = 0
+		for item in range(len(allId):
+			print(allId[self.i] + allProductsName[self.i] + allsubstitutesName[self.i])
+			self.i += 1
+
+	def displayFeatureFavorite(self, product, substitute):
 		
-		for name, feature in zip(self.featureNameList, self.feature):
-			print(self.emptyCase*24 + "{0} : {1}".format(name, feature))
+		print(self.emptyCase*24 + "Nom : {0}".format(product_name))
+		print(self.emptyCase*24 + "Marque : {0}".format(brands))
+		print(self.emptyCase*24 + "Ingredients : {0}".format(ingredients))
+		print(self.emptyCase*24 + "Nutriments : {0}".format(nutriments))
+		print(self.emptyCase*24 + "Nutri-score : {0}".format(nutriscore))
+		print(self.emptyCase*24 + "Quantite : {0}".format(quantity))
+		print(self.emptyCase*24 + "Magasin(s) : {0}".format(store))
 		print("\n")
 
 
-	def displayFavoriteList(self, idList, productNameList, substituteNameList):
-		self.i = 0
-		self.idList = idList
-		self.productNameList = productNameList
-		self.substituteNameList = substituteNameList
 
-		for names in zip(self.productNameList, self.substituteNameList):
-			print(self.emptyCase*24 + "{0} : {1} &".format(self.idList[self.i][0], names[0][0]))
-			print(self.emptyCase*24 + "{0}\n".format(names[1][0]))
-			self.i += 1
+
+
+
+	
