@@ -98,7 +98,6 @@ create procedure select_products_list(p_category_id int)
 			from product
 			where id = p_product_id;
 
-
 			select count(id) into v_nb
 			from product
 			where id = p_substitute_id and category_id = p_category_id and p_substitute_id in 
@@ -140,7 +139,7 @@ create procedure select_products_list(p_category_id int)
 
 
 -- procedure retrieves the names of the product, substitute and ids of the favorite table
-	create procedure select_favorites()
+	create procedure select_products_1()
 		begin 
 
 			declare v_nb int;
@@ -152,30 +151,38 @@ create procedure select_products_list(p_category_id int)
 				select 'empty';
 			end if;
 
-			begin
-				select product_name
-				from product 
-				where id in (
-					select product_id
-					from favorite 
-					order by id
-						);
+			begin 
+
+				select favorite.id, product_name
+				from product
+				inner join favorite
+				on product.id = favorite.product_id
+				order by favorite.id;
+
 			end;
 
-			begin
-				select product_name 
-				from product
-				where id in (
-					select substitute_id
-					from favorite
-					order by id
-					);
-			end;
+	end |
+
+	create procedure select_products_2()
+		begin 
+
+			declare v_nb int;
+
+			select count(id) into v_nb
+			from favorite;
+
+			if v_nb = 0 then
+				select 'empty';
+			end if;
 
 			begin 
-				select id 
-				from favorite
-				order by id;
+	
+				select favorite.id, product_name as substitute_name 
+				from product
+				inner join favorite
+				on product.id = favorite.substitute_id
+				order by favorite.id;
+
 			end;
 
 	end |
@@ -253,6 +260,12 @@ create procedure select_products_list(p_category_id int)
 
 
 
+	select name_product.product_name as name, substitute.product_name as substitute_name
+ 	from product
+    inner join favorite as name_product
+    on product.id = name_product.product_id
+    inner join favorite as substitute
+    on product.id = substitute.substitute_id;
 
 
 
@@ -263,4 +276,9 @@ create procedure select_products_list(p_category_id int)
 
 
 
-
+select favorite.id, product_name 
+				from product 
+				where id in (
+					select product_id
+					from favorite 
+					order by id );

@@ -20,9 +20,7 @@ class Manager (database.Data):
 			if self.event == '1':
 				self.selectCategories()
 			elif self.event == '2':
-				self.url = 'favoritesList'
-				self.displayHelp(self.url)
-				self.get_favorite()
+				self.selectFavorites()
 			else:
 				self.bad_value = 1/0
 		except :
@@ -49,12 +47,12 @@ class Manager (database.Data):
 			if int(str(self.substitute_id)) == 0:
 				self.selectProductId(self.category_id, self.product_id)
 			elif int(str(self.substitute_id)) > 0:
-				self.selectProductId(self.category_id, self.product_id)
-				self.select_substitute(self.substitute_id)
+				self.selectProductId(self.category_id, self.product_id, substitute=True)
+				self.selectSubstitute(self.category_id, self.product_id, self.substitute_id)
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.errorValue)
+			self.displayNotify("Veillez rentrer une valeur valide.")
 		self.event = 0
 
 	def choiceProduct(self):
@@ -77,8 +75,6 @@ class Manager (database.Data):
 			if self.event == 'r':
 				self.selectSubstitute(self.category_id, self.product_id, self.substitute_id)
 			elif int(str(self.event)) > 0:
-				self.url = 'productSubstitute'
-				self.displayHelp(self.url)
 				self.substitute_id = self.event
 				self.checkSubstitute()
 			else :
@@ -155,11 +151,11 @@ class Manager (database.Data):
 				self.choiceProduct()
 				self.event = 0
 
-			elif self.url == 'productListSubstitute':
+			elif self.url == 'product_and_substitutes':
 				self.choiceSubstitute()
 				self.event = 0
 
-			elif self.url == 'productSubstitute':
+			elif self.url == 'product_and_substitute_one':
 				self.choiceSave()
 				self.event = 0
 

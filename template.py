@@ -35,8 +35,6 @@ class Interface:
 
 	def displayProductId(self, product_name, brands, ingredients, nutriments, 
 		nutriscore, quantity, store):
-		self.featureValue = featureValue
-
 		print(self.emptyCase*24 + "Nom : {0}".format(product_name))
 		print(self.emptyCase*24 + "Marque : {0}".format(brands))
 		print(self.emptyCase*24 + "Ingredients : {0}".format(ingredients))
@@ -47,15 +45,14 @@ class Interface:
 		print("\n")
 
 	def displaySubstituteList(self, substitute_id, substitute_name, substitute_grade):
-		print(self.emptyCase*24 + "{0} : {1}" + "nutriscore": + "{2}".format(substitute_id, substitute_name, 
-			substitute_grade))
+		print(self.emptyCase*24 + "{0} : {1} {2}".format(substitute_id, substitute_name, substitute_grade))
 
+	def displayFavoriteList(self, products, substitutes):
 
-	def displayFavoriteList(self, allId, allProductsName, allsubstitutesName):
-		self.i = 0
-		for item in range(len(allId):
-			print(allId[self.i] + allProductsName[self.i] + allsubstitutesName[self.i])
-			self.i += 1
+		for items in zip(products, substitutes):
+			print(self.emptyCase*24 + "{0} : {1} \n \
+				{2} \n".format(items[0][0], items[0][1], items[1][1]))
+
 
 	def displayFeatureFavorite(self, product, substitute):
 		

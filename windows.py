@@ -25,19 +25,19 @@ window_dict = {
 
 
 
-		"product_and_ListSubstitute": "\n 		########## Produit et liste substitue ########## \n \
+		"product_and_substitutes": "\n 		########## Produit et liste substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
-			.",
+			",
 	
 
-		"substitute" : "\n 		########## Produit et substitue ########## \n \
+		"product_and_substitute_one" : "\n 		########## Produit et substitue ########## \n \
 			Mode d'emploi : Rentrez le numéro correspondant au choix. \n \
 			r : retour \n \
 			q : Quitter \n \
 			e : Enregistrer \n \
-			.",
+			",
 
 
 		"favoritesList" : "\n 		########## Liste de favories ########## \n \
