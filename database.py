@@ -139,12 +139,8 @@ class Data(template.Interface):
 		if self.featureSubstitute[0][0] == 'empty':
 			self.displayNotify("Veillez saisir un numéro valide.")
 		else:
-			self.url = "product_and_substitute_one"
-			self.displayHelp(self.url)
 			for feature in self.featureSubstitute:
 				self.displayProductId(feature[0], feature[1], feature[2], feature[3], 
-					feature[4], feature[5], feature[6])
-				print(feature[0], feature[1], feature[2], feature[3], 
 					feature[4], feature[5], feature[6])
 		
 		self.cursor.close()
@@ -204,19 +200,25 @@ class Data(template.Interface):
 
 	def selectFavoriteFeature(self, favoriteId):
 
-		self.favoriteFeatureList = []
+		self.favorites_products = []
 		self.connectDatabase()
 		self.cursor.execute("call display_feature_favorite({0})".format(favoriteId))
-		for doubt_tuple in self.cursor:
-			self.favoriteFeatureList.append(doubt_tuple)
+		for favorites in self.cursor:
+			self.favorites_products.append(favorites)
 
-		if self.favoriteFeatureList[0][0] == 'empty':
+		if self.favorites_products[0][0] == 'empty':
 			self.displayNotify("Le numéro saisit correspond à aucun favorie.")
 		else:
-			self.url = 'displayfeaturefavorite'
+			self.url = 'displayFavorite'
 			self.displayHelp(self.url)
-			self.displayFeatureFavorite(self.favoriteFeatureList[0], self.favoriteFeatureList[1])
+
+			print(self.favorites_products[0][0], self.favorites_products[0][1], 
+				self.favorites_products[0][2], self.favorites_products[0][3], self.favorites_products[0][4], 
+				self.cursorself.favorites_products[0][5], self.favorites_products[0][6])
+
 		self.cursor.close()
+
+
 
 
 

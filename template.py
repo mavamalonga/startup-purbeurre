@@ -35,6 +35,7 @@ class Interface:
 
 	def displayProductId(self, product_name, brands, ingredients, nutriments, 
 		nutriscore, quantity, store):
+	
 		print(self.emptyCase*24 + "Nom : {0}".format(product_name))
 		print(self.emptyCase*24 + "Marque : {0}".format(brands))
 		print(self.emptyCase*24 + "Ingredients : {0}".format(ingredients))
@@ -54,16 +55,6 @@ class Interface:
 				{2} \n".format(items[0][0], items[0][1], items[1][1]))
 
 
-	def displayFeatureFavorite(self, product, substitute):
-		
-		print(self.emptyCase*24 + "Nom : {0}".format(product_name))
-		print(self.emptyCase*24 + "Marque : {0}".format(brands))
-		print(self.emptyCase*24 + "Ingredients : {0}".format(ingredients))
-		print(self.emptyCase*24 + "Nutriments : {0}".format(nutriments))
-		print(self.emptyCase*24 + "Nutri-score : {0}".format(nutriscore))
-		print(self.emptyCase*24 + "Quantite : {0}".format(quantity))
-		print(self.emptyCase*24 + "Magasin(s) : {0}".format(store))
-		print("\n")
 
 
 

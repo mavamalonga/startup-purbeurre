@@ -243,10 +243,8 @@ create procedure select_products_list(p_category_id int)
 				substring(nutriments, 1, 60), nutrition_grades,
 				quantity, store
 				from product
-				where id = v_product_id;
-			end;
-
-			begin
+				where id = v_product_id
+				union
 				select product_name, brands, substring(ingredients_text, 1, 60), 
 				substring(nutriments, 1, 60), nutrition_grades,
 				quantity, store

@@ -103,15 +103,13 @@ class Manager (database.Data):
 			if self.event == 'r':
 				self.url = 'home'
 				self.home()
-			elif int(self.event) > 0:
-				self.url = 'displayFavorite'
-				self.favorite_id = self.event                 
-				self.displayHelp(self.url)
-				self.select_feature_favorite(self.favorite_id)
+			elif int(str(self.event)) > 0:
+				self.favorite_id = self.event 
+				self.selectFavoriteFeature(self.favorite_id)
 			else :
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.errorValue)
+			self.displayNotify("Veillez saisir une valeur valide.")
 		self.event = 0
 
 	def choiceDelete(self):
