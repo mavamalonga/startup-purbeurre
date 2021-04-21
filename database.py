@@ -6,6 +6,7 @@ from mysql.connector import errorcode
 import tables
 import template
 import windows
+import os
 
 
 class Data(template.Interface):
@@ -21,8 +22,6 @@ class Data(template.Interface):
 		self.cnx = mysql.connector.connect(user=self.login[0], host=self.login[1],
 		 password=self.login[2], port=self.login[3])
 		self.cursor = self.cnx.cursor()
-		self.cursor1 = self.cursor
-		self.cursor2 = self.cursor
 		self.cursor.execute("use Purbeurre")
 
 	def createDatabase(self):
@@ -57,7 +56,6 @@ class Data(template.Interface):
 		self.cursor.execute("call select_categories()")
 		for categories in self.cursor:
 			self.categoriesList.append(categories)
-
 		if self.categoriesList[0][0] == 'empty':
 			self.displayNotify('La liste de catégories est vide.')
 		else:
@@ -90,6 +88,7 @@ class Data(template.Interface):
 		self.connectDatabase()
 		self.featureList = []
 		self.cursor.execute("call select_product_id ({0}, {1})".format(categoryId, productId))
+
 		for feature in self.cursor:
 			self.featureList.append(feature)
 		if self.featureList[0][0] == 'empty':
@@ -99,18 +98,16 @@ class Data(template.Interface):
 				self.url = "product_and_substitutes"
 			else:
 				self.url = "product_and_substitute_one"
-
 			self.displayHelp(self.url)
 			for feature in self.featureList:
 				self.displayProductId(feature[0], feature[1], feature[2], feature[3], 
 					feature[4], feature[5], feature[6])
-
 		self.cursor.close()
 
 		if substitute == False:
 			self.selectSubstituteList(categoryId, productId)
-		else:
-			pass
+		else: 
+			self.selectSubstitute(categoryId, productId, substitute)
 
 
 	def selectSubstituteList(self, categoryId, productId):
@@ -138,6 +135,7 @@ class Data(template.Interface):
 
 		if self.featureSubstitute[0][0] == 'empty':
 			self.displayNotify("Veillez saisir un numéro valide.")
+			self.url = 'product_and_substitutes'
 		else:
 			for feature in self.featureSubstitute:
 				self.displayProductId(feature[0], feature[1], feature[2], feature[3], 
@@ -150,12 +148,14 @@ class Data(template.Interface):
 
 		self.connectDatabase()
 		self.cursor.execute("call insert_products({0},{1}}".format(productId, substituteId))
-		self.cnx.commit()
 		for response in self.cursor:
 			if response == 'duplicate':
-				self.displayNotify("Ces produits ont déjà été ajoutés au favories.")
+				print(response)
+				self.displayNotify("Ces produits ont déjà été ajoutés au favories.\n\
+					Veillez choisir une notre sélection de produits.")
 			else:
 				self.displayNotify("Ajout validé !")
+		self.cnx.commit()
 		self.cursor.close()
 
 	def selectFavorites(self):

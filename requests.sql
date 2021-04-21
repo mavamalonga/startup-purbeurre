@@ -134,7 +134,6 @@ create procedure select_products_list(p_category_id int)
 
 			insert into favorite (product_id, substitute_id)
 				values (p_product_id, p_substitute_id);
-
 		end |
 
 

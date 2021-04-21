@@ -3,6 +3,7 @@ import template
 import database
 import tables
 import windows
+import os
 
 class Manager (database.Data):
 	def __init__(self, table, windows_dict):
@@ -17,7 +18,7 @@ class Manager (database.Data):
 
 	def dashboard(self):
 		try:
-			if self.event == '1':
+			if int(self.event) == 1:
 				self.selectCategories()
 			elif self.event == '2':
 				self.selectFavorites()
@@ -26,6 +27,7 @@ class Manager (database.Data):
 		except :
 			self.displayNotify("Veillez rentrer une valeur valide.")
 		self.event = 0
+
 
 	def choiceCategory(self):
 		try:
@@ -37,7 +39,7 @@ class Manager (database.Data):
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify("La valeur rentré une valeur valide.")
+			self.displayNotify("Numéro de categorie invalide.")
 		self.event = 0
 
 
@@ -47,8 +49,8 @@ class Manager (database.Data):
 			if int(str(self.substitute_id)) == 0:
 				self.selectProductId(self.category_id, self.product_id)
 			elif int(str(self.substitute_id)) > 0:
-				self.selectProductId(self.category_id, self.product_id, substitute=True)
-				self.selectSubstitute(self.category_id, self.product_id, self.substitute_id)
+				self.selectProductId(self.category_id, self.product_id, 
+					substitute=self.substitute_id)
 			else:
 				self.bad_value = 1/0
 		except :
@@ -73,7 +75,7 @@ class Manager (database.Data):
 	def choiceSubstitute(self):
 		try :
 			if self.event == 'r':
-				self.selectSubstitute(self.category_id, self.product_id, self.substitute_id)
+				self.selectProductsList(self.category_id)
 			elif int(str(self.event)) > 0:
 				self.substitute_id = self.event
 				self.checkSubstitute()
@@ -86,15 +88,15 @@ class Manager (database.Data):
 	def choiceSave(self):
 		try :
 			if  self.event == 'e':
-				self.save_product(self.product_id, self.substitute_id)
+				self.insertProducts(self.product_id, self.substitute_id)
 			elif self.event == 'r':
-				self.url = 'productListSubstitute'
+				self.url = 'product_and_substitutes'
 				self.substitute_id = 0
 				self.checkSubstitute()
 			else:
 				self.bad_value = 1/0
 		except :
-			self.displayNotify(self.errorValue)
+			self.displayNotify("Veillez rentrer une valeur valide.")
 		self.event = 0
 
 
